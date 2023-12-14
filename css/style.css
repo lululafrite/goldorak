@@ -1,0 +1,98 @@
+.header__bg-image {
+    background-image: url('../img/img_goldorak_dark_02.webp');
+    background-size: cover;
+    background-position: center;
+    /*height: 100vh; /* 100% de la hauteur de la vue */
+    display: flex;
+    /*justify-content: center;
+    /*color: #fff; /* Couleur du texte pour assurer la visibilité sur l'image */
+    height: 300px;
+    padding: 0;
+    margin: auto;
+  }
+
+.custom-navbar-toggler {
+    background-color: rgb(176, 176, 176); /* Remplacez par la couleur souhaitée */
+    border-color: transparent; /* Facultatif : Remplacez par la couleur de la bordure souhaitée */
+    color: white; /* Facultatif : Remplacez par la couleur du texte souhaitée */
+}
+
+li:hover{
+    background-color: black;   
+}
+
+li:active {
+    background-color: orangered;
+}
+
+main{
+    background-image: url('../img/background_dark_0.5.webp');
+    background-size: cover;
+    background-position: center;
+}
+
+.div__p{
+    text-align: justify;
+}
+
+
+  
+  /*-----------------------------------------------------------------------*/
+  /*--------PARAMETRES ECRANS SUPERIEURs A 460px---------------------------*/
+  /*-----------------------------------------------------------------------*/
+  
+  @media screen and (min-width: 768px) {
+    
+    .img__icone{
+      width: 100px;
+      height: auto;
+      padding: 0;
+      margin: 0;
+    }
+  
+  }
+  
+  /*-----------------------------------------------------------------------*/
+  /*--------PARAMETRES ECRANS SUPERIEURs A 460px---------------------------*/
+  /*-----------------------------------------------------------------------*/
+  
+  @media screen and (min-width: 993px) {
+    
+    .img__icone{
+      width: 150px;
+      height: auto;
+      padding: 0;
+      margin: 0;
+    }
+  
+  }
+  
+/*-----------------------------------------------------------------------*/
+/*--------PARAMETRES ECRANS SUPERIEURs A 768px---------------------------*/
+/*-----------------------------------------------------------------------*/
+
+@media screen and (min-width: 1200px) {
+    
+    .img__icone{
+      width: 200px;
+      height: auto;
+      padding: 0;
+      margin: 0;
+    }
+  
+  }
+  
+  /*-----------------------------------------------------------------------*/
+  /*--------PARAMETRES ECRANS INFERIEURS A 460px---------------------------*/
+  /*-----------------------------------------------------------------------*/
+  
+  @media screen and (max-width: 768px) {
+    
+    .img__icone{
+      width: 0px;
+      height: auto;
+      padding: 0;
+      margin: 0;
+    }
+  
+  }
