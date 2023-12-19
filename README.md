@@ -1,3 +1,3 @@
 # Site web pour l'Association des passionnés de Goldorak
 
-Ce site à pour objet de faire connaitre l'association destinée aux passionnés de Goldorak, manga à l'énorme succé des années 80. Le site propose des actualités, des photos, des vidéos, des produits et beaucoup d'autres informations.
+Ce site a pour objet de faire connaitre l'association destinée aux passionnés de Goldorak, manga à l'énorme succès des années 80. Le site propose des actualités, des photos, des vidéos, des produits dérivés et beaucoup d'autres informations. Vous y trouverez également les l’actualité sur goldorak et les événement à venir organisés par l’association.
