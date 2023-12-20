@@ -2,91 +2,112 @@
     background-image: url('../img/img_goldorak_dark_02.webp');
     background-size: cover;
     background-position: center;
-    height: 300px;
     /*height: 100vh; /* 100% de la hauteur de la vue */
-    /*display: flex;*/
+    display: flex;
     /*justify-content: center;
     /*color: #fff; /* Couleur du texte pour assurer la visibilité sur l'image */
-    /*padding: 0;*/
-    /*margin: auto;*/
+    height: 300px;
+    padding: 0;
+    margin: auto;
   }
 
-.custom-navbar-toggler {
-    background-color: rgb(176, 176, 176); /* Remplacez par la couleur souhaitée */
-    border-color: transparent; /* Facultatif : Remplacez par la couleur de la bordure souhaitée */
-    color: white; /* Facultatif : Remplacez par la couleur du texte souhaitée */
+.navbar{
+  background-color: rgb(10, 10, 10, 0.75);
+  color: white;
 }
 
-li:hover{
-    background-color: black;   
+.dropdown-item{
+  background-color: rgb(99, 99, 99, 1);
 }
 
-li:active {
-    background-color: orangered;
+.nav-item:hover{
+    background-color: rgb(0, 123, 255);
+}
+
+.nav-link{
+  background-color: rgb(10, 10, 10, 1);
+  border-radius: 5px;
+}
+
+.nav-link:hover{
+  background-color: rgb(0, 123, 255);
+}
+
+.dropdown-item:hover{
+  background-color: rgb(0, 123, 255);
+}
+
+.nav-item{
+  border: 2px solid rgb(0, 123, 255);
+  border-radius: 5px;
+  padding: 0;
+  margin: 0px 1px 2px 0px;
+  width: 130px;
+}
+
+.dropdown-item{
+  border: 2px solid rgb(0, 123, 255);
+  padding: 2px;
+  margin: 0px 0px 2px 0px;
+  width: 130px;
 }
 
 main{
-    background-image: url('../img/background_dark_0.5.webp');
-    background-size: cover;
-    background-position: center;
+  background-image: url('../img/background_dark_0.5.webp');
+  background-size: cover;
+  background-position: center;
 }
 
 .div__p{
-    text-align: justify;
+  text-align: justify;
 }
 
 
   
   /*-----------------------------------------------------------------------*/
-  /*--------PARAMETRES ECRANS SUPERIEURs A 768px---------------------------*/
+  /*--------PARAMETRES ECRANS SUPERIEURs A 460px---------------------------*/
   /*-----------------------------------------------------------------------*/
   
-  @media screen and (min-width: 768px) {
-    
-    .img__icone{
-      width: 100px;
-      height: auto;
-      padding: 0;
-      margin: 0;
-    }
-  
+@media screen and (min-width: 768px) {
+  .img__icone{
+    width: 100px;
+    height: auto;
+    padding: 0;
+    margin: 0;
   }
+}
   
   /*-----------------------------------------------------------------------*/
-  /*--------PARAMETRES ECRANS SUPERIEURs A 993px---------------------------*/
+  /*--------PARAMETRES ECRANS SUPERIEURs A 460px---------------------------*/
   /*-----------------------------------------------------------------------*/
   
-  @media screen and (min-width: 993px) {
-    
-    .img__icone{
-      width: 150px;
-      height: auto;
-      padding: 0;
-      margin: 0;
-    }
-  
+@media screen and (min-width: 993px) {
+  .img__icone{
+    width: 150px;
+    height: auto;
+    padding: 0;
+    margin: 0;
   }
+}
   
 /*-----------------------------------------------------------------------*/
 /*--------PARAMETRES ECRANS SUPERIEURs A 1200px---------------------------*/
 /*-----------------------------------------------------------------------*/
 
 @media screen and (min-width: 1200px) {
-    
-    .img__icone{
-      width: 200px;
-      height: auto;
-      padding: 0;
-      margin: 0;
-    }
-  
+  .img__icone{
+    width: 200px;
+    height: auto;
+    padding: 0;
+    margin: 0;
   }
+}
   
   /*-----------------------------------------------------------------------*/
-  /*--------PARAMETRES ECRANS INFERIEURS A 768px---------------------------*/
+  /*--------PARAMETRES ECRANS INFERIEURS A 460px---------------------------*/
   /*-----------------------------------------------------------------------*/
   
-  @media screen and (max-width: 993px) {
+  @media screen and (max-width: 768px) {
     
     .img__icone{
       width: 0px;
@@ -94,34 +115,5 @@ main{
       padding: 0;
       margin: 0;
     }
-    .my__iframe{
-
-      width: 100%;
-      height: auto;
-      padding: 0;
-      margin: 0;
-    }
-  }
   
-  @media screen and (max-width: 375px) {
-    .my__iframe3, .my__iframe2, .articleFooter{
-
-      width: 100%;
-      height: auto;
-      padding: 0;
-      margin: 0;
-    }
-    
-  }
-  
-  @media screen and (max-width: 265px) {
-    .my__iframe3, .my__iframe2, .articleFooter{
-
-      width: 100%;
-      height: auto;
-      padding: 0;
-      margin: 0;
-      font-size:x-small;
-    }
-    
   }
