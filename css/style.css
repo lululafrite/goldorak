@@ -9,17 +9,11 @@ main{
 }
 
 .header__bg-image {
-    background-image: url('../img/img_goldorak_dark_02.webp');
-    background-size: cover;
-    background-position: center;
-    /*height: 100vh; /* 100% de la hauteur de la vue */
-    /*display: flex;*/
-    /*justify-content: center;
-    /*color: #fff; /* Couleur du texte pour assurer la visibilité sur l'image */
-    height: 300px;
-    /*padding: 0;
-    margin: auto;*/
-  }
+  background-image: url('../img/img_goldorak_dark_02.webp');
+  background-size: cover;
+  background-position: center;
+  height: 300px;
+}
 
 /**********************************/
 /* Barre de navigation */
@@ -46,8 +40,7 @@ main{
 /* sous menu du bouton Evénements */
 /**********************************/
 .dropdown-menu{
-  background-color: transparent; /*rgb(10, 10, 10, 1);*/
-  /*border: 2px solid rgb(0, 123, 255);*/
+  background-color: transparent;
 }
 
 .dropdown-item{
@@ -64,11 +57,11 @@ main{
   background-color: orangered;
 }
   
-  /*-----------------------------------------------------------------------*/
-  /*--------PARAMETRES ECRANS SUPERIEURs A 460px---------------------------*/
-  /*-----------------------------------------------------------------------*/
+/*-----------------------------------------------------------------------*/
+/*--------PARAMETRES ECRANS SUPERIEURs A 460px---------------------------*/
+/*-----------------------------------------------------------------------*/
   
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 768px){
   .img__icone{
     width: 100px;
     height: auto;
@@ -77,11 +70,11 @@ main{
   }
 }
   
-  /*-----------------------------------------------------------------------*/
-  /*--------PARAMETRES ECRANS SUPERIEURs A 460px---------------------------*/
-  /*-----------------------------------------------------------------------*/
+/*-----------------------------------------------------------------------*/
+/*--------PARAMETRES ECRANS SUPERIEURs A 990px---------------------------*/
+/*-----------------------------------------------------------------------*/
   
-@media screen and (min-width: 993px) {
+@media screen and (min-width: 990px){
   .img__icone{
     width: 150px;
     height: auto;
@@ -94,7 +87,7 @@ main{
 /*--------PARAMETRES ECRANS SUPERIEURs A 1200px---------------------------*/
 /*-----------------------------------------------------------------------*/
 
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 1200px){
   .img__icone{
     width: 200px;
     height: auto;
@@ -103,17 +96,50 @@ main{
   }
 }
   
-  /*-----------------------------------------------------------------------*/
-  /*--------PARAMETRES ECRANS INFERIEURS A 460px---------------------------*/
-  /*-----------------------------------------------------------------------*/
+/*-----------------------------------------------------------------------*/
+/*--------PARAMETRES ECRANS INFERIEURS A 768px---------------------------*/
+/*-----------------------------------------------------------------------*/
   
-  @media screen and (max-width: 768px) {
-    
-    .img__icone{
-      width: 0px;
-      height: auto;
-      padding: 0;
-      margin: 0;
-    }
-  
+@media screen and (max-width: 768px){
+  .img__icone{
+    width: 0px;
+    height: auto;
+    padding: 0;
+    margin: 0;
   }
+}
+  
+/*-----------------------------------------------------------------------*/
+/*--------PARAMETRES ECRANS INFERIEURS A 990px---------------------------*/
+/*-----------------------------------------------------------------------*/
+
+@media screen and (max-width: 990px){
+  .my__iframe{
+    width: 100%;
+    height: auto;
+    padding: 0;
+    margin: 0;
+  }
+}
+
+@media screen and (max-width: 990px){
+  .my__iframe2, .my__iframe3{
+    width: auto;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+  }
+}
+  
+/*-----------------------------------------------------------------------*/
+/*--------PARAMETRES ECRANS INFERIEURS A 350px---------------------------*/
+/*-----------------------------------------------------------------------*/
+  
+@media screen and (max-width: 350px){
+  .my__iframe2, .my__iframe3{
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+  }
+}
