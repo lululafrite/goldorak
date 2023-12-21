@@ -153,8 +153,6 @@ main{
   }
 }
 
-
-
 /*-----------------------------------------------------------------------*/
 /*--------PARAMETRES ECRANS INFERIEURS A 990px---------------------------*/
 /*-----------------------------------------------------------------------*/
@@ -186,6 +184,13 @@ main{
     height: 315px;
     padding: 0;
     margin: 20px auto auto auto;
+  }
+  
+  .article__card{
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items: center;
   }
 }
   
@@ -221,15 +226,23 @@ main{
     margin: 0;
   }
   
-  
   .mediaSalon{
     display: flex;
     flex-direction: column;
   }
+
   .my__iframe4{
     width: 100%;
     height: auto;
     padding: 0;
     margin: auto;
   }
+}
+
+  
+/*-----------------------------------------------------------------------*/
+/*--------PARAMETRES ECRANS INFERIEURS A 350px---------------------------*/
+/*-----------------------------------------------------------------------*/
+  
+@media screen and (max-width: 320px){
 }
