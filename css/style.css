@@ -61,7 +61,7 @@ main{
 /*--------PARAMETRES ECRANS SUPERIEURs A 768px---------------------------*/
 /*-----------------------------------------------------------------------*/
   
-@media screen and (min-width: 768px){
+@media screen and (min-width: 767px){
   .img__icone{
     width: 100px;
     height: auto;
@@ -78,6 +78,14 @@ main{
     height: 315px;
     padding: 0;
     margin: 0;
+  }
+
+  .div__button{
+    display: flex;
+    justify-content:end;
+  }
+  .btAdherer{
+    margin: 5px;
   }
 }
   
@@ -195,10 +203,10 @@ main{
 }
   
 /*-----------------------------------------------------------------------*/
-/*--------PARAMETRES ECRANS INFERIEURS A 768px---------------------------*/
+/*--------PARAMETRES ECRANS INFERIEURS A 767px---------------------------*/
 /*-----------------------------------------------------------------------*/
   
-@media screen and (max-width: 768px){
+@media screen and (max-width: 767px){
   .img__icone{
     width: 0px;
     height: auto;
@@ -206,9 +214,24 @@ main{
     margin: 0;
   }
 
-  .my__iframe4{
+  /*.my__iframe4{
     width: 373px;
     height: 210px;
+    padding: 0;
+    margin: 20px auto auto auto;
+  }*/
+
+  .div__button{
+    display: flex;
+    justify-content:center;
+  }
+  .btAdherer{
+    margin: 5px;
+  }
+
+  .my__iframe4{
+    width: 100%;
+    height: auto;
     padding: 0;
     margin: 20px auto auto auto;
   }
@@ -235,7 +258,7 @@ main{
     width: 100%;
     height: auto;
     padding: 0;
-    margin: auto;
+    margin: 20px auto auto auto;
   }
 }
 
