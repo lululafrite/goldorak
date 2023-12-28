@@ -50,9 +50,9 @@ function startGame() {
 function displayGame() {
     gameContainer.innerHTML = `
         <div class=" mb-3 ms-3 me-auto pe-3">
-            <h2>Bon courage, ${playerName}!<br>Trouve le nombre de Golgote, il peut être de 1 à ${maxNumber}</h2>
+            <h2>Bon courage, ${playerName}!<br>Trouve le nombre de Golgoth, il peut être de 1 à ${maxNumber}</h2>
             <form id="guess-form">
-                <label for="userGuess">Quel est le nombre de Golgote ?</label>
+                <label for="userGuess">Quel est le nombre de Golgoth ?</label>
                 <input type="number" id="userGuess" name="userGuess" min="1" max="${maxNumber}" required onkeydown="if(event.keyCode==13) makeGuess()">
                 <br>
                 <button class="btn btn-lg btn-primary" id="guessButton" type="button" onclick="makeGuess()">Proposer</button>
@@ -99,7 +99,7 @@ function makeGuess() {
             gameContainer.innerHTML = contenuHtmlActuel + displayResults();
         } else {
             // Le joueur a deviné correctement
-            var messageGagnant = "<h2 class='m-3'>Bravo, " + playerName + "!</h2><h3 class='m-3'>Tu as trouvé le nombre de Golgote en " + attempts + " tentatives.</h3>";
+            var messageGagnant = "<h2 class='m-3'>Bravo, " + playerName + "!</h2><h3 class='m-3'>Tu as trouvé le nombre de Golgoth en " + attempts + " tentatives.</h3>";
             
             ajoutBaliseHtml = `
                 <p class="m-3" >` + messageGagnant + `</p>
