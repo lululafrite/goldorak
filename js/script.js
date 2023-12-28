@@ -42,35 +42,25 @@ function startGame() {
         secretNumber = Math.floor(Math.random() * maxNumber) + 1;
 
         // Afficher le jeu
-        displayGame();
+        displayGame(0);
     }
 }
 
 // Afficher le jeu
-function displayGame() {
-    gameContainer.innerHTML = `
-        <div class=" mb-3 ms-3 me-auto pe-3">
-            <h2>Bon courage, ${playerName}!<br>Trouve le nombre de Golgoth, il peut être de 1 à ${maxNumber}</h2>
-            <form id="guess-form">
-                <label for="userGuess">Quel est le nombre de Golgoth ?</label>
-                <input type="number" id="userGuess" name="userGuess" min="1" max="${maxNumber}" required onkeydown="if(event.keyCode==13) makeGuess()">
-                <br>
-                <button class="btn btn-lg btn-primary" id="guessButton" type="button" onclick="makeGuess()">Proposer</button>
-            </form>
-        </div>
-    `;
+function displayGame(valeur=0) {
+    gameContainer.innerHTML = '<div class=" mb-3 ms-3 me-auto pe-3">\n<h2>Bon courage, ' + playerName + '!<br>Trouve le nombre de Golgoth, il peut être de 1 à ' + maxNumber + '</h2>\n<form id="guess-form">\n<label for="userGuess">Quel est le nombre de Golgoth ?</label>\n<input type="number" id="userGuess" name="userGuess" min="1" max="' + maxNumber + '" required onkeydown="if(event.keyCode==13) makeGuess()" value="' + valeur + '">\n<br>\n<button class="btn btn-lg btn-primary" id="guessButton" type="button" onclick="makeGuess()">Proposer</button>\n</form>\n</div>\n';
     contenuHtmlActuel = gameContainer.innerHTML;
 
     // Ajoute un gestionnaire d'événements pour la touche "Entrée" sur le bouton "Proposer"
     document.getElementById("guessButton").addEventListener("keydown", function(event) {
-        if (event.keyCode === 13) {
+        if (event.key === 13) {
             makeGuess();
         }
     });
 
     // Ajoute un gestionnaire d'événements pour la touche "Entrée" dans le champ de texte
     document.getElementById("userGuess").addEventListener("keydown", function(event) {
-        if (event.keyCode === 13) {
+        if (event.key === 13) {
             makeGuess();
         }
     });
@@ -89,14 +79,14 @@ function makeGuess() {
 
         // Ajouter la réponse à la liste des réponses déjà effectuées
         guessedNumbers.push(userGuess);
-
+        displayGame(userGuess);
         // Vérifier la devinette
         if (userGuess < secretNumber) {
             customAlert("Trop bas! Essaie encore.");
-            gameContainer.innerHTML = contenuHtmlActuel + displayResults();
+            gameContainer.innerHTML = contenuHtmlActuel + "<p class='ms-3'>Trop Bas!</p>" + displayResults();
         } else if (userGuess > secretNumber) {
             customAlert("Trop haut! Essaie encore.");
-            gameContainer.innerHTML = contenuHtmlActuel + displayResults();
+            gameContainer.innerHTML = contenuHtmlActuel + "<p class='ms-3'>Trop haut!</p>" + displayResults();
         } else {
             // Le joueur a deviné correctement
             var messageGagnant = "<h2 class='m-3'>Bravo, " + playerName + "!</h2><h3 class='m-3'>Tu as trouvé le nombre de Golgoth en " + attempts + " tentatives.</h3>";
