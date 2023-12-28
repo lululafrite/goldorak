@@ -83,13 +83,13 @@ function makeGuess() {
         // Vérifier la devinette
         if (userGuess < secretNumber) {
             customAlert("Trop bas! Essaie encore.");
-            gameContainer.innerHTML = contenuHtmlActuel + "<p class='ms-3'>Trop Bas!</p>" + displayResults();
+            gameContainer.innerHTML = contenuHtmlActuel + "<p class='ms-3'><strong>" + userGuess + " c'est trop Bas!</strong></p>" + displayResults();
         } else if (userGuess > secretNumber) {
             customAlert("Trop haut! Essaie encore.");
-            gameContainer.innerHTML = contenuHtmlActuel + "<p class='ms-3'>Trop haut!</p>" + displayResults();
+            gameContainer.innerHTML = contenuHtmlActuel + "<p class='ms-3'><strong>" + userGuess + " c'est trop haut!</strong></p>" + displayResults();
         } else {
             // Le joueur a deviné correctement
-            var messageGagnant = "<h2 class='m-3'>Bravo, " + playerName + "!</h2><h3 class='m-3'>Tu as trouvé le nombre de Golgoth en " + attempts + " tentatives.</h3>";
+            var messageGagnant = "<h2 class='m-3'>Bravo, " + playerName + "!</h2><h3 class='m-3'>Tu as trouvé le nombre de Golgoth en " + attempts + " tentatives.</h3><h4 class='m-3'>Goldorak doit abattre " + userGuess + " Golgoth(s) pour sauver la terre.</h4>";
             
             ajoutBaliseHtml = `
                 <p class="m-3" >` + messageGagnant + `</p>
@@ -109,7 +109,7 @@ function makeGuess() {
 
 // Afficher les résultats
 function displayResults() {
-    propositionEffectuée = "<p class='m-3'>Réponses déjà proposées : " + guessedNumbers.join(", ") + "</p>";
+    propositionEffectuée = "<p class='m-3'>Réponses proposées : " + guessedNumbers.join(", ") + "</p>";
     return propositionEffectuée;
 }
 
