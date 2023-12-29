@@ -1,0 +1,19 @@
+.dice {
+    text-align: center;
+    display: inline-block;
+    margin: 10px;
+}
+
+img {
+    width: 100%;
+}
+
+.bottom {
+    padding-top: 30px;
+}
+
+.img3:hover{
+    background-color: rgb(255, 255, 0);
+    border: 5px solid transparent;
+    border-radius: 15px;
+}
