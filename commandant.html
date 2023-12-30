@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Accueil : Bienvenue sur le site de l'association Club Goldorak</title>
+    <title>Jeu : Aide le professeur à choisir le commandant</title>
 
 	<!-- --------------------------- META DATA FOR REFFERENCEMENT ----------------------------- -->
 	<meta name="description" content="Ce site a pour objet de faire connaitre l'association 'Club Goldorak' destinée aux passionnés de la série Goldorak. Goldorak est le manga à l'énorme succès diffusé dans les années 80 sur l'émission pour la jeunesse 'Récré A2' présenté par Dorothé. Le site propose des actualités, des photos, des vidéos, des produits dérivés et beaucoup d'autres informations. Vous y trouverez également les l’actualité sur goldorak et les événement à venir organisés par l’association.">
@@ -67,7 +67,7 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item text-light" href="goldorakgo.html">Godorak Go</a></li>
-                                <li><a class="dropdown-item text-light" href="commandant.html">Mon Commandant</a></li>
+                                <li><a class="dropdown-item text-light" href="commandant.html">My Commander</a></li>
                             </ul>
                         </li>
 
@@ -93,45 +93,71 @@
         <div class="border rounded-3 p-3"> 
             <div class="row d-flex justify-content-center">
                 <div class="col-12">
-                    <h3 class="text-light" style="text-align:left;">Contexte</h3>
-                    <p class=" text-light" style="text-align: justify; font-size: 1.6rem;">
-                        Le professeur Procyon (père d'adoption d'Actarus) est face à un dilemme. Actarus n'est pas en mesure de combattre car il a reçue une blessure importante lors de la dernière bataille.
-                        Alcor et Vénusia se revendiquent tout deux en mesure de prendre le commandement de l'escadrille en l'absence d'Actarus.
-                        Ne pouvant faire un choix affectif car les deux jeunes combattants sont suffisamment formés pour assumer cette tâche, le professeur décide de les mettre en compétition dans une épreuve d'entrainement.
-                        Le gagnant sera le prochain commandant d'escadrille.
-                    </p>
-                    <hr>
-                    <h3 class="text-light" style="text-align:left;">Régle de l'épreuve</h3>
-                    <p class=" text-light" style="text-align: justify; font-size: 1.6rem;">
-                        Chaque compétiteur possède un score temporaire (Somme) et un score global (Total).
-                        À chaque tour, le joueur a sa (Somme) initialisé à 0 et peut lancer le dé autant de fois qu'il le souhaite.
-                        Le résultat d’un lancer est ajouté au (Total).
-                        Lors de son tour, le joueur peut décider à tout moment de :<br>
-                        - Cliquer sur “Prendre”, qui permet d’envoyer les points acumulés dans (Somme) vers le conteur (Total). Ce sera alors le
-                        tour de l’autre joueur.<br>
-                        - Lancer le dé. S’il obtient un 1, son score (Somme) est perdu et c’est la fin de son tour.<br>
-                        Le premier joueur qui atteint les 100 points sur (Total) gagne le jeu.
-                    </p>
-                    <hr>
-                    <h3 class="text-light" style="text-align:left;">Avant de commencer la partie</h3>
-                    <p class=" text-light" style="text-align: justify; font-size: 1.6rem;">
-                        1. Clique sur le bouton "nouvelle partie",<br>
-                        2. Facultatif : Change les pseudos des Joueurs 1 et 2 en cliquant sur les boutons "Nom du joueur 1" et "Nom du joueur 2",<br>
-                        3. Alcor peut commencer à lancer le dé en cliquant sur le dé,<br>
-                        Pour savoir à qui est le tour, les cellules (Somme) et (Total) sont en vert et un texte d'état apparait et Orange. 
-                    </p>
-                    <hr>
+                    <div class="accordion accordion-flush" id="accordionFlushExample">
+                        <div class="accordion-item" style="background-color: transparent;">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed bg-dark text-light fs-2" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                    Contexte
+                                </button>
+                            </h2>
+                            <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                                <div class="accordion-body text-light" style="text-align: justify;">
+                                    Le professeur Procyon (père adoptif d'Actarus) est face à un dilemme. Actarus n'est pas en mesure de combattre car il a reçu une blessure importante lors de la dernière bataille.
+                                    Alcor et Vénusia se revendiquent tout deux en mesure de prendre le commandement de l'escadrille en l'absence d'Actarus.
+                                    Ne pouvant faire un choix affectif car les deux jeunes combattants sont suffisamment formés pour assumer cette tâche, le professeur décide de les mettre en compétition dans une épreuve d'entraînement.
+                                    Le gagnant sera le prochain commandant d'escadrille.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item" style="background-color: transparent;">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed bg-dark text-light fs-2" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                                    Régle de l'épreuve
+                                </button>
+                            </h2>
+                            <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                                <div class="accordion-body text-light" style="text-align: justify;">
+                                    Chaque compétiteur possède un score temporaire nommé Somme et un score global nommé Total.
+                                    À chaque tour, le joueur a sa Somme initialisée à 0 et peut lancer le dé autant de fois qu'il le souhaite.
+                                    Le résultat de la Somme est ajouté au Total.
+                                    Lors de son tour, le joueur peut décider à tout moment de :<br>
+                                    - Cliquer sur “Prendre”, qui permet d’envoyer les points accumulés dans Somme vers le compteur Total. Ce sera alors le
+                                    tour de l’autre joueur.<br>
+                                    - Lancer le dé. Si le joueur obtient un 1, son score (Somme) est perdu et c’est la fin de ton tour.<br>
+                                    Le premier joueur qui atteint les 100 points sur le compteur Total gagne le jeu.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item" style="background-color: transparent;">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed bg-dark text-light fs-2" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                                    Avant de commencer la partie
+                                </button>
+                            </h2>
+                            <div id="flush-collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                                <div class="accordion-body text-light" style="text-align: justify;">
+                                    1. Clique sur le bouton "nouvelle partie",<br>
+                                    2. Etant le premier joueur, Alcor peut commencer en cliquant sur le dé,<br>
+                                    Les compteurs (Somme) et (Total) sont en vert pour le joueur ayant la main et un texte d'état apparait en Orange. 
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
+                <hr>
             </div>
             
-            <div class="row d-flex justify-content-center" id="btnNewGame">
-                <div class="col-2 d-flex justify-content-center">
+            <div class="row d-flex justify-content-center mt-4" id="btnNewGame">
+                <div class="col-12 d-flex justify-content-center">
                     <button class="btn btn-lg btn-primary my-3 mx-auto" type="button"  onClick="nouvellePartie()">Nouvelle partie</button>
                 </div>
             </div>
             
             <div class="row d-flex justify-content-center" id="btnCancelGame" >
-                <div class="col-2 d-flex justify-content-center">
+                <div class="col-12 d-flex justify-content-center">
                     <button class="btn btn-lg btn-primary my-3 mx-auto" type="button"  onClick="annulerPartie()">Annuler partie</button>
                 </div>
             </div>
@@ -164,11 +190,11 @@
                     
                     <p class="text-warning text-center fs-2" id="txtJoueur1"></p>
 
-                    <button class="btn btn-lg btn-primary my-3 mx-auto" type="button" id="btnEditerNomJoueur1" onClick="editerNomJoueur1()">Renommé Alcor</button>
+                    <!-- <button class="btn btn-lg btn-primary my-3 mx-auto" type="button" id="btnEditerNomJoueur1" onClick="editerNomJoueur1()">Renommé Alcor</button> -->
 
                 </div>
 
-                <div class="col-md-2 m-md-0">
+                <div class="col-md-2 m-md-0 mb-4">
                     
                     <div class="d-flex justify-content-center">
                         <img class="img3" src="img/dice3.png" onClick="lanceLeDe()" style="width: 100px; height: 100px;">
@@ -201,14 +227,14 @@
                     
                     <p class="text-warning text-center fs-2" id="txtJoueur2"></p>
                     
-                    <button type="button" class="btn btn-lg btn-primary my-3 mx-auto" id="btnEditerNomJoueur2" onClick="editerNomJoueur2()">Renommé Vénusia</button>
+                    <!-- <button type="button" class="btn btn-lg btn-primary my-3 mx-auto" id="btnEditerNomJoueur2" onClick="editerNomJoueur2()">Renommé Vénusia</button> -->
 
                 </div>
                 
             </div>
 
             <div class="row d-flex justify-content-center my-3 mx-auto">
-                <div class="col-2 d-flex justify-content-center">
+                <div class="col-12 d-flex justify-content-center">
                     <button type="button" class="btn btn-lg btn-primary my-3 mx-auto" id="btnPrendre" onClick="validerSomme()">Prendre</button>
                 </div>
             </div>

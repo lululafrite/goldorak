@@ -48,20 +48,6 @@ function lanceLeDe(){
     }
 }
 
-//Paramètres pour permettre à Alcor de jouer
-function joueur1Joue(){
-    txtJoueur1.textContent = "Allez " + document.querySelector("h1.Joueur1").innerHTML + ", à toi de jouer!" ;
-    txtJoueur2.textContent = "" ;
-    joueurActif = 1;
-}
-
-//Paramètres pour permettre à Vénusia de jouer
-function joueur2Joue(){
-    txtJoueur2.textContent = "Allez " + document.querySelector("h1.Joueur2").innerHTML + ", à toi de jouer!" ;
-    txtJoueur1.textContent = "" ;
-    joueurActif = 2;
-}
-
 //Sortir une valeur aléatoire du dé et incrémenter la valeur dans la variable 'somme' OU annuler le tour si la valeur est égale à 1.
 function valeurDuDe() {
     var randomNumber = Math.floor(Math.random() * 6) + 1;
@@ -105,9 +91,7 @@ function validerSomme(){
             document.getElementById('somme1').value = 0;
             
             if(parseInt(document.getElementById('total1').value) >= 100){
-                txtJoueur1.textContent = "Bravo!!! " + document.querySelector("h1.Joueur1").innerHTML + " a gagné cette partie" ;
-                txtJoueur2.textContent = "" ;
-                resetVariable();
+                bravoJoueur1();
                 exit();
             }
             
@@ -118,9 +102,7 @@ function validerSomme(){
             document.getElementById('total2').value = parseInt(document.getElementById('total2').value) + sommeJoueur;
             document.getElementById('somme2').value = 0;
             if(parseInt(document.getElementById('total2').value) >= 100){
-                txtJoueur2.textContent = "Bravo!!! " + document.querySelector("h1.Joueur2").innerHTML + " a gagné cette partie" ;
-                txtJoueur1.textContent = "" ;
-                resetVariable();
+                bravoJoueur2();
                 exit();
             }
             
@@ -132,6 +114,46 @@ function validerSomme(){
     }else{
         alert("Lance le dé avant d'ajouter la somme dans le total");
     }
+}
+
+function annulerPartie(){
+    changeColor();
+    resetVariable();
+}
+
+//Paramètres pour permettre à Alcor de jouer
+function joueur1Joue(){
+    txtJoueur1.textContent = "Allez " + document.querySelector("h1.Joueur1").innerHTML + ", à toi de jouer!" ;
+    txtJoueur2.textContent = "" ;
+    joueurActif = 1;
+}
+
+//Paramètres pour permettre à Vénusia de jouer
+function joueur2Joue(){
+    txtJoueur2.textContent = "Allez " + document.querySelector("h1.Joueur2").innerHTML + ", à toi de jouer!" ;
+    txtJoueur1.textContent = "" ;
+    joueurActif = 2;
+}
+
+function finPartie(){
+    partieEncours= false;
+    btnNewGame.style.visibility = 'visible';
+    btnPrendre.style.visibility = 'hidden';
+    btnCancelGame.style.visibility = 'hidden';
+    btnNewGame.style.height= 'auto';
+    btnCancelGame.style.height= '0px';
+}
+
+function bravoJoueur1(){
+    txtJoueur1.textContent = "Bravo!!! " + document.querySelector("h1.Joueur1").innerHTML + " tu as gagné cette partie" ;
+    txtJoueur2.textContent = "" ;
+    finPartie();
+}
+
+function bravoJoueur2(){
+    txtJoueur2.textContent = "Bravo!!! " + document.querySelector("h1.Joueur2").innerHTML + " tu as gagné cette partie" ;
+    txtJoueur1.textContent = "" ;
+    finPartie();
 }
 
 //Changer les bg et txt des input après avoir cliqué sur nouvelle partie
@@ -154,28 +176,25 @@ function changeColor(){
 
 function resetVariable(){
     
+    bgInputBlanc();
+    txtInputNoir();
+    finPartie();
+
     sommeJoueur = 0;
     joueurActif = 1;
-    partieEncours= false;
 
     document.getElementById('total1').value = 0;
     document.getElementById('somme1').value = 0;
     document.getElementById('total2').value = 0;
     document.getElementById('somme2').value = 0;
 
-    bgInputBlanc();
-    txtInputNoir();
-    
-    btnNewGame.style.visibility = 'visible';
-    btnPrendre.style.visibility = 'hidden';
-    btnCancelGame.style.visibility = 'hidden';
-    btnNewGame.style.height= 'auto';
-    btnCancelGame.style.height= '0px';
-
     txtJoueur1.textContent = "" ;
     txtJoueur2.textContent = "" ;
 
+    partieEncours= false;
+    btnNewGame.style.visibility = 'visible';
     btnPrendre.style.visibility = 'hidden';
+    btnCancelGame.style.visibility = 'hidden';
 }
 
 function nouvellePartie(){
@@ -192,12 +211,6 @@ function nouvellePartie(){
 
     partieEncours= true;
 }
-
-function annulerPartie(){
-    changeColor();
-    resetVariable();
-}
-
 
 function bgInputBlanc(){
     inputTotal1.style.backgroundColor = '#ffffff';
