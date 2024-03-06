@@ -11,21 +11,14 @@
 
             <ul class="navbar-nav">
             
-                <li class="nav-item">
+                <li class="nav-item d-flex justify-content-center align-items-center">
                     <a class="nav-link active text-light" aria-current="page" href="index.php?page=home">
                         <img class="p-0 px-2 mb-1" src="img/icon/house.svg" alt="icone événements">
                         Accueil
                     </a>
                 </li>
-
-                <li class="nav-item">
-                    <a class="nav-link active text-light" aria-current="page" href="index.php?page=media">
-                        <img class="p-0 px-2 mb-1" src="img/icon/card-image.svg" alt="icone événements">
-                        Médias
-                    </a>
-                </li>
                 
-                <li class="nav-item dropdown">
+                <li class="nav-item dropdown d-flex justify-content-center align-items-center">
                     <a class="nav-link dropdown-toggle text-light" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <img class="p-0 px-2 mb-1" src="img/icon/calendar2-event.svg" alt="icone événements">
                         Evénements
@@ -51,8 +44,18 @@
                         </li>
                     </ul>
                 </li>
-                
-                <li class="nav-item dropdown">
+
+            <?php if($_SESSION['typeConnect'] === 'Administrator' || $_SESSION['typeConnect'] === 'Member'){ ?>
+                <li class="nav-item d-flex justify-content-center align-items-center">
+                    <a class="nav-link active text-light" aria-current="page" href="index.php?page=media">
+                        <img class="p-0 px-2 mb-1" src="img/icon/card-image.svg" alt="icone événements">
+                        Médias
+                    </a>
+                </li>
+            <?php } ?>
+            
+            <?php if($_SESSION['subscriptionConnect'] != 'Vénusia' ){ ?>
+                <li class="nav-item dropdown d-flex justify-content-center align-items-center">
                     <a class="nav-link dropdown-toggle text-light" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <img class="p-0 px-2 mb-1" src="img/icon/joystick.svg" alt="icone joystick du menu jeux">  
                         Jeux
@@ -64,16 +67,20 @@
                                 Goldorak Go
                             </a>
                         </li>
+                    <?php if($_SESSION['subscriptionConnect'] === 'Goldorak' ){ ?>
                         <li>
                             <a class="dropdown-item text-light" href="index.php?page=commander">
                                 <img class="p-0 pe-2 mb-1" src="img/icon/dice-6.svg" alt="icone du menu s'identifier">    
                                 My Commander
                             </a>
                         </li>
+                    <?php } ?>
                     </ul>
                 </li>
+            <?php } ?>
                 
-                <li class="nav-item dropdown">
+            <?php if($_SESSION['typeConnect'] === 'Administrator'){ ?>
+                <li class="nav-item dropdown d-flex justify-content-center align-items-center">
                     <a class="nav-link dropdown-toggle text-light" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <img class="px-2 mb-1" src="img/icon/people.svg" alt="icone du bouton s'identifier">    
                         Profils
@@ -95,31 +102,56 @@
                         </li>
                     </ul>
                 </li>
+            <?php } ?>
                 
-                <li class="nav-item dropdown custom-border-md-bottom">
+                <li class="nav-item dropdown custom-border-md-bottom d-flex justify-content-center align-items-center">
                     <a class="nav-link dropdown-toggle text-light" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img class="p-0 px-2 mb-1" src="img/icon/person.svg" alt="icone du menu s'identifier">
-                        Mon compte
+                            <img class="p-0 px-2 mb-1" alt="icone du menu s'identifier" style="width: 30px;" src=
+                            "<?php
+                                if($_SESSION['typeConnect'] != 'Guest'){
+                                    echo "img/avatar/" . $_SESSION['avatarConnect']; 
+                                }else{
+                                    echo "img/icon/person.svg"; 
+                                }
+                            ?>">
+                            <span class="Nav_Span1"><?php if($_SESSION['pseudoConnect']!= 'Guest'){echo 'Bonjour';}else{echo 'Se connecter';}?></span></br><span class="Nav_Span2 text-warning"><?php if($_SESSION['pseudoConnect']!= 'Guest'){echo $_SESSION['pseudoConnect'] . ' !';}else{echo "à votre compte";}?></span>
                     </a>
                     <ul class="dropdown-menu">
+                        <?php if($_SESSION['typeConnect'] === 'Guest'){ ?>
                         <li>
                             <a class="dropdown-item text-light" href="index.php?page=connexion">
                                 <img class="p-0 m-0 pe-2" src="img/icon/box-arrow-in-left.svg" alt="icone du bouton connexion">    
                                 Connexion
                             </a>
                         </li>
+                        <?php } ?>
+                        <?php if($_SESSION['typeConnect'] != 'Guest'){ ?>
                         <li>
                             <a class="dropdown-item text-light" href="index.php?page=disconnect">
                                 <img class="p-0 m-0 pe-2" src="img/icon/box-arrow-right.svg" alt="icone du bouton déconnexion">    
                                 Déconnexion
                             </a>
                         </li>
+                        <?php } ?>
+                    <?php if($_SESSION['typeConnect'] != 'Guest'){ ?>
+                        <li>
+                            <form action="index.php?page=user_edit" method="post">
+                                <button class="dropdown-item text-light" type="submit" name="btn_monCompte">
+                                    <img class="p-0 m-0 pe-2" src="img/icon/person-gear.svg" alt="icone du bouton mon compte">    
+                                    Mon compte
+                                </button>
+                            </form>
+                        </li>
+                    <?php } ?>
+                    
+                    <?php if($_SESSION['typeConnect'] === 'Guest'){ ?>
                         <li>
                             <a class="dropdown-item text-light" href="index.php?page=adherer">
                                 <img class="p-0 m-0 pe-2" src="img/icon/pencil-square.svg" alt="icone du bouton adhérer">    
                                 Adhérer
                             </a>
                         </li>
+                    <?php } ?>
                     </ul>
                 </li>
 

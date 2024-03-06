@@ -4,7 +4,7 @@ use Symfony\Component\Intl\Scripts;
 
 use function PHPSTORM_META\type;
 
-	class Type
+	class Subscription
 	{
 
 		function __construct()
@@ -13,32 +13,32 @@ use function PHPSTORM_META\type;
 
 		//-----------------------------------------------------------------------
 
-		private $id_type;
-		public function getId()
+		private $id_subscription;
+		public function getIdSubscription()
 		{
-			return $this->id_type;
+			return $this->id_subscription;
 		}
-		public function setId($new)
+		public function setIdSubscription($new)
 		{
-			$this->id_type = $new;
-		}
-
-		//-----------------------------------------------------------------------
-
-		private $type;
-		public function getName()
-		{
-			return $this->type;
-		}
-		public function setName($new)
-		{
-			$this->type = $new;
+			$this->id_subscription = $new;
 		}
 
 		//-----------------------------------------------------------------------
 
-		private $theType;
-		public function getType($îdType)
+		private $subscription;
+		public function getSubscription()
+		{
+			return $this->subscription;
+		}
+		public function setSubscription($new)
+		{
+			$this->subscription = $new;
+		}
+
+		//-----------------------------------------------------------------------
+
+		private $theSubscription;
+		public function getSubscription_($îdSubscription)
 		{
 			include('../Controller/ConfigConn.php');
 
@@ -47,16 +47,16 @@ use function PHPSTORM_META\type;
 			try
 			{
 			    $sql = $bdd->query("SELECT
-										`user_type`.`id_type`,
-										`user_type`.`type`
+										`subscription`.`id_subscription`,
+										`subscription`.`subscription`
 
-									FROM `user_type`
+									FROM `subscription`
 									
-									WHERE `user_type`.`id_type`=$îdType
+									WHERE `subscription`.`id_subscription`=$îdSubscription
 								");
 
-				$this->theType[] = $sql->fetch();
-				return $this->theType;
+				$this->theSubscription[] = $sql->fetch();
+				return $this->theSubscription;
 			}
 			catch (Exception $e)
 			{
@@ -68,25 +68,25 @@ use function PHPSTORM_META\type;
 
 		//-----------------------------------------------------------------------
 
-		private $userTypeList;
-		public function get($whereClause, $orderBy = 'type', $ascOrDesc = 'ASC', $firstLine = 0, $linePerPage = 13)
+		private $userSubscriptionList;
+		public function get($whereClause, $orderBy = 'subscription', $ascOrDesc = 'ASC', $firstLine = 0, $linePerPage = 13)
 		{
 			include('../Controller/ConfigConn.php');
 			
 			try
 			{
 			    $sql = $bdd->query("SELECT
-										`user_type`.`id_type`,
-										`user_type`.`type`
+										`subscription`.`id_subscription`,
+										`subscription`.`subscription`
 									FROM
-										`user_type`
+										`subscription`
 									WHERE $whereClause
 									ORDER BY $orderBy $ascOrDesc
 									LIMIT $firstLine, $linePerPage
 								");
 
-				while ($this->userTypeList[] = $sql->fetch());
-				return $this->userTypeList;
+				while ($this->userSubscriptionList[] = $sql->fetch());
+				return $this->userSubscriptionList;
 			}
 			catch (Exception $e)
 			{
@@ -98,17 +98,17 @@ use function PHPSTORM_META\type;
 
 		//-----------------------------------------------------------------------
 
-		public function addUserType()
+		public function addUserSubscription()
 		{
 			include('../Controller/ConfigConn.php');
 
 			try{
-				$bdd->exec("INSERT INTO `user_type`(`type`)
-							VALUES('" . $this->type . "')");
+				$bdd->exec("INSERT INTO `subscription`(`subscription`)
+							VALUES('" . $this->subscription . "')");
 
-				$sql = $bdd->query("SELECT MAX(`id_type`) FROM `user_type`");
-				$id_type = $sql->fetch();
-				$this->id_type = intval($id_type['id_type']);
+				$sql = $bdd->query("SELECT MAX(`id_subscription`) FROM `subscription`");
+				$id_subscription = $sql->fetch();
+				$this->id_subscription = intval($id_subscription['id_subscription']);
 
 				echo '<script>alert("L\'enregistrement est effectué!");</script>';
 
@@ -123,13 +123,13 @@ use function PHPSTORM_META\type;
 
 		//-----------------------------------------------------------------------
 
-		public function updateUserType($idType)
+		public function updateUserSubscription($idSubscription)
 		{
 			include('../Controller/ConfigConn.php');
 			try
 			{
-				$bdd->exec("UPDATE `user_type` SET `name` = '" . $this->type . "'
-							WHERE `id_type` = " . intval($idType) . "
+				$bdd->exec("UPDATE `subscription` SET `subscription` = '" . $this->subscription . "'
+							WHERE `id_subscription` = " . intval($idSubscription) . "
 							");
 				
 				echo '<script>alert("Les modifications sont enregistrées!");</script>';
@@ -144,13 +144,13 @@ use function PHPSTORM_META\type;
 
 		//-----------------------------------------------------------------------
 
-		public function deleteUserType($id)
+		public function deleteUsersubscription($id)
 		{
 			include('../Controller/ConfigConn.php');
 
 			try
 			{
-			    $bdd->exec('DELETE FROM user_type WHERE id_type=' . $id);
+			    $bdd->exec('DELETE FROM subscription WHERE id_subscription=' . $id);
 				echo '<script>alert("Cet enregistrement est supprimé!");</script>';
 			}
 			catch (Exception $e)
@@ -163,17 +163,17 @@ use function PHPSTORM_META\type;
 
         //__Ajouter user?___________________________________________
         
-        public function getAddUserType()
+        public function getAddUserSubscription()
         {
-            if(is_null($_SESSION['addUserType']))
+            if(is_null($_SESSION['addUserSubscription']))
             {
-                $_SESSION['addUserType']=false;
+                $_SESSION['addUserSubscription']=false;
             }
-            return $_SESSION['addUserType'];
+            return $_SESSION['addUserSubscription'];
         }
-        public function setAddUserType($new)
+        public function setAddUserSubscription($new)
         {
-            $_SESSION['addUserType']=$new;
+            $_SESSION['addUserSubscription']=$new;
         }
 
 	}

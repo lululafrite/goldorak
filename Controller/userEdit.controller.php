@@ -1,103 +1,296 @@
 <?php
 
+    
 //***********************************************************************************************
-// traitement droits utilisateur : renvoi vers la page erro_page.php si l'utilisateur et un Guest
+// Echapper les variables
 //***********************************************************************************************
 
-    if ($_SESSION['userConnected'] != "Administrator"){
-
-        if($_SESSION['local']===true){
-
-            echo '<script>window.location.href = "http://goldorak/index.php?page=error_page";</script>';
-        
-        }
-        else{
-
-            echo '<script>window.location.href = "https://www.follaco.fr/index.php?page=error_page";</script>';
-        
-        }
-        exit();
+    function escapeInput($input){
+        return htmlspecialchars($input, ENT_QUOTES, 'UTF-8');
     }
+    
+    $nav_new_user = isset($_POST['nav_new_user']) ? true : false;
+    $bt_userEdit_new = isset($_POST['bt_userEdit_new']) ? true : false;
+    $bt_userEdit_delete = isset($_POST['bt_userEdit_delete']) ? true : false;
+    $bt_userEdit_cancel = isset($_POST['bt_userEdit_cancel']) ? true : false;
+    $bt_userEdit_save = isset($_POST['bt_userEdit_save']) ? true : false;
+    $btn_monCompte = isset($_POST['btn_monCompte']) ? true : false;
+
+    $btn_avatar = isset($_POST['btn_avatar']) ? true : false;
+    
+    $btn_venusia = isset($_POST['btn_venusia']) ? true : false;
+    $btn_actarus = isset($_POST['btn_actarus']) ? true : false;
+    $btn_goldorak = isset($_POST['btn_goldorak']) ? true : false;
+
+    $newError = isset($_GET['newError']) ? escapeInput($_GET['newError']) : false;
+   
 
 //***********************************************************************************************
 // Daclaration de variables
 //***********************************************************************************************
 
     include_once('../Model/user.class.php');
+
+    if($nav_new_user){
+
+        $_SESSION['newUser'] = true;
+
+    }else if ($bt_userEdit_new){
+
+        $_SESSION['newUser'] = true;
+
+    }else if($btn_venusia){
+        
+        $_SESSION['subsription'] = 'Vénusia';
+        $_SESSION['newMember'] = true;
+        $_SESSION['newUser'] = true;
+
+    }else if($btn_actarus){
+        
+        $_SESSION['subsription'] = 'Actarus';
+        $_SESSION['newMember'] = true;
+        $_SESSION['newUser'] = true;
+
+    }else if($btn_goldorak){
+        
+        $_SESSION['subsription'] = 'Goldorak';
+        $_SESSION['newMember'] = true;
+        $_SESSION['newUser'] = true;
+
+    }
     
     $_SESSION['theTable'] = 'user';
-
-    $MyUser = new User();
     
-    $Users = array();
+    $changeAvatar = false;
+    
+    $MyUser = new User();
+    $MyUser->setNewUser($_SESSION['newUser']);
+
+    $users = array();
     $user = array(
         "id_user" => ''
     );
-    $Users[0] = $user;
+    $users[0] = $user;
+
+    //***********************************************************************************************
+    // traitement du téléchargement des images 
+    //***********************************************************************************************
+    
+        if($btn_avatar){
+            
+            $uploadDirectory = './img/avatar/';
+    
+            $_SESSION['uploadAvatar'] = isset($_POST['txt_userEdit_avatar']) ? escapeInput($_POST['txt_userEdit_avatar']) : false;
+            //$_SESSION['uploadAvatar'] = $_POST['txt_userEdit_avatar'];
+
+            $_SESSION['uploadAvatar'] = isset($_FILES["fileAvatar"]) ? escapeInput($_FILES["fileAvatar"]["error"]) : false;
+    
+            //if (isset($_FILES["fileAvatar"]) && $_FILES["fileAvatar"]["error"] == UPLOAD_ERR_OK){
+            if ($_SESSION['uploadAvatar'] == UPLOAD_ERR_OK){
+    
+                $_SESSION['uploadAvatar'] = isset($_FILES["fileAvatar"]) ? escapeInput($_FILES["fileAvatar"]["name"]) : false; //$_FILES["fileAvatar"]["name"];
+                $sourceFile = isset($_FILES["fileAvatar"]) ? escapeInput($_FILES["fileAvatar"]["tmp_name"]) : false; //$_FILES["fileAvatar"]["tmp_name"];
+                $destinationFile = $uploadDirectory . basename($_SESSION['uploadAvatar']); //$_FILES["fileAvatar"]["name"]);
+                unset($_FILES["fileAvatar"]);
+    
+            }else{
+    
+                echo "<script>alert('Aucune image n'a été sélectionnée ou une erreur s'est produite.');</script>";
+                
+            }
+    
+            if(move_uploaded_file($sourceFile, $destinationFile)){
+    
+                echo "<script>alert('L\'image a été uploadée avec succès.');</script>";
+    
+            }else{
+    
+                echo "<script>alert('Désolé, une erreur s'est produite lors de l'upload de l'image.');</script>";
+            
+            }
+    
+            $changeAvatar = true;
+        }
 
 //***********************************************************************************************
 // traitement du CRUD
 //***********************************************************************************************
 
-    if(isset($_POST['bt_userEdit_save']) && $_SESSION['errorFormUser'] === false){
+    if($bt_userEdit_save && $_SESSION['errorFormUser'] === false){
         
         //Récupération des valeurs des input du formulaire
-        $MyUser->setName(strtoupper($_POST["txt_userEdit_name"]));
-        $MyUser->setSurname(ucfirst(strtolower($_POST["txt_userEdit_surname"])));
-        $MyUser->setPseudo($_POST["txt_userEdit_pseudo"]);
-        $MyUser->setEmail($_POST["txt_userEdit_email"]);
-        $MyUser->setPhone($_POST["txt_userEdit_phone"]);
-        $MyUser->setType($_POST["list_userEdit_type"]);
-        $MyUser->setPassword($_POST["txt_userEdit_password"]);
 
+        $_SESSION['id_user'] = isset($_POST['txt_userEdit_id']) ? escapeInput($_POST['txt_userEdit_id']) : '';
+        $_SESSION['name'] = isset($_POST['txt_userEdit_name']) ? escapeInput($_POST['txt_userEdit_name']) : '';
+        $_SESSION['surname'] = isset($_POST['txt_userEdit_surname']) ? escapeInput($_POST['txt_userEdit_surname']) : '';
+        $_SESSION['pseudo'] = isset($_POST['txt_userEdit_pseudo']) ? escapeInput($_POST['txt_userEdit_pseudo']) : '';
+        $_SESSION['email'] = isset($_POST['txt_userEdit_email']) ? escapeInput($_POST['txt_userEdit_email']) : '';
+        $_SESSION['phone'] = isset($_POST['txt_userEdit_phone']) ? escapeInput($_POST['txt_userEdit_phone']) : '';
+        $_SESSION['type_'] = isset($_POST['list_userEdit_type']) ? escapeInput($_POST['list_userEdit_type']) : '';
+        $_SESSION['avatar'] = isset($_POST['txt_userEdit_avatar']) ? escapeInput($_POST['txt_userEdit_avatar']) : '';
+        $_SESSION['subscription'] = isset($_POST['list_userEdit_subscription']) ? escapeInput($_POST['list_userEdit_subscription']) : '';
+        $_SESSION['password'] = isset($_POST['txt_userEdit_password']) ? escapeInput($_POST['txt_userEdit_password']) : '';
+
+        $MyUser->setName(strtoupper($_SESSION['name']));
+        $MyUser->setSurname(ucfirst(strtolower($_SESSION['surname'])));
+        $MyUser->setPseudo($_SESSION['pseudo']);
+        $MyUser->setEmail($_SESSION['email']);
+        $MyUser->setPhone($_SESSION['phone']);
+
+        if($_SESSION['typeConnect'] ==='Administrator'){
+
+            $MyUser->setType($_SESSION['type_']);
+
+        }else{
+
+            $MyUser->setType('Member');
+
+        }
+
+        $MyUser->setAvatar($_SESSION['avatar']);
+        $MyUser->setSubscription($_SESSION['subscription']);
+        $MyUser->setPassword($_SESSION['password']);
         
-        if($_SESSION['newUser'] === true){
-            // $req est la valeur retournée par la requete permettent de vérifier si l'utilisateur n'est pas déjà existant en BD. 1 = exitant, 0 = non existant
-            $req = $MyUser->verifUser($MyUser->getEmail());
-            
-            if($req === 0){
+        if($_SESSION['newUser']){
                 
-                $MyUser->setId($MyUser->addUser()); // Requete qui ajoute l'utilisateur
-                $_SESSION['newUser'] = false;
-				echo '<script>alert("L\'enregistrement est effectué!");</script>';
+            $MyUser->setId($MyUser->addUser());
+            $_SESSION['newUser'] = false;
+            $MyUser->setNewUser(false);
+
+            if($_SESSION['newMember']){
+
+                $_SESSION['newMember'] = false;
+                $_SESSION['typeConnect'] = 'Member';
+                $_SESSION['pseudoConnect'] = $_SESSION['pseudo'];
+                $_SESSION['avatarConnect'] = $_SESSION['avatar'];
+                $_SESSION['subscriptionConnect'] = $_SESSION['subscription'];
+                $_SESSION['connexion'] = true;
+
+                if($_SESSION['local'] === true){
+
+                    echo '<script>window.location.href = "http://goldorak/index.php?page=home";</script>';
+                
+                }
+                else{
+                    
+                    echo '<script>window.location.href = "https://www.follaco.fr/index.php?page=home";</script>';
+                
+                }
 
             }else{
-                
-                echo '<script>alert("Cet utilisateur existe déjà en base de donnée.;</script>';
-            
+
+                echo '<script>alert("L\'enregistrement est effectué!");</script>';
+
             }
 
         }else{
 
-            $MyUser->updateUser($_POST["txt_userEdit_id"]);
+            $MyUser->updateUser($_SESSION['id_user']);
+
+            if ($_SESSION['updateMoncompte']){
+
+                $_SESSION['pseudoConnect'] = $_SESSION['pseudo'];
+                $_SESSION['avatarConnect'] = $_SESSION['avatar'];
+                $_SESSION['subscriptionConnect'] = $_SESSION['subscription'];
+
+            }
 
         }
 
-    }else if(isset($_POST['nav_new_user']) || isset($_POST['bt_userEdit_new'])){
+    }else if($newError && !$_SESSION['errorFormUser']){
         
-        if ($_SESSION['errorFormUser'] === false){
-            // Vide le tableau pour que les input du formulaire soient vides après avoir cliqué sur le bouton nouveau
-            $user = array(
-                "id_user" => '',
-                "name" => '',
-                "surname" => '',
-                "pseudo" => '',
-                "email" => '',
-                "phone" => '',
-                "type" => '',
-                "password" => ''
-            );
-            $Users[0] = $user;
+        $user = array(
+            "id_user" => $_SESSION['id_user'],
+            "name" => $_SESSION['name'],
+            "surname" => $_SESSION['surname'],
+            "pseudo" => $_SESSION['pseudo'],
+            "email" => $_SESSION['email'],
+            "phone" => $_SESSION['phone'],
+            "type" => $_SESSION['type_'],
+            "avatar" => $_SESSION['avatar'],
+            "subscription" => $_SESSION['subscription'],
+            "password" => $_SESSION['password']
+        );
+        $users[0] = $user;
 
-            $_SESSION['newUser'] = true;
-            
+        $_SESSION['newUser'] = true;
+        $MyUser->setNewUser(true);
+        $newUser = true;
+        $newError = false;
+
+    }else if(($bt_userEdit_new && !$_SESSION['errorFormUser']) || ($_SESSION['newUser'] && !$_SESSION['errorFormUser'])){
+        
+        $user = array(
+            "id_user" => '',
+            "name" => '',
+            "surname" => '',
+            "pseudo" => '',
+            "email" => '',
+            "phone" => '',
+            "type" => 'Member',
+            "avatar" => 'avatar_membre_white.webp',
+            "subscription" => $_SESSION['subsription'], //'Vénusia',
+            "password" => ''
+        );
+        $users[0] = $user;
+
+        $_SESSION['newUser'] = true;
+        $MyUser->setNewUser(true);
+        $newUser = true;
+
+    }else if($bt_userEdit_delete){
+        
+        $_SESSION['id_user'] = isset($_POST['txt_userEdit_id']) ? escapeInput($_POST['txt_userEdit_id']) : '';
+        
+        if ($MyUser->deleteUser($_SESSION['id_user'])){
+
+            if($_SESSION['typeConnect'] === 'Member'){
+
+                $_SESSION['id_user'] = '';
+                $_SESSION['name'] = '';
+                $_SESSION['surname'] = '';
+                $_SESSION['pseudo'] = 'Guest';
+                $_SESSION['email'] = '';
+                $_SESSION['phone'] = '## ## ## ## ##';
+                $_SESSION['type'] = 'Guest';
+                $_SESSION['avatar'] = 'avatar_membre_white.webp';
+                $_SESSION['subscription'] = 'Vénusia';
+                $_SESSION['password'] =  '';
+                $_SESSION['connexion'] = false;
+
+            }
+
+            echo '<script>alert(\'Cet enregistrement est correctement supprimé de la base de données!\');</script>';
+
+            if($_SESSION['local']){
+
+                if($_SESSION['typeConnect'] === 'Administrator'){
+
+                    echo '<script>window.location.href = "http://goldorak/index.php?page=user";</script>';
+
+                }else{
+
+                    echo '<script>window.location.href = "http://goldorak/index.php?page=disconnect";</script>';
+
+                }
+
+            }else{
+
+                if($_SESSION['typeConnect'] === 'Administrator'){
+
+                    echo '<script>window.location.href = "https://www.follaco.fr/index.php?page=user";</script>';
+
+                }else{
+
+                    echo '<script>window.location.href = "https://www.follaco.fr/index.php?page=disconnect";</script>';
+                    
+                }
+
+            }
+            exit;
         }
 
-    }else if(isset($_POST['bt_userEdit_delete'])){
-        // requete qui supprime le véhicule
-        $MyUser->deleteUser($_POST["txt_userEdit_id"]);
-
-    }else if(isset($_POST['bt_userEdit_cancel'])){
+    }else if($bt_userEdit_cancel){
         
         $_SESSION['newUserr'] = false;
         
@@ -118,26 +311,52 @@
     if($_SESSION['errorFormUser']===false){
 
         if(!$_SESSION['newUser']){
-            // Traitement de récupération de l'id de l'utilisateur en fonction des conditions
-            if(isset($_POST['txt_userEdit_id']) && !empty($_POST['txt_userEdit_id'])){
-                
-                $MyUser->setId($_POST['txt_userEdit_id']);
+            
+            if($btn_monCompte){
 
-            }else if($Users[0]['id_user'] != ''){
+                $users = $MyUser->get('`pseudo` = \'' . $_SESSION['pseudoConnect'] . '\'');
+                $_SESSION['updateMoncompte'] = true;
 
-                $MyUser->setId($Users[0]['id_user']);
+            }else{
+
+                $_SESSION['id_user'] = isset($_POST['txt_userEdit_id']) ? escapeInput($_POST['txt_userEdit_id']) : '';
+                if(!empty($_SESSION['id_user'])){
+                    
+                    $MyUser->setId($_SESSION['id_user']);
+
+                }else if($users[0]['id_user'] != ''){
+
+                    $MyUser->setId($users[0]['id_user']);
+
+                }
+                // Requete SELECT permettant de récupérer les données de l'utilisateur en fonction de l'id traité ci-dessus
+                $users = $MyUser->get('`id_user` = \'' . $MyUser->getId() . '\'');
 
             }
-            // Requete SELECT permettant de récupérer les données de l'utilisateur en fonction de l'id traité ci-dessus
-            $Users = $MyUser->getUser($MyUser->getId());
+
         }
-        
-        //Traiment de la BD pour récupérer les données destinées à l'input liste type
-        include('../Model/type.class.php');
-        $Types = new Type();
-        $MyType = $Types->get(1,'type', 'ASC', 0, 50);
-        unset($Types);
 
     }
+        
+    if($changeAvatar === true){
+
+        $users[0]['avatar'] = $_SESSION['uploadAvatar'];
+        $_SESSION['avatar'] = $_SESSION['uploadAvatar'];
+
+        $changeAvatar = false;
+
+    }
+
+    //Traiment de la BD pour récupérer les données destinées à l'input liste type
+    include('../Model/type.class.php');
+    $Types = new Type();
+    $MyType = $Types->get(1,'type', 'ASC', 0, 50);
+    unset($Types);
+
+    //Traiment de la BD pour récupérer les données destinées à l'input liste subscription
+    include('../Model/subscription.class.php');
+    $Subscriptions = new Subscription();
+    $MySubscription = $Subscriptions->get(1,'subscription', 'ASC', 0, 50);
+    unset($Subscriptions);
 
 ?>

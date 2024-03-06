@@ -46,12 +46,34 @@
                                         </blockquote>
                                     </div>
                                     <?php
-                                    if($_SESSION['userConnected'] != 'Guest'){
+                                    if($_SESSION['typeConnect'] != 'Guest' && $_SESSION['typeConnect'] != 'Member'){
                                     ?>
                                         <div class="card-footer d-flex flex-wrap justify-content-center">
                                             <button class="btn btn-lg btn-primary me-2" type="submit" id="bt_comment_validate" name="bt_comment_validate" style="width: 120px;">Valider</button>
                                             <button class="btn btn-lg btn-warning me-2" type="submit" id="bt_comment_refuse" name="bt_comment_refuse" style="width: 120px;">Refuser</button>
                                             <button class="btn btn-lg btn-danger me-2" type="submit" id="bt_comment_delete" name="bt_comment_delete" style="width: 120px;">Supprimer</button>
+                                        </div>
+                                        <div>
+                                        <input class="text-center <?php
+                                                                        if ($Comment[$i]['publication'] == '0'){
+                                                                            echo "bg-info";
+                                                                        }else if ($Comment[$i]['publication'] == '1'){
+                                                                            echo "bg-danger";
+                                                                        }else if ($Comment[$i]['publication'] == '2'){
+                                                                            echo "bg-success";
+                                                                        }
+                                                                    ?>"
+                                            value="Etat : <?php
+                                                            if ($Comment[$i]['publication'] == '0'){
+                                                                echo "En attente";
+                                                            }else if ($Comment[$i]['publication'] == '1'){
+                                                                echo "Refusé";
+                                                            }else if ($Comment[$i]['publication'] == '2'){
+                                                                echo "Validé";
+                                                            }
+                                                        ?>"
+                                                        
+                                            type="text" readonly>
                                         </div>
                                     <?php
                                     }

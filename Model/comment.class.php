@@ -73,14 +73,14 @@ use function PHPSTORM_META\type;
 
 		//-----------------------------------------------------------------------
 
-		private $id_menber;
+		private $id_member;
 		public function getIdMember()
 		{
-			return $this->id_menber;
+			return $this->id_member;
 		}
 		public function setIdMember($new)
 		{
-			$this->id_menber = $new;
+			$this->id_member = $new;
 		}
 
 		//-----------------------------------------------------------------------
@@ -88,39 +88,11 @@ use function PHPSTORM_META\type;
 		private $theComment;
 		public function getComments($idComment)
 		{
-			include('../Controller/ConfigConnGP.php');
-
-            //$_SESSION['timeZone']="Europe/Paris";
+			include('../Controller/ConfigConn.php');
             date_default_timezone_set($_SESSION['timeZone']);
-			//$labd = $_SESSION['db'];
 			
 			try
 			{
-			/*
-			    $sql = $bdd->query("SELECT
-										`comment`.`id_comment`,
-										`comment`.`date_`,
-										`user`.`pseudo` AS `pseudo`,
-										`comment`.`rating`,
-										`comment`.`comment`,
-										`user`.`avatar` AS `avatar`,
-										`comment`.`id_member`
-
-									FROM `comment`
-
-									LEFT JOIN `user`
-										ON `user`.`id_user` = `comment`.`id_member`
-
-									LEFT JOIN `user` AS `userAvatar`
-										ON `userAvatar`.`id_user` = `comment`.`id_member`
-									
-									WHERE `comment`.`id_comment`=$idComment
-								");
-
-				$this->theComment[] = $sql->fetch();
-				return $this->theComment;
-			*/
-
 				// Préparez la requête avec un paramètre
 				$sql = $bdd->prepare("SELECT
 											`comment`.`id_comment`,
@@ -129,6 +101,7 @@ use function PHPSTORM_META\type;
 											`comment`.`rating`,
 											`comment`.`comment`,
 											`user`.`avatar` AS `avatar`,
+											`comment`.`publication`,
 											`comment`.`id_member`
 										
 										FROM `comment`
@@ -169,7 +142,7 @@ use function PHPSTORM_META\type;
 		private $CommentList;
 		public function get($whereClause, $orderBy = 'date_', $ascOrDesc = 'ASC', $firstLine = 0, $linePerPage = 30)
 		{
-			include('../Controller/ConfigConnGP.php');
+			include('../Controller/ConfigConn.php');
 			
 			try
 			{
@@ -181,6 +154,7 @@ use function PHPSTORM_META\type;
 											`comment`.`rating`,
 											`comment`.`comment`,
 											`user`.`avatar` AS `avatar`,
+											`comment`.`publication`,
 											`comment`.`id_member`
 										FROM `comment`
 										
@@ -222,7 +196,7 @@ use function PHPSTORM_META\type;
 		private $idComment;
 		public function addComment()
 		{
-			include('../Controller/ConfigConnGP.php');
+			include('../Controller/ConfigConn.php');
 
 			try{
 
@@ -232,7 +206,8 @@ use function PHPSTORM_META\type;
 										WHERE `comment`.`date_` = :date_
 										AND `comment`.`pseudo` = :pseudo
 										AND `comment`.`rating` = :rating
-										AND `comment`.`comment` = :comment");
+										AND `comment`.`comment` = :comment"
+										);
 
 				// Liaison des valeurs
 				$query->bindParam(':date_', $this->date_);
@@ -248,8 +223,9 @@ use function PHPSTORM_META\type;
 
 				if (!$result) {
 
-
-					$query = $bdd->prepare("INSERT INTO `comment` (`date_`, `pseudo`, `rating`, `comment`) VALUES (:date_, :pseudo, :rating, :comment)");
+					$query = $bdd->prepare("INSERT INTO `comment` (`date_`, `pseudo`, `rating`, `comment`, `id_member`)
+                        VALUES (:date_, :pseudo, :rating, :comment, (SELECT id_user FROM user WHERE `pseudo` = :pseudo))
+                    ");
 
 					// Liaison des valeurs
 					$query->bindParam(':date_', $this->date_);
@@ -259,6 +235,7 @@ use function PHPSTORM_META\type;
 
 					// Exécution de la requête
 					$query->execute();
+
 					
 					$bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 					$sql = $bdd->query("SELECT MAX(`id_comment`) AS idMax FROM `comment`");
@@ -281,7 +258,7 @@ use function PHPSTORM_META\type;
 
 		public function updateComment($idComment)
 		{
-			include('../Controller/ConfigConnGP.php');
+			include('../Controller/ConfigConn.php');
 			try
 			{
 				// Requête préparée
@@ -313,10 +290,40 @@ use function PHPSTORM_META\type;
 		}
 
 		//-----------------------------------------------------------------------
+
+		public function modereComment($idComment, $publication)
+		{
+			include('../Controller/ConfigConn.php');
+			try
+			{
+				// Requête préparée
+				$query = $bdd->prepare("UPDATE `comment`
+										SET `publication` = :publication
+										WHERE `id_comment` = :idComment"
+									);
+
+				// Liaison des valeurs
+				$query->bindParam(':idComment', $idComment);
+				$query->bindParam(':publication', $publication);
+
+				// Exécution de la requête
+				$query->execute();
+				
+				echo '<script>alert("Les modifications sont enregistrées!");</script>';
+			}
+			catch (Exception $e)
+			{
+				echo "Erreur de la requete :" . $e->GetMessage();
+			}
+
+			$bdd=null;
+		}
+
+		//-----------------------------------------------------------------------
 		
 		public function deleteComment($id)
 		{
-			include('../Controller/ConfigConnGP.php');
+			include('../Controller/ConfigConn.php');
 
 			try {
 				// Requête préparée pour la sélection

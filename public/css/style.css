@@ -59,6 +59,7 @@ main{
 
 .nav-item:hover{
   background-color: rgb(0, 123, 255);
+  color: white;
 }
 
 .navbar-toggler-icon {

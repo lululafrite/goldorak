@@ -104,7 +104,7 @@
 		}
 		public function setCountLine($theTable)
 		{
-			include('../Controller/ConfigConnGP.php');
+			include('../Controller/ConfigConn.php');
 
 			try
 			{

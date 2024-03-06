@@ -7,8 +7,7 @@ use function PHPSTORM_META\type;
 	class User
 	{
 
-		function __construct()
-		{
+		function __construct(){
 		}
 
 		//-----------------------------------------------------------------------
@@ -97,6 +96,40 @@ use function PHPSTORM_META\type;
 
 		//-----------------------------------------------------------------------
 
+		private $avatar;
+		public function getAvatar()
+		{
+			return $this->avatar;
+		}
+		public function setAvatar($new)
+		{
+			$this->avatar = $new;
+		}
+
+		//-----------------------------------------------------------------------
+
+		private $subscription;
+		public function getSubscription()
+		{
+			return $this->subscription;
+		}
+		public function setSubscription($new)
+		{
+			$this->subscription = $new;
+		}
+	
+		private function getSubscriptionId() {
+
+			include('../Controller/ConfigConn.php');
+			$stmt = $bdd->prepare("SELECT `id_subscription` FROM `subscription` WHERE `subscription` = ?");
+			$stmt->execute([$this->subscription]);
+			$result = $stmt->fetch();
+			return $result['id_subscription'];
+
+		}
+
+		//-----------------------------------------------------------------------
+
 		private $type;
 		public function getType()
 		{
@@ -106,21 +139,26 @@ use function PHPSTORM_META\type;
 		{
 			$this->type = $new;
 		}
+	
+		private function getUserTypeId() {
+
+			include('../Controller/ConfigConn.php');
+			$stmt = $bdd->prepare("SELECT `id_type` FROM `user_type` WHERE `type` = ?");
+			$stmt->execute([$this->type]);
+			$result = $stmt->fetch();
+			return $result['id_type'];
+
+		}
 
 		//-----------------------------------------------------------------------
 
 		private $newUser;
 		public function getNewUser()
 		{
-			if(empty($_SESSION['newUser'])){
-				$_SESSION['newUser'] = false;
-				$this->newUser = false;
-			}
-			return $_SESSION['newUser'];
+			return $this->newUser;
 		}
 		public function setNewUser($new)
 		{
-			$_SESSION['newUser'] = $new;
 			$this->newUser = $new;
 		}
 
@@ -129,37 +167,40 @@ use function PHPSTORM_META\type;
 		private $listPseudo;
 		public function getPseudoUser()
 		{
-			include('../Controller/ConfigConnGP.php');
+			include('../Controller/ConfigConn.php');
 
-			try
-			{
-			    $sql = $bdd->query("SELECT `pseudo` FROM `user` ORDER BY `pseudo` ASC");
+			try {
+				// Utilisation d'une requête préparée pour améliorer la sécurité même si aucun paramètre n'est utilisé ici
+				$stmt = $bdd->prepare("SELECT `pseudo` FROM `user` ORDER BY `pseudo` ASC");
 
-				while ($this->listPseudo[] = $sql->fetch());
+				// Exécutez la requête
+				$stmt->execute();
+
+				$this->listPseudo = [];
+				while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+					$this->listPseudo[] = $row['pseudo'];
+				}
+
 				return $this->listPseudo;
-			}
-			catch (Exception $e)
-			{
-				echo "Erreur de la requete :" . $e->GetMessage();
+			} catch (Exception $e) {
+				echo "Erreur de la requete : function getPseudoUser() :" . $e->getMessage();
 			}
 
-			$bdd=null;
+			$bdd = null;
 		}
 
 		//-----------------------------------------------------------------------
 
 		private $theUser;
-		public function getUser($îdUser)
+		public function getUser($idUser)
 		{
-			include('../Controller/ConfigConnGP.php');
+			include('../Controller/ConfigConn.php');
 
-            //$_SESSION['timeZone']="Europe/Paris";
-            date_default_timezone_set($_SESSION['timeZone']);
-			//$labd = $_SESSION['db'];
-			
+			date_default_timezone_set($_SESSION['timeZone']);
+
 			try
 			{
-			    $sql = $bdd->query("SELECT
+				$stmt = $bdd->prepare("SELECT
 										`user`.`id_user`,
 										`user`.`name`,
 										`user`.`surname`,
@@ -167,27 +208,35 @@ use function PHPSTORM_META\type;
 										`user`.`email`,
 										`user`.`phone`,
 										`user`.`password`,
+										`user`.`avatar`,
+										`subscription`.`subscription` AS 'subscription',
 										`user_type`.`type` AS `type`
 
 									FROM `user`
 
+									LEFT JOIN `subscription`
+										ON `user`.`id_subscription` = `subscription`.`id_subscription`
+
 									LEFT JOIN `user_type`
 										ON `user`.`id_type` = `user_type`.`id_type`
-									
-									WHERE `user`.`id_user`=$îdUser
-								");
 
-				
-				/*while ($this->theContact[] = $sql->fetch());*/
-				$this->theUser[] = $sql->fetch();
+									WHERE `user`.`id_user` = :idUser");
+
+				$stmt->bindParam(':idUser', $idUser, PDO::PARAM_INT);
+
+				$stmt->execute();
+
+				$this->theUser = $stmt->fetch(PDO::FETCH_ASSOC);
+
 				return $this->theUser;
-			}
-			catch (Exception $e)
-			{
-				echo "Erreur de la requete :" . $e->GetMessage();
+
+			} catch (Exception $e) {
+
+				echo "Erreur de la requete : function getUser(\$idUser) :" . $e->GetMessage();
+
 			}
 
-			$bdd=null;
+			$bdd = null;
 		}
 
 		//-----------------------------------------------------------------------
@@ -195,143 +244,240 @@ use function PHPSTORM_META\type;
 		private $userList;
 		public function get($whereClause, $orderBy = 'name', $ascOrDesc = 'ASC', $firstLine = 0, $linePerPage = 13)
 		{
-			include('../Controller/ConfigConnGP.php');
-			
+			include('../Controller/ConfigConn.php');
+
 			try
 			{
-			    $sql = $bdd->query("SELECT
-										`user`.`id_user`,
-										`user`.`name`,
-										`user`.`surname`,
-										`user`.`pseudo`,
-										`user`.`email`,
-										`user`.`phone`,
-										`user`.`password`,
-										`user_type`.`type` AS `type`
-									FROM
-										`user`
-									LEFT JOIN `user_type` ON `user`.`id_type` = `user_type`.`id_type`
-									WHERE $whereClause
-									ORDER BY $orderBy $ascOrDesc
-									LIMIT $firstLine, $linePerPage
-								");
 
-				while ($this->userList[] = $sql->fetch());
+				$sqlString = "SELECT
+								`user`.`id_user`,
+								`user`.`name`,
+								`user`.`surname`,
+								`user`.`pseudo`,
+								`user`.`email`,
+								`user`.`phone`,
+								`user`.`password`,
+								`user`.`avatar`,
+								`subscription`.`subscription` AS 'subscription',
+								`user_type`.`type` AS `type`
+
+							FROM `user`
+
+							LEFT JOIN `subscription`
+								ON `user`.`id_subscription` = `subscription`.`id_subscription`
+
+							LEFT JOIN `user_type`
+								ON `user`.`id_type` = `user_type`.`id_type`
+
+							WHERE " . $whereClause . " 
+							ORDER BY " . $orderBy . " " . $ascOrDesc . " 
+							LIMIT :firstLine, :linePerPage";
+
+				$stmt = $bdd->prepare($sqlString);
+
+				// Lier les paramètres pour LIMIT
+				$stmt->bindParam(':firstLine', $firstLine, PDO::PARAM_INT);
+				$stmt->bindParam(':linePerPage', $linePerPage, PDO::PARAM_INT);
+
+				$stmt->execute();
+
+				$this->userList = [];
+				while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+					$this->userList[] = $row;
+				}
+
 				return $this->userList;
+
+			} catch (Exception $e) {
+
+				echo "Erreur de la requete : function get(\$whereClause, \$orderBy = 'name', \$ascOrDesc = 'ASC', \$firstLine = 0, \$linePerPage = 13) : " . $e->GetMessage();
+
+			}
+
+			$bdd = null;
+		}
+
+		//-----------------------------------------------------------------------
+
+		public function addUser() {
+			include('../Controller/ConfigConn.php');
+	
+			try
+			{
+				// Vérifier si l'email existe déjà
+				$stmt = $bdd->prepare("SELECT `id_user` FROM `user` WHERE `email` = ?");
+				$stmt->execute([$this->email]);
+				$result = $stmt->fetch();
+	
+				if (!$result) {
+					// Vérifier si le pseudonyme existe déjà
+					$stmt = $bdd->prepare("SELECT `id_user` FROM `user` WHERE `pseudo` = ?");
+					$stmt->execute([$this->pseudo]);
+					$result = $stmt->fetch();
+	
+					if (!$result) {
+						// Insérer un nouvel utilisateur
+						$stmt = $bdd->prepare("INSERT INTO `user`(`name`,`surname`,`pseudo`,`email`,`phone`,`password`,`avatar`,`id_subscription`,`id_type`)
+											  VALUES(?,?,?,?,?,?,?,?,?)");
+						$stmt->execute([$this->name, $this->surname, $this->pseudo, $this->email, $this->phone, $this->password,
+										$this->avatar, $this->getSubscriptionId(), $this->getUserTypeId()]);
+	
+						// Récupérer l'ID de l'utilisateur nouvellement inséré
+						$stmt = $bdd->query("SELECT MAX(`id_user`) FROM `user`");
+						$id_user = $stmt->fetch();
+						$this->id_user = intval($id_user[0]);
+	
+						return $this->id_user;
+
+					} else {
+
+						echo "<script>alert('Ce pseudonyme est existant! Saisissez un autre pseudonyme');</script>";
+						return false;
+
+					}
+
+				} else {
+
+					echo "<script>alert('Ce courriel est existant! Saisissez un autre courriel');</script>";
+					
+					
+					if($_SESSION['local'] === 'true'){
+
+						echo '<script>window.location.href = "http://goldorak/index.php?page=user_edit&newError=true";</script>';
+
+					}else{
+
+						echo '<script>window.location.href = "https://www.follaco.fr/index.php?page=user_edit&newError=true";</script>';
+
+					}
+					
+					exit;
+
+				}
 			}
 			catch (Exception $e)
 			{
-				echo "Erreur de la requete :" . $e->GetMessage();
+				echo "Erreur de la requête function addUser() : " . $e->getMessage();
 			}
-
-			$bdd=null;
+			finally
+			{
+				$bdd = null;
+			}
 		}
 
 		//-----------------------------------------------------------------------
 
-		public function addUser()
-		{
-			include('../Controller/ConfigConnGP.php');
+		public function updateUser($idUser){
 
-			try {
-					$bdd->exec("INSERT INTO `user`(`name`,`surname`,`pseudo`,`email`,`phone`,`password`,`id_type`)
-							VALUES('" . $this->name . "',
-									'" . $this->surname . "',
-									'" . $this->pseudo . "',
-									'" . $this->email . "',
-									'" . $this->phone . "',
-									'" . $this->password . "',
-									(SELECT `id_type` FROM `user_type` WHERE `type`='" . $this->type . "'))");
-
-				$sql = $bdd->query("SELECT `id_user` FROM `user` WHERE `email`='" . $this->email . "'");
-				$id_user = $sql->fetch();
-				$this->id_user = intval($id_user['id_user']);
-				return intval($id_user['id_user']);
-
-			} catch (Exception $e) {
-				
-				echo "Erreur de la requête : " . $e->getMessage();
-
-			}
-
-			$bdd=null;
-		}
-
-		//-----------------------------------------------------------------------
-
-		public function updateUser($idUser)
-		{
-			include('../Controller/ConfigConnGP.php');
+			include('../Controller/ConfigConn.php');
 			try
 			{
-				$bdd->exec("UPDATE `user` SET
-								`name` = '" . $this->name . "',
-								`surname` = '" . $this->surname . "',
-								`pseudo` = '" . $this->pseudo . "',
-								`email` = '" . $this->email . "',
-								`phone` = '" . $this->phone . "',
-								`password` = '" . $this->password . "',
-								`id_type` = (SELECT `id_type` FROM `user_type` WHERE `type`='" . $this->type . "')
-							WHERE `id_user` = " . intval($idUser) . "
-							");
+				$stmt = $bdd->prepare("UPDATE `user` SET
+										`name` = :name,
+										`surname` = :surname,
+										`pseudo` = :pseudo,
+										`email` = :email,
+										`phone` = :phone,
+										`password` = :password,
+										`avatar` = :avatar,
+										`id_subscription` = (SELECT `id_subscription` FROM `subscription` WHERE `subscription` = :subscription),
+										`id_type` = (SELECT `id_type` FROM `user_type` WHERE `type` = :type)
+									WHERE `id_user` = :id_user");
+
+				$stmt->bindParam(':name', $this->name);
+				$stmt->bindParam(':surname', $this->surname);
+				$stmt->bindParam(':pseudo', $this->pseudo);
+				$stmt->bindParam(':email', $this->email);
+				$stmt->bindParam(':phone', $this->phone);
+				$stmt->bindParam(':password', $this->password);
+				$stmt->bindParam(':avatar', $this->avatar);
+				$stmt->bindParam(':subscription', $this->subscription);
+				$stmt->bindParam(':type', $this->type);
+				$stmt->bindParam(':id_user', $idUser, PDO::PARAM_INT);
+
+				$stmt->execute();
 				
 				echo '<script>alert("Les modifications sont enregistrées!");</script>';
 			}
 			catch (Exception $e)
 			{
-				echo "Erreur de la requete :" . $e->GetMessage();
+				echo "Erreur de la requete  : function updateUser(\$idUser) :" . $e->GetMessage();
 			}
-
-			$this->setType('Administrator');
 
 			$bdd=null;
 		}
+
 
 		//-----------------------------------------------------------------------
 
 		public function deleteUser($id)
 		{
-			include('../Controller/ConfigConnGP.php');
+			include('../Controller/ConfigConn.php');
 
 			try
 			{
-			    $bdd->exec('DELETE FROM user WHERE id_user=' . $id);
-				echo '<script>alert("Cet enregistrement est supprimé!");</script>';
-				echo '<script>window.location.href = "http://garageparrot/index.php?page=user";</script>';
-				echo '<script>window.location.href = "http://www.follaco.fr/index.php?page=user";</script>';
+
+				$stmt = $bdd->prepare('DELETE FROM user WHERE id_user = :id_user');
+			
+				$stmt->bindParam(':id_user', $id, PDO::PARAM_INT);
+			
+				$stmt->execute();
+
+				$bdd=null;
+/*
+				if($_SESSION['local']){
+
+					echo '<script>window.location.href = "http://goldorak/index.php?page=user_edit";</script>';
+
+				}else{
+
+					echo '<script>window.location.href = "https://www.follaco.fr/index.php?page=user";</script>';
+
+				}
+				exit;
+*/
+				return true;
 			}
 			catch (Exception $e)
 			{
 				echo "Erreur de la requete :" . $e->GetMessage();
+				$bdd=null;
+				return false;
 			}
 
-			$bdd=null;
 		}
 		
 		private $userExist;
 		public function verifUser($email)
 		{
-			include('../Controller/ConfigConnGP.php');
+			include('../Controller/ConfigConn.php');
 
 			try
 			{
-			    $sql = $bdd->query("SELECT COUNT(*) AS `number`
-									FROM
-										`user`
-									WHERE
-										`email` = '" . $email . "'
-								");
 
-				while ($this->userExist[] = $sql->fetch());
-				return $this->userExist[0][0];
+				$stmt = $bdd->prepare("SELECT COUNT(*) AS `number`
+									FROM `user`
+									WHERE `email` = :email");
+
+				$stmt->bindParam(':email', $email);
+
+				$stmt->execute();
+
+				$this->userExist = $stmt->fetch(PDO::FETCH_ASSOC);
+
+				return $this->userExist['number'];
+
 			}
 			catch (Exception $e)
 			{
-				echo "Erreur de la requete :" . $e->GetMessage();
+
+				echo "Erreur de la requete : function verifUser(\$email) :" . $e->GetMessage();
+
 			}
 
-			$bdd=null;
+			$bdd = null;
 		}
+
 
         //__Ajouter user?___________________________________________
         

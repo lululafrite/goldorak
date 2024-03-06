@@ -1,12 +1,16 @@
 //Permet de remplir les input avec une valeur quelquonque. Utile si l'on a cliqué sur le bouton nouveau et que l'on veut annuler. 
 
-    function retour() {        
+    function retour() {
+        
+        setInputValue('txt_userEdit_id', '1');
+        setInputValue('list_userEdit_subscription', 'Vénusia');
         setInputValue('txt_userEdit_name', '_');
         setInputValue('txt_userEdit_surname', '_');
         setInputValue('txt_userEdit_pseudo', '_');
-        setInputValue('txt_userEdit_email', 'user@gmail.com');
-        setInputValue('txt_userEdit_phone', '00 00 00 00 00');
-        setInputValue('list_userEdit_type', 'User');
+        setInputValue('txt_userEdit_email', '_@gmail.com');
+        setInputValue('txt_userEdit_phone', '## ## ## ## ##');
+        setInputValue('txt_userEdit_avatar', 'avatar_membre_white.webp');
+        setInputValue('list_userEdit_type', 'Member');
         setInputValue('txt_userEdit_password', 'Abc123/*-');
         setInputValue('txt_userEdit_confirm', 'Abc123/*-');
 

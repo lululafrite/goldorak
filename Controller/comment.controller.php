@@ -18,22 +18,21 @@
 
     }else if(isset($_POST['bt_comment_validate'])){
         
-        $comments->deleteComment($_POST['txt_comment_id']);
+        $comments->modereComment($_POST['txt_comment_id'], 2);
         unset($_POST['bt_comment_validate']);
 
     }else if(isset($_POST['bt_comment_refuse'])){
         
-        $comments->deleteComment($_POST['txt_comment_id']);
+        $comments->modereComment($_POST['txt_comment_id'], 1);
         unset($_POST['bt_comment_refuse']);
 
     }
 
-    if($_SESSION['userConnected'] === 'Administrator'){
+    if($_SESSION['typeConnect'] === 'Administrator'){
         $Comment = $comments->get(1,'date_','DESC','0','50');
-    }else if($_SESSION['userConnected'] === 'User'){
+    }else if($_SESSION['typeConnect'] === 'User'){
         $Comment = $comments->get('`publication` = 0','date_','DESC','0','50');
     }else{
         $Comment = $comments->get('`publication` = 2','date_','DESC','0','50');
     }
-
 ?>

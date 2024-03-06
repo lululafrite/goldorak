@@ -14,7 +14,7 @@
                                 <label class="form-label" for="comment_name">Pseudo</label>
                             </td>
                             <td>
-                                <input class="form-control fs-4" type="text" id="txt_comment_pseudo" name="txt_comment_pseudo" placeholder="Saisissez votre pseudonyme">
+                                <input class="form-control bg-dark text-light fs-4" type="text" id="txt_comment_pseudo" name="txt_comment_pseudo" placeholder="Saisissez votre pseudonyme" readonly value="<?php echo $_SESSION['pseudo']; ?>">
                             </td>
                         </tr>
                         <tr class="table-active">
@@ -44,11 +44,13 @@
                                 </div>
                             </td>
                         </tr>
-                        </tr>
-                            <td class="text-center" colspan="2">
-                                <button class="btn btn btn-primary fs-4" type="submit" id="bt_save_comment" name="bt_save_comment">Envoyer</button>
-                            </td>
-                        </tr>
+                            </tr>
+                                <td class="text-center" colspan="2">
+                                    <?php if($_SESSION['typeConnect'] != 'Guest'){ ?>
+                                        <button class="btn btn btn-primary fs-4" type="submit" id="bt_save_comment" name="bt_save_comment">Envoyer</button>
+                                    <?php }else{echo "Inscrivez-vous pour laisser un commentaire";}?>
+                                </td>
+                            </tr>
                     </tbody>
                 </form>
             </table>

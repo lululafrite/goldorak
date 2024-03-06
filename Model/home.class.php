@@ -220,7 +220,7 @@ use function PHPSTORM_META\type;
 		private $theHome;
 		public function getHome($îdHome)
 		{
-			include('../Controller/ConfigConnGP.php');
+			include('../Controller/ConfigConn.php');
             date_default_timezone_set($_SESSION['timeZone']);
 			
 			try
@@ -266,7 +266,7 @@ use function PHPSTORM_META\type;
 		private $homeList;
 		public function get($whereClause, $orderBy = 'id_home', $ascOrDesc = 'ASC', $firstLine = 0, $linePerPage = 13)
 		{
-			include('../Controller/ConfigConnGP.php');
+			include('../Controller/ConfigConn.php');
 			
 			try
 			{
@@ -311,7 +311,7 @@ use function PHPSTORM_META\type;
 
 		public function updateHome($idHome)
 		{
-			include('../Controller/ConfigConnGP.php');
+			include('../Controller/ConfigConn.php');
 			try{
 				$stmt = $bdd->prepare("UPDATE `home`
 				SET `titre1` = ?,
@@ -356,7 +356,7 @@ use function PHPSTORM_META\type;
 
 		public function deleteHome($id)
 		{
-			include('../Controller/ConfigConnGP.php');
+			include('../Controller/ConfigConn.php');
 
 			try
 			{

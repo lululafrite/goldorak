@@ -93,7 +93,7 @@ function makeGuess() {
             
             ajoutBaliseHtml = `
                 <p class="m-3" >` + messageGagnant + `</p>
-                <img class="m-3" src="img/gagne.gif" alt="J'ai gagné">
+                <img class="m-3" src="img/jeux/gagne.gif" alt="J'ai gagné">
                 <br>
                 `+ displayResults(); +`
                 <br>
@@ -114,7 +114,7 @@ function displayResults() {
 }
 
 function ouvrirJeux() {
-    window.location.href = "goldorakgo.html";
+    window.location.href = "index.php?page=goldorakgo";
 }
 
 // Fonction personnalisée pour alert

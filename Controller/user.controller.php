@@ -3,20 +3,7 @@
 //---Product page controller-------------------------------------
 //---------------------------------------------------------------
 //---Checking access permissions---
-    if ($_SESSION['userConnected'] != "Administrator") {
-        
-        if($_SESSION['local']===true){
-            
-            echo '<script>window.location.href = "http://goldorak/index.php?page=error_page";</script>';
-        
-        }
-        else{
-            
-            echo '<script>window.location.href = "https://www.follaco.fr/index.php?page=error_page";</script>';
-        
-        }
-        exit();
-    }
+    include "../Elements/_11_checkingPermission.php";
 
 //---Load model user--------------------
     include('../Model/user.class.php');
@@ -127,7 +114,7 @@
     $_SESSION['whereClause'] =  $whereClause;
 
     // Executer la requete SELECT pour rechercher les contacts en fonction de la clause WHERE
-    if($_SESSION['errorFormUser']===false && $MyUser->getNewUser() === false ){
+    if(!$_SESSION['errorFormUser'] && !$_SESSION['newUser']){
         
         include_once('../Controller/page.controller.php');
         $users = $MyUser->get($whereClause, 'name', 'ASC', $MyPage->getFirstLine(), $_SESSION['ligneParPage']);

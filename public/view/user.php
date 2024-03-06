@@ -8,11 +8,18 @@
 
     <section class="m-0 d-flex flex-wrap justify-content-between">
 
-    <?php for($i=0;$i != count($users)-1;$i++) { ?>
+    <?php for($i=0;$i != count($users);$i++) { ?>
 
     <article class="border rounded-4 ps-3 my-5">
+
         <form action="/index.php?page=user_edit" method="post">
+
+            <div class="d-flex justify-content-center div__Car--img mt-3">
+                <img src="../img/avatar/<?php echo $users[$i]['avatar']; ?>" alt="Avatar de l'utilisateur" style="width:50px;">
+            </div>
+
             <div class="div__user--img">
+
                 <table class='table__user--img'>
                     <tr>
                         <td class="tdLabel text-end text-light border border-0 pe-1">ID:</td>
@@ -44,18 +51,40 @@
                         <td class="tdText border border-0"><input type="tel" name="txt_user_phone" class="bg-transparent text-light text-start ps-2" readonly value='<?php echo $users[$i]['phone'];?>'></td>
                     </tr>
                     <tr>
-                        <td class="tdLabel text-end border border-0 pe-1">type:</td>
+                        <td class="tdLabel text-end border border-0 pe-1">Formule:</td>
+                        <td class="tdText border border-0"><input type="tel" name="txt_user_formule" class="bg-transparent text-light text-start ps-2" readonly value='<?php echo $users[$i]['subscription'];?>'></td>
+                    </tr>
+                    <tr>
+                        <td class="tdLabel text-end border border-0 pe-1">Type:</td>
                         <td class="tdText border border-0"><input type="tel" name="txt_user_type" class="bg-transparent text-light text-start ps-2" readonly value='<?php echo $users[$i]['type'];?>'></td>
                     </tr>
                 </table>
             </div>
-            <div class="d-flex justify-content-center mt-1 mb-3">
+        <?php
+        if($_SESSION['typeConnect'] != 'Guest'){
+
+        ?>
+            <div class="d-flex justify-content-center my-2">
                 <button type="submit" class='btn btn-primary fs-3 mt-3' name='bt_user_edit'>Editer</button>
             </div>
-        </form>
-    </article>
+        <?php
+        }
+        ?>
+    </form>
+        <?php
+        if($_SESSION['typeConnect'] === 'Guest'){
 
-    <?php } ?>
+        ?>
+            <div class="d-flex justify-content-center my-2">
+                <button type="submit" class='btn btn-primary fs-3 mt-3' name='bt_user_editMember'>Editer</button>
+            </div>
+        <?php
+        }
+        ?>
+
+</article>
+
+<?php } ?>
 
     </section>
 </div>
