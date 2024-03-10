@@ -113,16 +113,22 @@
 
     document.getElementById('formUserEdit').addEventListener('submit', function (event) {
 
+        var MessageSubscription = "Saisissez une formule dans la liste de choix.";
         var MessageName = "Saisissez le Nom (50 caractères maximum).";
         var MessageSurname = "Saisissez le Prénom (50 caractères maximum).";
         var MessagePseudo = "Saisissez le pseudonyme (20 caractères maximum).";
         var MessageEmail = "Saisissez l'adresse email (255 caractères maximum).";
         var MessagePhone = "Saisissez le N° de téléphone.";
         var MessageType = "Selectionnez le type d'utilisateur dans la liste de choix.";
+        var MessageAvatar = "Selectionnez image valide (.webp, .png ou .jpg). Les dimensions recommandées sont 70px sur 70px.";
         var MessagePassword = "Saisissez un mot de passe de 255 caractères maximum et 8 caractères minimun comprenant au moins : 1 minuscule, 1 majuscule, 1 chiffre et 1 caractère spéciale parmi les suivants /*-.!?@";
         
         var isError = false;
-        
+
+        if (!validateInput('list_userEdit_subscription', 'datalist_userEdit_subscription', 'labelMessageSubscription', MessageSubscription)) {
+            isError = true;
+        }
+
         if (!validateInput('txt_userEdit_name', '', 'labelMessageName', MessageName)){
             isError = true;
         }
@@ -144,6 +150,10 @@
         }
 
         if (!validateInput('list_userEdit_type', 'datalist_userEdit_type', 'labelMessageType', MessageType)) {
+            isError = true;
+        }
+
+        if (!validateInput('txt_userEdit_avatar', '', 'labelMessageavatar', MessageAvatar)) {
             isError = true;
         }
 

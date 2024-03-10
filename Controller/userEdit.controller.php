@@ -1,13 +1,12 @@
 <?php
 
+    include_once('../Model/user.class.php');
+    include_once('../common/utilies.php');
+
     
 //***********************************************************************************************
 // Echapper les variables
 //***********************************************************************************************
-
-    function escapeInput($input){
-        return htmlspecialchars($input, ENT_QUOTES, 'UTF-8');
-    }
     
     $nav_new_user = isset($_POST['nav_new_user']) ? true : false;
     $bt_userEdit_new = isset($_POST['bt_userEdit_new']) ? true : false;
@@ -29,7 +28,6 @@
 // Daclaration de variables
 //***********************************************************************************************
 
-    include_once('../Model/user.class.php');
 
     if($nav_new_user){
 
@@ -166,16 +164,7 @@
                 $_SESSION['subscriptionConnect'] = $_SESSION['subscription'];
                 $_SESSION['connexion'] = true;
 
-                if($_SESSION['local'] === true){
-
-                    echo '<script>window.location.href = "http://goldorak/index.php?page=home";</script>';
-                
-                }
-                else{
-                    
-                    echo '<script>window.location.href = "https://www.follaco.fr/index.php?page=home";</script>';
-                
-                }
+                routeToHomePage();
 
             }else{
 
@@ -197,26 +186,11 @@
 
         }
 
-    }else if($newError && !$_SESSION['errorFormUser']){
+    }else if($bt_userEdit_cancel){
         
-        $user = array(
-            "id_user" => $_SESSION['id_user'],
-            "name" => $_SESSION['name'],
-            "surname" => $_SESSION['surname'],
-            "pseudo" => $_SESSION['pseudo'],
-            "email" => $_SESSION['email'],
-            "phone" => $_SESSION['phone'],
-            "type" => $_SESSION['type_'],
-            "avatar" => $_SESSION['avatar'],
-            "subscription" => $_SESSION['subscription'],
-            "password" => $_SESSION['password']
-        );
-        $users[0] = $user;
-
-        $_SESSION['newUser'] = true;
-        $MyUser->setNewUser(true);
-        $newUser = true;
-        $newError = false;
+        $_SESSION['newUser'] = false;
+        
+        routeToUserPage();
 
     }else if(($bt_userEdit_new && !$_SESSION['errorFormUser']) || ($_SESSION['newUser'] && !$_SESSION['errorFormUser'])){
         
@@ -229,7 +203,7 @@
             "phone" => '',
             "type" => 'Member',
             "avatar" => 'avatar_membre_white.webp',
-            "subscription" => $_SESSION['subsription'], //'Vénusia',
+            "subscription" => $_SESSION['subscription'], //'Vénusia',
             "password" => ''
         );
         $users[0] = $user;
@@ -261,50 +235,31 @@
             }
 
             echo '<script>alert(\'Cet enregistrement est correctement supprimé de la base de données!\');</script>';
-
-            if($_SESSION['local']){
-
-                if($_SESSION['typeConnect'] === 'Administrator'){
-
-                    echo '<script>window.location.href = "http://goldorak/index.php?page=user";</script>';
-
-                }else{
-
-                    echo '<script>window.location.href = "http://goldorak/index.php?page=disconnect";</script>';
-
-                }
-
-            }else{
-
-                if($_SESSION['typeConnect'] === 'Administrator'){
-
-                    echo '<script>window.location.href = "https://www.follaco.fr/index.php?page=user";</script>';
-
-                }else{
-
-                    echo '<script>window.location.href = "https://www.follaco.fr/index.php?page=disconnect";</script>';
-                    
-                }
-
-            }
-            exit;
-        }
-
-    }else if($bt_userEdit_cancel){
-        
-        $_SESSION['newUserr'] = false;
-        
-        if($_SESSION['local']===true){
-
-            echo '<script>window.location.href = "http://goldorak/index.php?page=user";</script>';
-        
-        }
-        else{
             
-            echo '<script>window.location.href = "https://www.follaco.fr/index.php?page=user";</script>';
-        
+            routeAfterDelete();
+
         }
-        exit();
+
+    }else if($newError && !$_SESSION['errorFormUser']){
+        
+        $user = array(
+            "id_user" => $_SESSION['id_user'],
+            "name" => $_SESSION['name'],
+            "surname" => $_SESSION['surname'],
+            "pseudo" => $_SESSION['pseudo'],
+            "email" => $_SESSION['email'],
+            "phone" => $_SESSION['phone'],
+            "type" => $_SESSION['type_'],
+            "avatar" => $_SESSION['avatar'],
+            "subscription" => $_SESSION['subscription'],
+            "password" => $_SESSION['password']
+        );
+        $users[0] = $user;
+
+        $_SESSION['newUser'] = true;
+        $MyUser->setNewUser(true);
+        $newUser = true;
+        $newError = false;
 
     }
 

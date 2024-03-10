@@ -1,5 +1,6 @@
 <?php
-    include('../Model/comment.class.php');
+    include_once('../Model/comment.class.php');
+    
     $comments = new Comment();
     if(isset($_POST['bt_save_comment'])){
         

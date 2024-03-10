@@ -1,3 +1,5 @@
+<?php include_once('../Controller/page.controller.php'); ?>
+
 <div class="container">
 
     <section class="d-flex flex-column flex-sm-row justify-content-center align-items-center p-3 mx-md-0 mx-2  bgDark border border-secondary border-3 rounded-4">

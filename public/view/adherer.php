@@ -2,9 +2,9 @@
     </br><h2>Adhérer : Découvrez les formules pour adhérer au Club Goldorak</h2></br>
 </div>
 
-<form action="index.php?page=user_edit" method="post">
+<form action="index.php?page=userEdit" method="post">
 
-<section class="container d-flex justify-content-evenly border rounded-3 py-3 mb-5 article__card">
+<section class="container d-flex justify-content-evenly py-3 mb-5">
 
     <div class="card mb-3" style="width: 28rem;">
         <div class="card-body d-flex flex-column">
@@ -19,7 +19,7 @@
             </ul>
             <div class="d-flex flex-column align-items-center mt-auto mb-0 pt-auto pb-0">
                 <p class="card-text"><strong>35,00€TTC/an</strong></p>
-                <button type="submit" name="btn_venusia" class="btn btn-primary">Adhérer à Vénusia</button>
+                <button type="submit" name="btn_venusia" class="btn btn-lg btn-primary">Adhérer à Vénusia</button>
             </div>
         </div>
     </div>
@@ -39,7 +39,7 @@
             </ul>
             <div class="d-flex flex-column align-items-center mt-auto mb-0 pt-auto pb-0">
                 <p class="card-text"><strong>45,00€TTC/an</strong></p>
-                <button type="submit" name="btn_actarus" class="btn btn-primary">Adhérer à Actarus</button>
+                <button type="submit" name="btn_actarus" class="btn btn-lg btn-primary">Adhérer à Actarus</button>
             </div>
         </div>
     </div>
@@ -61,7 +61,7 @@
             </ul>
             <div class="d-flex flex-column align-items-center mt-auto mb-0 pt-auto pb-0">
                 <p class="card-text"><strong>50,00€TTC/an</strong></p>
-                <button type="submit" name="btn_goldorak" class="btn btn-primary">Adhérer à Goldorak</button>
+                <button type="submit" name="btn_goldorak" class="btn btn-lg btn-primary">Adhérer à Goldorak</button>
             </div>
         </div>
     </div>

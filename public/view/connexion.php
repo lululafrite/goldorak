@@ -1,6 +1,5 @@
 <?php include('../Controller/connexion.controller.php'); ?>
 
-
 <div class="container">
 
     <div class="row">
@@ -11,7 +10,7 @@
                 
                 <fieldset class="">
                     
-                    <legend class="text-center fs-1 text-light mb-3" >Connexion</legend>
+                    <legend class="text-center text-light mb-3" >Connexion</legend>
 
                     <div class="form-group mb-3">
                         <label class="text-light w-100" for="email">email</label>
@@ -24,7 +23,7 @@
                     </div>
 
                     <div class="form-group my-5">
-                        <input class="btn btn-lg btn-primary fs-3" type="submit" name="envoyer" id="envoyer" value="Se connecter">
+                        <input class="btn btn-lg btn-primary" type="submit" name="envoyer" id="envoyer" value="Se connecter">
                     </div>
 
                 </fieldset>

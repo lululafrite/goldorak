@@ -37,182 +37,74 @@ use function PHPSTORM_META\type;
 
 		//-----------------------------------------------------------------------
 
-		private $intro_chapter1;
-		public function getIntro_chapter1()
+		private $titre_chapter1;
+		public function getTitre_chapter1()
 		{
-			return $this->intro_chapter1;
+			return $this->titre_chapter1;
 		}
-		public function setIntro_chapter1($new)
+		public function setTitre_chapter1($new)
 		{
-			$this->intro_chapter1 = $new;
-		}
-
-		//-----------------------------------------------------------------------
-
-		private $intro_chapter2;
-		public function getIntro_chapter2()
-		{
-			return $this->intro_chapter2;
-		}
-		public function setIntro_chapter2($new)
-		{
-			$this->intro_chapter2 = $new;
+			$this->titre_chapter1 = $new;
 		}
 
 		//-----------------------------------------------------------------------
 
-		private $titre2;
-		public function getTitre2()
+		private $chapter1;
+		public function getChapter1()
 		{
-			return $this->titre2;
+			return $this->chapter1;
 		}
-		public function setTitre2($new)
+		public function setChapter1($new)
 		{
-			$this->titre2 = $new;
-		}
-
-		//-----------------------------------------------------------------------
-
-		private $article1_titre;
-		public function getArticle1_titre()
-		{
-			return $this->article1_titre;
-		}
-		public function setArticle1_titre($new)
-		{
-			$this->article1_titre = $new;
+			$this->chapter1 = $new;
 		}
 
 		//-----------------------------------------------------------------------
 
-		private $article1_chapter1;
-		public function getArticle1_chapter1()
+		private $img_chapter1;
+		public function getImg_chapter1()
 		{
-			return $this->article1_chapter1;
+			return $this->img_chapter1;
 		}
-		public function setArticle1_chapter1($new)
+		public function setImg_chapter1($new)
 		{
-			$this->article1_chapter1 = $new;
-		}
-
-		//-----------------------------------------------------------------------
-
-		private $article1_image1;
-		public function getArticle1_image1()
-		{
-			return $this->article1_image1;
-		}
-		public function setArticle1_image1($new)
-		{
-			$this->article1_image1 = $new;
+			$this->img_chapter1 = $new;
 		}
 
 		//-----------------------------------------------------------------------
 
-		private $article1_titre2;
-		public function getArticle1_titre2()
+		private $titre_chapter2;
+		public function getTitre_chapter2()
 		{
-			return $this->article1_titre2;
+			return $this->titre_chapter2;
 		}
-		public function setArticle1_titre2($new)
+		public function setTitre_chapter2($new)
 		{
-			$this->article1_titre2 = $new;
-		}
-
-		//-----------------------------------------------------------------------
-
-		private $article1_chapter2;
-		public function getArticle1_chapter2()
-		{
-			return $this->article1_chapter2;
-		}
-		public function setArticle1_chapter2($new)
-		{
-			$this->article1_chapter2 = $new;
+			$this->titre_chapter2 = $new;
 		}
 
 		//-----------------------------------------------------------------------
 
-		private $article1_image2;
-		public function getArticle1_image2()
+		private $chapter2;
+		public function getChapter2()
 		{
-			return $this->article1_image2;
+			return $this->chapter2;
 		}
-		public function setArticle1_image2($new)
+		public function setChapter2($new)
 		{
-			$this->article1_image2 = $new;
-		}
-
-		//-----------------------------------------------------------------------
-
-		private $article2_titre;
-		public function getArticle2_titre()
-		{
-			return $this->article2_titre;
-		}
-		public function setArticle2_titre($new)
-		{
-			$this->article2_titre = $new;
+			$this->chapter2 = $new;
 		}
 
 		//-----------------------------------------------------------------------
 
-		private $article2_chapter1;
-		public function getArticle2_chapter1()
+		private $img_chapter2;
+		public function getImg_chapter2()
 		{
-			return $this->article2_chapter1;
+			return $this->img_chapter2;
 		}
-		public function setArticle2_chapter1($new)
+		public function setImg_chapter2($new)
 		{
-			$this->article2_chapter1 = $new;
-		}
-
-		//-----------------------------------------------------------------------
-
-		private $article2_image1;
-		public function getArticle2_image1()
-		{
-			return $this->article2_image1;
-		}
-		public function setArticle2_image1($new)
-		{
-			$this->article2_image1 = $new;
-		}
-
-		//-----------------------------------------------------------------------
-
-		private $article2_titre2;
-		public function getArticle2_titre2()
-		{
-			return $this->article2_titre2;
-		}
-		public function setArticle2_titre2($new)
-		{
-			$this->article2_titre2 = $new;
-		}
-
-		//-----------------------------------------------------------------------
-
-		private $article2_chapter2;
-		public function getArticle2_chapter2()
-		{
-			return $this->article2_chapter2;
-		}
-		public function setArticle2_chapter2($new)
-		{
-			$this->article2_chapter2 = $new;
-		}
-
-		//-----------------------------------------------------------------------
-
-		private $article2_image2;
-		public function getArticle2_image2()
-		{
-			return $this->article2_image2;
-		}
-		public function setArticle2_image2($new)
-		{
-			$this->article2_image2 = $new;
+			$this->img_chapter2 = $new;
 		}
 
 		//-----------------------------------------------------------------------
@@ -228,21 +120,12 @@ use function PHPSTORM_META\type;
 			    $sql = $bdd->query("SELECT
 										`home`.`id_home`,
 										`home`.`titre1`,
-										`home`.`intro_chapter1`,
-										`home`.`intro_chapter2`,
-										`home`.`titre2`,
-										`home`.`article1_titre`,
-										`home`.`article1_chapter1`,
-										`home`.`article1_image1`,
-										`home`.`article1_titre2`,
-										`home`.`article1_chapter2`,
-										`home`.`article1_image2`,
-										`home`.`article2_titre`,
-										`home`.`article2_chapter1`,
-										`home`.`article2_image1`,
-										`home`.`article2_titre2`,
-										`home`.`article2_chapter2`,
-										`home`.`article2_image2`
+										`home`.`titre_chapter1`,
+										`home`.`chapter1`,
+										`home`.`img_chapter1`,
+										`home`.`titre_chapter2`,
+										`home`.`chapter2`,
+										`home`.`img_chapter2`
 
 									FROM `home`
 									
@@ -273,21 +156,12 @@ use function PHPSTORM_META\type;
 			    $sql = $bdd->query("SELECT
 										`home`.`id_home`,
 										`home`.`titre1`,
-										`home`.`intro_chapter1`,
-										`home`.`intro_chapter2`,
-										`home`.`titre2`,
-										`home`.`article1_titre`,
-										`home`.`article1_chapter1`,
-										`home`.`article1_image1`,
-										`home`.`article1_titre2`,
-										`home`.`article1_chapter2`,
-										`home`.`article1_image2`,
-										`home`.`article2_titre`,
-										`home`.`article2_chapter1`,
-										`home`.`article2_image1`,
-										`home`.`article2_titre2`,
-										`home`.`article2_chapter2`,
-										`home`.`article2_image2`
+										`home`.`titre_chapter1`,
+										`home`.`chapter1`,
+										`home`.`img_chapter1`,
+										`home`.`titre_chapter2`,
+										`home`.`chapter2`,
+										`home`.`img_chapter2`
 
 									FROM `home`
 
@@ -315,31 +189,22 @@ use function PHPSTORM_META\type;
 			try{
 				$stmt = $bdd->prepare("UPDATE `home`
 				SET `titre1` = ?,
-					`intro_chapter1` = ?,
-					`intro_chapter2` = ?,
-					`titre2` = ?,
-					`article1_titre` = ?,
-					`article1_chapter1` = ?,
-					`article1_titre2` = ?,
-					`article1_chapter2` = ?,
-					`article2_titre` = ?,
-					`article2_chapter1` = ?,
-					`article2_titre2` = ?,
-					`article2_chapter2` = ?
+					`titre_chapter1` = ?,
+					`chapter1` = ?,
+					`img_chapter1` = ?,
+					`titre_chapter2` = ?,
+					`chapter2` = ?,
+					`img_chapter2` = ?
+					
 				WHERE `id_home` = ?");
 
 				$stmt->execute([$this->titre1,
-						$this->intro_chapter1,
-						$this->intro_chapter2,
-						$this->titre2,
-						$this->article1_titre,
-						$this->article1_chapter1,
-						$this->article1_titre2,
-						$this->article1_chapter2,
-						$this->article2_titre,
-						$this->article2_chapter1,
-						$this->article2_titre2,
-						$this->article2_chapter2,
+						$this->titre_chapter1,
+						$this->chapter1,
+						$this->img_chapter1,
+						$this->titre_chapter2,
+						$this->chapter2,
+						$this->img_chapter2,
 						$idHome]);
 							
 				echo '<script>alert("Les modifications sont enregistrées!");</script>';

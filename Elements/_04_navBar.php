@@ -93,7 +93,7 @@
                             </a>
                         </li>
                         <li>
-                            <form action="index.php?page=user_edit" method="post">
+                            <form action="index.php?page=userEdit" method="post">
                                 <button class="dropdown-item text-light" id="nav_new_user" name="nav_new_user" type="submit">
                                     <img class="pe-2 mb-1" src="img/icon/person-plus.svg" alt="icone nouveau profil">
                                     Nouveau
@@ -120,7 +120,7 @@
                         <?php if($_SESSION['typeConnect'] === 'Guest'){ ?>
                         <li>
                             <a class="dropdown-item text-light" href="index.php?page=connexion">
-                                <img class="p-0 m-0 pe-2" src="img/icon/box-arrow-in-left.svg" alt="icone du bouton connexion">    
+                                <img class="p-0 m-0 pe-2" src="img/icon/box-arrow-in-left.svg" alt="icone du bouton connexion" style="width:10px; height: 10px; object-fit: cover;">    
                                 Connexion
                             </a>
                         </li>
@@ -135,7 +135,7 @@
                         <?php } ?>
                     <?php if($_SESSION['typeConnect'] != 'Guest'){ ?>
                         <li>
-                            <form action="index.php?page=user_edit" method="post">
+                            <form action="index.php?page=userEdit" method="post">
                                 <button class="dropdown-item text-light" type="submit" name="btn_monCompte">
                                     <img class="p-0 m-0 pe-2" src="img/icon/person-gear.svg" alt="icone du bouton mon compte">    
                                     Mon compte

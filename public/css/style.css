@@ -3,7 +3,9 @@ html{
   font-size: 62.5%;  /*62.5% = 10px.*/
 }
 
-body, p, h5, h6{
+body, p, h5, h6, .btn,
+.accordion-button,
+.form-select, .form-text{
   font-size: 1.6rem;
 }
 
@@ -11,7 +13,7 @@ h1{
   font-size: 3.2rem;
 }
 
-h2{
+h2, legend{
   font-size: 2.4rem;
 }
 
@@ -29,11 +31,7 @@ main{
   background-position: center;
 }
 
-.div__p{
-  text-align: justify;
-}
-
-.header__bg-image {
+header{
   background-image: url('../img/baniere/img_goldorak_dark_02.webp');
   background-size: cover;
   background-position: center;
@@ -88,335 +86,35 @@ main{
   background-color: orangered;
 }
 
-.btn{
-  font-size: 1.6rem;
-}
-
-/************************************************************************/
-/* mise en forme tableau et input formulaires */
-/************************************************************************/
-
-.tdLineAdd{
-  width: 30px;
-  min-width: 15px;
-  max-width: 35px;
-  resize: vertical;
-  background-color:lightgrey;
-}
-
-
-.tdLine{
-  width: 30px;
-  min-width: 15px;
-  max-width: 35px;
-  resize: vertical;
-  background-color:lightgrey;
-}
-
-.tdUpdate, .tdDelete{
-/*width: 5%;*/
-  text-align: center;
-}
-
-
-[class*="td__user"]{
-  height: auto;
-  padding: 0;
-  overflow: hidden;
-  border: none;
-  background-color: #343a40;
-}
-
-input[type="text"][class*="user"],
-input[type="email"][class*="user"],
-input[type="tel"][class*="user"]{
-  background-color: #343a40;
-  color: white;
-  font-size: 1.4rem;
-  border: none;
-  /*margin: 0;
-  padding: 0;*/
-}
-
-input[type="tel"][class*="user"], input[type="email"][class*="user"] {
-  border: none;
-}
-
-input[type="text"][class*="label"] {
-  outline: none;
-  font-size: 1.4rem;
-}
-
-.tdLabel{
-  width: 65px;
-}
-
-.tdText{
-  width: 250px;
-}
-
-.td__user--titre{
-  /*width: 90px;*/
-}
-
-.label__user--id,.label__user--tel,
-.label__user--job, .label__user--email,
-.label__user--society, .label__user--pseudo,
-.td__user--titre, .label__user--firstName,
-.label__user--lastName, .label__user--userGroup{
-  /*text-align: right;*/
-}
-
-.form-select{
-  font-size: 1.6rem;
-}
-
 input, textarea{
   border: none;
   width: 100%;
-}
-
-
-/**********************************************/
-/* rating */
-/**********************************************/
-
-.rating {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.rating i {
-  font-size: 24px;
-  color: #d7d7d7;/* #ffd700;*/ /* Couleur jaune pour les étoiles */
-  transition: color 0.3s ease;
-  cursor: pointer;
-}
-
-.rating i:hover,
-.rating i.active {
-  color: #ffcc00; /* Couleur jaune clair au survol */
-}
-
-/**********************************************/
-/* Input */
-/**********************************************/
-
-input, textarea{
-  border: none;
-  width: 100%;
+  font-size: 1.6rem;  
 }
 
 /*-----------------------------------------------------------------------*/
-/*--------PARAMETRES ECRANS SUPERIEURs A 768px---------------------------*/
+/*--------PARAMETRES ECRANS SUPERIEURs A 460px---------------------------*/
 /*-----------------------------------------------------------------------*/
   
-@media screen and (min-width: 767px){
-  .img__icone{
-    width: 100px;
-    height: auto;
-    padding: 0;
+@media screen and (min-width: 460px){
+
+  .my_iframe{
+    width:450px;
+    height:250px;
+    padding: 0 0 10px 0;
     margin: 0;
   }
-  
-  .mediaSalon{
-    display: flex;
-  }
-
-  .my__iframe4{
-    width: 560px;
-    height: 315px;
-    padding: 0;
-    margin: 0;
-  }
-
-  .div__button{
-    display: flex;
-    justify-content:end;
-  }
-  .btAdherer{
-    margin: 5px;
-  }
 }
   
 /*-----------------------------------------------------------------------*/
-/*--------PARAMETRES ECRANS SUPERIEURs A 990px---------------------------*/
-/*-----------------------------------------------------------------------*/
-  
-@media screen and (min-width: 990px){
-  .img__icone{
-    width: 150px;
-    height: auto;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .mediaSalon{
-    display: flex;
-  }
-
-  .my__iframe4{
-    width: 560px;
-    height: 315px;
-    padding: 0;
-    margin: 20px auto auto auto;
-  }
-}
-  
-/*-----------------------------------------------------------------------*/
-/*--------PARAMETRES ECRANS SUPERIEURs A 1200px---------------------------*/
+/*--------PARAMETRES ECRANS INFERIEURS A 465px---------------------------*/
 /*-----------------------------------------------------------------------*/
 
-@media screen and (max-width: 1200px){
-  .img__icone{
-    width: 200px;
-    height: auto;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .mediaSalon{
-    display: flex;
-  }
-
-  .my__iframe4{
-    width: 420px;
-    height: 236px;
-    padding: 0;
-    margin: 20px auto auto auto;
-  }
-}
-  
-/*-----------------------------------------------------------------------*/
-/*--------PARAMETRES ECRANS SUPERIEURs A 1400px---------------------------*/
-/*-----------------------------------------------------------------------*/
-
-@media screen and (max-width: 1400px){
-  .img__icone{
-    width: 200px;
-    height: auto;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .mediaSalon{
-    display: flex;
-  }
-
-  .my__iframe4{
-    width: 420px;
-    height: 236px;
-    padding: 0;
-    margin: 20px auto auto auto;
-  }
-}
-
-/*-----------------------------------------------------------------------*/
-/*--------PARAMETRES ECRANS INFERIEURS A 990px---------------------------*/
-/*-----------------------------------------------------------------------*/
-
-@media screen and (max-width: 990px){
-  .my__iframe{
+@media screen and (max-width: 465px) {
+  .my_iframe {
     width: 100%;
     height: auto;
-    padding: 0;
+    padding: 10px;
     margin: 0;
   }
-}
-
-@media screen and (max-width: 990px){
-  .my__iframe2, .my__iframe3{
-    width: auto;
-    height: 100%;
-    padding: 0;
-    margin: 0;
-  }
-
-  .mediaSalon{
-    display: flex;
-    flex-direction: column;
-  }
-
-  .my__iframe4{
-    width: 560px;
-    height: 315px;
-    padding: 0;
-    margin: 20px auto auto auto;
-  }
-  
-  .article__card{
-    display: flex;
-    flex-direction: column;
-    justify-content:center;
-    align-items: center;
-  }
-}
-  
-/*-----------------------------------------------------------------------*/
-/*--------PARAMETRES ECRANS INFERIEURS A 767px---------------------------*/
-/*-----------------------------------------------------------------------*/
-  
-@media screen and (max-width: 767px){
-  .img__icone{
-    width: 0px;
-    height: auto;
-    padding: 0;
-    margin: 0;
-  }
-
-  /*.my__iframe4{
-    width: 373px;
-    height: 210px;
-    padding: 0;
-    margin: 20px auto auto auto;
-  }*/
-
-  .div__button{
-    display: flex;
-    justify-content:center;
-  }
-  .btAdherer{
-    margin: 5px;
-  }
-
-  .my__iframe4{
-    width: 100%;
-    height: auto;
-    padding: 0;
-    margin: 20px auto auto auto;
-  }
-}
-  
-/*-----------------------------------------------------------------------*/
-/*--------PARAMETRES ECRANS INFERIEURS A 350px---------------------------*/
-/*-----------------------------------------------------------------------*/
-  
-@media screen and (max-width: 350px){
-  .my__iframe2, .my__iframe3{
-    width: 100%;
-    height: 100%;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .mediaSalon{
-    display: flex;
-    flex-direction: column;
-  }
-
-  .my__iframe4{
-    width: 100%;
-    height: auto;
-    padding: 0;
-    margin: 20px auto auto auto;
-  }
-}
-
-  
-/*-----------------------------------------------------------------------*/
-/*--------PARAMETRES ECRANS INFERIEURS A 350px---------------------------*/
-/*-----------------------------------------------------------------------*/
-  
-@media screen and (max-width: 320px){
 }

@@ -102,8 +102,6 @@
             
             <p class="text-warning text-center fs-2" id="txtJoueur1"></p>
 
-            <!-- <button class="btn btn-lg btn-primary my-3 mx-auto" type="button" id="btnEditerNomJoueur1" onClick="editerNomJoueur1()">Renommé Alcor</button> -->
-
         </div>
 
         <div class="col-md-2 m-md-0 mb-4">
@@ -139,8 +137,6 @@
             
             <p class="text-warning text-center fs-2" id="txtJoueur2"></p>
             
-            <!-- <button type="button" class="btn btn-lg btn-primary my-3 mx-auto" id="btnEditerNomJoueur2" onClick="editerNomJoueur2()">Renommé Vénusia</button> -->
-
         </div>
         
     </div>
@@ -155,4 +151,4 @@
 
 </div>
 
-<script src="../JS/commandant.js"></script>
+<script src="js/commander.js"></script>

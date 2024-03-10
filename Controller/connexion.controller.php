@@ -2,7 +2,8 @@
 
     if (isset($_POST['envoyer'])) {
         
-        include('../Model/connexion.class.php');
+        include_once('../Model/connexion.class.php');
+
         $MyUserConnect = new userConnect();
 
         $emptyCell = false;
@@ -32,16 +33,8 @@
                     $_SESSION['connexion'] = true;
                     $MyUserConnect->SetConnexion(true);
 
-                    if($_SESSION['local']===true){
-            
-                        echo '<script>window.location.href = "http://goldorak/index.php?page=home";</script>';
-                        
-            
-                    }else{
-            
-                        echo '<script>window.location.href = "https://www.follaco.fr/index.php?page=home";</script>';
-            
-                    }
+                    include_once '../common/utilies.php';
+                    routeToHomePage();
 
                 }else{
 
