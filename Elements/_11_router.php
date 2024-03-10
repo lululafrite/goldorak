@@ -8,7 +8,7 @@
         $_SESSION['updateMoncompte'] = false;
         $_SESSION['newUser'] = false;
 
-        include_once 'view/index.php';
+        include_once 'view/home.php';
 
     }elseif ($page === 'user'){
 

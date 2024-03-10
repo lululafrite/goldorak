@@ -12,10 +12,21 @@
 //---------------------------------------------------------------
 
     if (isset($_POST['btn-SearchUser'])){
+        
         $_SESSION['laPage'] = 1;
         $_SESSION['firstLine'] = 0;
         $_SESSION['ligneParPage'] = 3;
         $_SESSION['nbOfPage'] = 1;
+
+        $_SESSION['criteriaName'] = isset($_POST['Text_User_Nom']) ? escapeInput($_POST['Text_User_Nom']) : '';
+        unset($_POST['Text_User_Nom']);
+
+        $_SESSION['criteriaPseudo'] = isset($_POST['Text_User_Pseudo']) ? escapeInput($_POST['Text_User_Pseudo']) : '';
+        unset($_POST['Text_User_Pseudo']);
+
+        $_SESSION['criteriaType'] = isset($_POST['Select_User_Type']) ? escapeInput($_POST['Select_User_Type']) : 'Selectionnez un type';
+        unset($_POST['Select_User_Type']);
+
     }else if(isset($_POST['nbOfPage'])){
         $_SESSION['laPage'] = 1;
         $_SESSION['firstLine']=0;
@@ -26,26 +37,17 @@
     $pseudo_umpty = true;
     $userType_umpty = true;
 
-    $_SESSION['criteriaName'] = isset($_POST['Text_User_Nom']) ? escapeInput($_POST['Text_User_Nom']) : '';
-    unset($_POST['Text_User_Nom']);
-
     if(!empty($_SESSION['criteriaName'])){
         $name_umpty = false;
     }else{
         $name_umpty = true;
     }
 
-    $_SESSION['criteriaPseudo'] = isset($_POST['Text_User_Pseudo']) ? escapeInput($_POST['Text_User_Pseudo']) : '';
-    unset($_POST['Text_User_Pseudo']);
-
     if(!empty($_SESSION['criteriaPseudo'])){
         $pseudo_umpty = false;
     }else{
         $pseudo_umpty = true;
     }
-
-    $_SESSION['criteriaType'] = isset($_POST['Select_User_Type']) ? escapeInput($_POST['Select_User_Type']) : 'Selectionnez un type';
-    unset($_POST['Select_User_Type']);
 
     if(!empty($_SESSION['criteriaType']) && $_SESSION['criteriaType'] != 'Selectionnez un type'){
         $userType_umpty = false;

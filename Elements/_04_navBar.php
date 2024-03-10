@@ -54,7 +54,7 @@
                 </li>
             <?php } ?>
             
-            <?php if($_SESSION['subscriptionConnect'] != 'Vénusia' ){ ?>
+            <?php if($_SESSION['subscriptionConnect'] != 'Vénusia' && $_SESSION['typeConnect'] != 'User'){ ?>
                 <li class="nav-item dropdown d-flex justify-content-center align-items-center">
                     <a class="nav-link dropdown-toggle text-light" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <img class="p-0 px-2 mb-1" src="img/icon/joystick.svg" alt="icone joystick du menu jeux">  
