@@ -104,7 +104,9 @@
 		}
 		public function setCountLine($theTable)
 		{
-			include('../Controller/ConfigConn.php');
+			include_once('../Model/dbConnect.class.php');
+			$dbConnect_ = new dbConnect();
+			$bdd = $dbConnect_->connectionDb();
 
 			try
 			{

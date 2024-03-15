@@ -52,7 +52,7 @@
         }
         else{
             
-            echo '<script>window.location.href = "https://www.follaco.fr/index.php?page=accessPage";</script>';
+            echo '<script>window.location.href = "https://www.follaco.fr/goldorak/public/index.php?page=accessPage";</script>';
         
         }
         exit();
@@ -69,7 +69,7 @@
         }
         else{
             
-            echo '<script>window.location.href = "https://www.follaco.fr/errorPage/index.php?page=unknownPage";</script>';
+            echo '<script>window.location.href = "https://www.follaco.fr/goldorak/public/errorPage/index.php?page=unknownPage";</script>';
         
         }
         exit();
@@ -86,7 +86,7 @@
 
         }else{
 
-            echo '<script>window.location.href = "https://www.follaco.fr/index.php?page=home";</script>';
+            echo '<script>window.location.href = "https://www.follaco.fr/goldorak/public/index.php?page=home";</script>';
 
         }
         exit();
@@ -101,7 +101,7 @@
         }
         else{
             
-            echo '<script>window.location.href = "https://www.follaco.fr/index.php?page=user";</script>';
+            echo '<script>window.location.href = "https://www.follaco.fr/goldorak/public/index.php?page=user";</script>';
         
         }
         exit();
@@ -116,7 +116,7 @@
         }
         else{
             
-            echo '<script>window.location.href = "https://www.follaco.fr/index.php?page=disconnect";</script>';
+            echo '<script>window.location.href = "https://www.follaco.fr/goldorak/public/index.php?page=disconnect";</script>';
         
         }
         exit();

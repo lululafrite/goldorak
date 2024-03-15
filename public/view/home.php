@@ -40,7 +40,6 @@
 
                             <!-- End Titre chapter1 -->
 
-
                             <!-- Start Chapter 1 -->
 
                             <?php if ($_SESSION['typeConnect']!='Administrator'){ ?>

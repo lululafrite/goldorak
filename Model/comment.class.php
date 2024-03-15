@@ -88,7 +88,10 @@ use function PHPSTORM_META\type;
 		private $theComment;
 		public function getComments($idComment)
 		{
-			include('../Controller/ConfigConn.php');
+			include_once('../Model/dbConnect.class.php');
+			$dbConnect_ = new dbConnect();
+			$bdd = $dbConnect_->connectionDb();
+
             date_default_timezone_set($_SESSION['timeZone']);
 			
 			try
@@ -142,11 +145,13 @@ use function PHPSTORM_META\type;
 		private $CommentList;
 		public function get($whereClause, $orderBy = 'date_', $ascOrDesc = 'ASC', $firstLine = 0, $linePerPage = 30)
 		{
-			include('../Controller/ConfigConn.php');
+			include_once('../Model/dbConnect.class.php');
+			$dbConnect_ = new dbConnect();
+			$bdd = $dbConnect_->connectionDb();
 			
 			try
 			{
-				// Préparez la requête avec des paramètres
+				// Préparez la requête avec les paramètres
 				$sql = $bdd->prepare("SELECT 
 											`comment`.`id_comment`,
 											`comment`.`date_`,
@@ -196,7 +201,9 @@ use function PHPSTORM_META\type;
 		private $idComment;
 		public function addComment()
 		{
-			include('../Controller/ConfigConn.php');
+			include_once('../Model/dbConnect.class.php');
+			$dbConnect_ = new dbConnect();
+			$bdd = $dbConnect_->connectionDb();
 
 			try{
 
@@ -258,7 +265,10 @@ use function PHPSTORM_META\type;
 
 		public function updateComment($idComment)
 		{
-			include('../Controller/ConfigConn.php');
+			include_once('../Model/dbConnect.class.php');
+			$dbConnect_ = new dbConnect();
+			$bdd = $dbConnect_->connectionDb();
+
 			try
 			{
 				// Requête préparée
@@ -293,7 +303,10 @@ use function PHPSTORM_META\type;
 
 		public function modereComment($idComment, $publication)
 		{
-			include('../Controller/ConfigConn.php');
+			include_once('../Model/dbConnect.class.php');
+			$dbConnect_ = new dbConnect();
+			$bdd = $dbConnect_->connectionDb();
+
 			try
 			{
 				// Requête préparée
@@ -323,7 +336,9 @@ use function PHPSTORM_META\type;
 		
 		public function deleteComment($id)
 		{
-			include('../Controller/ConfigConn.php');
+			include_once('../Model/dbConnect.class.php');
+			$dbConnect_ = new dbConnect();
+			$bdd = $dbConnect_->connectionDb();
 
 			try {
 				// Requête préparée pour la sélection
@@ -364,7 +379,7 @@ use function PHPSTORM_META\type;
 		}
 
         //__Ajouter user?___________________________________________
-        
+       
         public function getAddComment()
         {
             if(is_null($_SESSION['addComment']))

@@ -120,7 +120,10 @@ use function PHPSTORM_META\type;
 	
 		private function getSubscriptionId() {
 
-			include('../Controller/ConfigConn.php');
+			include_once('Model/dbConnect.class.php');
+			$dbConnect_ = new dbConnect();
+			$bdd = $dbConnect_->connectionDb();
+			
 			$stmt = $bdd->prepare("SELECT `id_subscription` FROM `subscription` WHERE `subscription` = ?");
 			$stmt->execute([$this->subscription]);
 			$result = $stmt->fetch();
@@ -142,7 +145,10 @@ use function PHPSTORM_META\type;
 	
 		private function getUserTypeId() {
 
-			include('../Controller/ConfigConn.php');
+			include_once('Model/dbConnect.class.php');
+			$dbConnect_ = new dbConnect();
+			$bdd = $dbConnect_->connectionDb();
+
 			$stmt = $bdd->prepare("SELECT `id_type` FROM `user_type` WHERE `type` = ?");
 			$stmt->execute([$this->type]);
 			$result = $stmt->fetch();
@@ -167,7 +173,9 @@ use function PHPSTORM_META\type;
 		private $listPseudo;
 		public function getPseudoUser()
 		{
-			include('../Controller/ConfigConn.php');
+			include_once('Model/dbConnect.class.php');
+			$dbConnect_ = new dbConnect();
+			$bdd = $dbConnect_->connectionDb();
 
 			try {
 				// Utilisation d'une requête préparée pour améliorer la sécurité même si aucun paramètre n'est utilisé ici
@@ -194,7 +202,9 @@ use function PHPSTORM_META\type;
 		private $theUser;
 		public function getUser($idUser)
 		{
-			include('../Controller/ConfigConn.php');
+			include_once('Model/dbConnect.class.php');
+			$dbConnect_ = new dbConnect();
+			$bdd = $dbConnect_->connectionDb();
 
 			date_default_timezone_set($_SESSION['timeZone']);
 
@@ -244,7 +254,9 @@ use function PHPSTORM_META\type;
 		private $userList;
 		public function get($whereClause, $orderBy = 'name', $ascOrDesc = 'ASC', $firstLine = 0, $linePerPage = 13)
 		{
-			include('../Controller/ConfigConn.php');
+			include_once('../Model/dbConnect.class.php');
+			$dbConnect_ = new dbConnect();
+			$bdd = $dbConnect_->connectionDb();
 
 			try
 			{
@@ -300,7 +312,10 @@ use function PHPSTORM_META\type;
 		//-----------------------------------------------------------------------
 
 		public function addUser() {
-			include('../Controller/ConfigConn.php');
+
+			include_once('Model/dbConnect.class.php');
+			$dbConnect_ = new dbConnect();
+			$bdd = $dbConnect_->connectionDb();
 	
 			try
 			{
@@ -369,7 +384,10 @@ use function PHPSTORM_META\type;
 
 		public function updateUser($idUser){
 
-			include('../Controller/ConfigConn.php');
+			include_once('Model/dbConnect.class.php');
+			$dbConnect_ = new dbConnect();
+			$bdd = $dbConnect_->connectionDb();
+
 			try
 			{
 				$stmt = $bdd->prepare("UPDATE `user` SET
@@ -412,7 +430,9 @@ use function PHPSTORM_META\type;
 
 		public function deleteUser($id)
 		{
-			include('../Controller/ConfigConn.php');
+			include_once('Model/dbConnect.class.php');
+			$dbConnect_ = new dbConnect();
+			$bdd = $dbConnect_->connectionDb();
 
 			try
 			{
@@ -424,18 +444,6 @@ use function PHPSTORM_META\type;
 				$stmt->execute();
 
 				$bdd=null;
-/*
-				if($_SESSION['local']){
-
-					echo '<script>window.location.href = "http://goldorak/index.php?page=user_edit";</script>';
-
-				}else{
-
-					echo '<script>window.location.href = "https://www.follaco.fr/index.php?page=user";</script>';
-
-				}
-				exit;
-*/
 				return true;
 			}
 			catch (Exception $e)
@@ -450,7 +458,9 @@ use function PHPSTORM_META\type;
 		private $userExist;
 		public function verifUser($email)
 		{
-			include('../Controller/ConfigConn.php');
+			include_once('Model/dbConnect.class.php');
+			$dbConnect_ = new dbConnect();
+			$bdd = $dbConnect_->connectionDb();
 
 			try
 			{

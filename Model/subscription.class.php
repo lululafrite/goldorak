@@ -40,7 +40,9 @@ use function PHPSTORM_META\type;
 		private $theSubscription;
 		public function getSubscription_($îdSubscription)
 		{
-			include('../Controller/ConfigConn.php');
+			include_once('../Model/dbConnect.class.php');
+			$dbConnect_ = new dbConnect();
+			$bdd = $dbConnect_->connectionDb();
 
             date_default_timezone_set($_SESSION['timeZone']);
 			
@@ -71,7 +73,9 @@ use function PHPSTORM_META\type;
 		private $userSubscriptionList;
 		public function get($whereClause, $orderBy = 'subscription', $ascOrDesc = 'ASC', $firstLine = 0, $linePerPage = 13)
 		{
-			include('../Controller/ConfigConn.php');
+			include_once('../Model/dbConnect.class.php');
+			$dbConnect_ = new dbConnect();
+			$bdd = $dbConnect_->connectionDb();
 			
 			try
 			{
@@ -100,7 +104,9 @@ use function PHPSTORM_META\type;
 
 		public function addUserSubscription()
 		{
-			include('../Controller/ConfigConn.php');
+			include_once('../Model/dbConnect.class.php');
+			$dbConnect_ = new dbConnect();
+			$bdd = $dbConnect_->connectionDb();
 
 			try{
 				$bdd->exec("INSERT INTO `subscription`(`subscription`)
@@ -125,7 +131,10 @@ use function PHPSTORM_META\type;
 
 		public function updateUserSubscription($idSubscription)
 		{
-			include('../Controller/ConfigConn.php');
+			include_once('../Model/dbConnect.class.php');
+			$dbConnect_ = new dbConnect();
+			$bdd = $dbConnect_->connectionDb();
+
 			try
 			{
 				$bdd->exec("UPDATE `subscription` SET `subscription` = '" . $this->subscription . "'
@@ -146,7 +155,9 @@ use function PHPSTORM_META\type;
 
 		public function deleteUsersubscription($id)
 		{
-			include('../Controller/ConfigConn.php');
+			include_once('../Model/dbConnect.class.php');
+			$dbConnect_ = new dbConnect();
+			$bdd = $dbConnect_->connectionDb();
 
 			try
 			{

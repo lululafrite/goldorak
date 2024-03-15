@@ -1,19 +1,15 @@
 <?php
 	class userConnect
-    {
-        public function __construct()
-        {
-        }
-        
+    {        
         private $type;
         public function getUserConnect()
         {
-            if(is_null($this->type)) //is_null($_SESSION['type']))
+            if(is_null($this->type))
             {
                 $this->type = 'Guest';
                 $_SESSION['typeConnect'] = 'Guest';
             }
-            return $this->type; // $_SESSION['type'];
+            return $this->type;
         }
 
         public function SetUserConnect($new)
@@ -38,7 +34,9 @@
         private $dataConnect;
         public function queryConnect($email,$pw){
 
-            require('../Controller/ConfigConn.php');
+			include_once('../Model/dbConnect.class.php');
+			$dbConnect_ = new dbConnect();
+			$bdd = $dbConnect_->connectionDb();
 
             try {
                     $stmt = $bdd->prepare("SELECT `pseudo`,
@@ -56,27 +54,13 @@
 
                                             WHERE `email` = :email AND `password` = :password");
                 
-                    // Bind parameters
                     $stmt->bindParam(':email', $email, PDO::PARAM_STR);
                     $stmt->bindParam(':password', $pw, PDO::PARAM_STR);
                 
-                    // Execute the query
                     $stmt->execute();
-                
-                    // Fetch the result
+
                     $this->dataConnect = $stmt->fetch();
-                
-                    // Check if the result exists
-                    //if ($this->dataConnect) {
-                        
-                        return $this->dataConnect;
-
-                    //} else {
-
-                        //echo '<script>window.location.href = "http://goldorak/index.php?page=error_page";</script>';
-                        //return false;
-
-                    //}
+                    return $this->dataConnect;
 
                 } catch (PDOException $e) {
                     

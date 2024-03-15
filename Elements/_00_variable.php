@@ -5,6 +5,10 @@
     $_SESSION['local']=true;
 
     if (!isset($_SESSION['typeConnect'])) {
+
+/********************************************************************** */
+/******************* VARIABLES CONNEXION *************************** */
+/********************************************************************** */
         
         $_SESSION['connexion'] = false;
         $_SESSION['typeConnect']= 'Guest';
@@ -18,12 +22,6 @@
 /******************* VARIABLES USER *********************************** */
 /********************************************************************** */
 
-        //$_SESSION['userConnected'] = 'Guest';
-
-        $_SESSION['addUser'] = false;
-        $_SESSION['newUser'] = false;
-        $_SESSION['newMember'] = false;
-
         $_SESSION['id_user'] = '';
         $_SESSION['name'] = '';
         $_SESSION['surname'] = '';
@@ -35,17 +33,16 @@
         $_SESSION['subscription'] = 'Vénusia';
         $_SESSION['password'] =  '';
 
-        $_SESSION['errorFormUser'] = false;
+        $_SESSION['addUser'] = false;
+        $_SESSION['newUser'] = false;
+        $_SESSION['newMember'] = false;
 
-        //Variable critères de recharche user
-        $_SESSION['criteriaName'] = '';
-        $_SESSION['criteriaPseudo'] = '';
-        $_SESSION['criteriaType'] = 'Selectionnez un type';
+        $_SESSION['errorFormUser'] = false;
 
         $_SESSION['uploadAvatar'] = '';
 
 /********************************************************************** */
-/******************* VARIABLES USER *********************************** */
+/******************* VARIABLES PAGINATION ***************************** */
 /********************************************************************** */
 
         $_SESSION['laPage'] = 1;
@@ -55,28 +52,21 @@
         $_SESSION['nbOfProduct'] = 1;
         $_SESSION['NextOrPrevious'] = false;
 
-        $_SESSION['theTable'] = 'car';
+        $_SESSION['theTable'] = 'user';
 
-        $_SESSION['addCar'] = false;
-        $_SESSION['newCar'] = false;
-        $_SESSION['errorFormCar'] = false;
-        $_SESSION['carBrand'] = '_';
-        $_SESSION['carModel'] = '_';
-        $_SESSION['carMotorization'] = '_';
-        $_SESSION['carSold'] = 'Oui';
-        //Variable critères de recharche car
-        $_SESSION['criteriaBrand'] = 'Selectionnez une marque';
-        $_SESSION['criteriaModel'] = 'Selectionnez un modele';
-        $_SESSION['criteriaMileage'] = 'Selectionnez un kilometrage maxi';
-        $_SESSION['criteriaPrice'] = 'Selectionnez un prix maxi';
-
-        $_SESSION['addBrand'] = false;
-        $_SESSION['addModel']=false;
-        $_SESSION['addMotorization']=false;
+/********************************************************************** */
+/******************* VARIABLES CRITERIA SEARCH ************************ */
+/********************************************************************** */
+        $_SESSION['criteriaName'] = '';
+        $_SESSION['criteriaPseudo'] = '';
+        $_SESSION['criteriaType'] = 'Selectionnez un type';
 
         $_SESSION['whereClause'] = 1;
 
-        //$_SESSION['local']=true;
+/********************************************************************** */
+/************************* VARIABLES OTHER **************************** */
+/********************************************************************** */
+
         $_SESSION['timeZone']="Europe/Paris";
     }
 ?>
