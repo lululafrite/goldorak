@@ -104,6 +104,7 @@
 			include_once('../Model/dbConnect.class.php');
 			$dbConnect_ = new dbConnect();
 			$bdd = $dbConnect_->connectionDb();
+            unset($dbConnect_);
 
 			date_default_timezone_set($_SESSION['timeZone']);
 			
@@ -143,6 +144,7 @@
 			include_once('../Model/dbConnect.class.php');
 			$dbConnect_ = new dbConnect();
 			$bdd = $dbConnect_->connectionDb();
+            unset($dbConnect_);
 			
 			try
 			{
@@ -182,6 +184,7 @@
 			include_once('../Model/dbConnect.class.php');
 			$dbConnect_ = new dbConnect();
 			$bdd = $dbConnect_->connectionDb();
+            unset($dbConnect_);
 
 			try{
 				$stmt = $bdd->prepare("UPDATE `home`
@@ -221,6 +224,7 @@
 			include_once('../Model/dbConnect.class.php');
 			$dbConnect_ = new dbConnect();
 			$bdd = $dbConnect_->connectionDb();
+            unset($dbConnect_);
 			
 			try
 			{
@@ -243,6 +247,7 @@
 			include_once('../Model/dbConnect.class.php');
 			$dbConnect_ = new dbConnect();
 			$bdd = $dbConnect_->connectionDb();
+            unset($dbConnect_);
 	
 			try
 			{

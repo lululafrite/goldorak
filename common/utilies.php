@@ -122,6 +122,20 @@
         exit();
     }
 
+    // Route to disconnect page
+    function returnNewError(){
+        if($_SESSION['local']){
+
+            echo '<script>window.location.href = "http://goldorak/index.php?page=user_edit&newError=true";</script>';
+
+        }else{
+
+            echo '<script>window.location.href = "https://www.follaco.fr/index.php?page=user_edit&newError=true";</script>';
+
+        }
+        exit();
+    }
+
     // Route after delete
     function routeAfterDelete(){
 

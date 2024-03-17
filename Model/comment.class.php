@@ -1,18 +1,7 @@
 <?php
 
-use Symfony\Component\Intl\Scripts;
-
-use function PHPSTORM_META\type;
-
 	class Comment
 	{
-
-		function __construct()
-		{
-		}
-
-		//-----------------------------------------------------------------------
-
 		private $id;
 		public function getId()
 		{
@@ -91,6 +80,7 @@ use function PHPSTORM_META\type;
 			include_once('../Model/dbConnect.class.php');
 			$dbConnect_ = new dbConnect();
 			$bdd = $dbConnect_->connectionDb();
+            unset($dbConnect_);
 
             date_default_timezone_set($_SESSION['timeZone']);
 			
@@ -148,6 +138,7 @@ use function PHPSTORM_META\type;
 			include_once('../Model/dbConnect.class.php');
 			$dbConnect_ = new dbConnect();
 			$bdd = $dbConnect_->connectionDb();
+            unset($dbConnect_);
 			
 			try
 			{
@@ -204,6 +195,7 @@ use function PHPSTORM_META\type;
 			include_once('../Model/dbConnect.class.php');
 			$dbConnect_ = new dbConnect();
 			$bdd = $dbConnect_->connectionDb();
+            unset($dbConnect_);
 
 			try{
 
@@ -268,6 +260,7 @@ use function PHPSTORM_META\type;
 			include_once('../Model/dbConnect.class.php');
 			$dbConnect_ = new dbConnect();
 			$bdd = $dbConnect_->connectionDb();
+            unset($dbConnect_);
 
 			try
 			{
@@ -306,6 +299,7 @@ use function PHPSTORM_META\type;
 			include_once('../Model/dbConnect.class.php');
 			$dbConnect_ = new dbConnect();
 			$bdd = $dbConnect_->connectionDb();
+            unset($dbConnect_);
 
 			try
 			{
@@ -339,6 +333,7 @@ use function PHPSTORM_META\type;
 			include_once('../Model/dbConnect.class.php');
 			$dbConnect_ = new dbConnect();
 			$bdd = $dbConnect_->connectionDb();
+            unset($dbConnect_);
 
 			try {
 				// Requête préparée pour la sélection
@@ -377,21 +372,6 @@ use function PHPSTORM_META\type;
 
 			$bdd = null;
 		}
-
-        //__Ajouter user?___________________________________________
-       
-        public function getAddComment()
-        {
-            if(is_null($_SESSION['addComment']))
-            {
-                $_SESSION['addComment']=false;
-            }
-            return $_SESSION['addComment'];
-        }
-        public function setAddSchedules($new)
-        {
-            $_SESSION['addComment']=$new;
-        }
 
 	}
 	

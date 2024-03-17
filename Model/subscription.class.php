@@ -1,18 +1,7 @@
 <?php
 
-use Symfony\Component\Intl\Scripts;
-
-use function PHPSTORM_META\type;
-
 	class Subscription
 	{
-
-		function __construct()
-		{
-		}
-
-		//-----------------------------------------------------------------------
-
 		private $id_subscription;
 		public function getIdSubscription()
 		{
@@ -43,6 +32,7 @@ use function PHPSTORM_META\type;
 			include_once('../Model/dbConnect.class.php');
 			$dbConnect_ = new dbConnect();
 			$bdd = $dbConnect_->connectionDb();
+            unset($dbConnect_);
 
             date_default_timezone_set($_SESSION['timeZone']);
 			
@@ -76,6 +66,7 @@ use function PHPSTORM_META\type;
 			include_once('../Model/dbConnect.class.php');
 			$dbConnect_ = new dbConnect();
 			$bdd = $dbConnect_->connectionDb();
+            unset($dbConnect_);
 			
 			try
 			{
@@ -107,6 +98,7 @@ use function PHPSTORM_META\type;
 			include_once('../Model/dbConnect.class.php');
 			$dbConnect_ = new dbConnect();
 			$bdd = $dbConnect_->connectionDb();
+            unset($dbConnect_);
 
 			try{
 				$bdd->exec("INSERT INTO `subscription`(`subscription`)
@@ -134,6 +126,7 @@ use function PHPSTORM_META\type;
 			include_once('../Model/dbConnect.class.php');
 			$dbConnect_ = new dbConnect();
 			$bdd = $dbConnect_->connectionDb();
+            unset($dbConnect_);
 
 			try
 			{
@@ -158,6 +151,7 @@ use function PHPSTORM_META\type;
 			include_once('../Model/dbConnect.class.php');
 			$dbConnect_ = new dbConnect();
 			$bdd = $dbConnect_->connectionDb();
+            unset($dbConnect_);
 
 			try
 			{
@@ -171,21 +165,6 @@ use function PHPSTORM_META\type;
 
 			$bdd=null;
 		}
-
-        //__Ajouter user?___________________________________________
-        
-        public function getAddUserSubscription()
-        {
-            if(is_null($_SESSION['addUserSubscription']))
-            {
-                $_SESSION['addUserSubscription']=false;
-            }
-            return $_SESSION['addUserSubscription'];
-        }
-        public function setAddUserSubscription($new)
-        {
-            $_SESSION['addUserSubscription']=$new;
-        }
 
 	}
 	

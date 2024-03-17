@@ -3,7 +3,6 @@
     include_once('../Model/user.class.php');
     include_once('../common/utilies.php');
 
-    
 //***********************************************************************************************
 // Echapper les variables
 //***********************************************************************************************
@@ -22,12 +21,10 @@
     $btn_goldorak = isset($_POST['btn_goldorak']) ? true : false;
 
     $newError = isset($_GET['newError']) ? escapeInput($_GET['newError']) : false;
-   
 
 //***********************************************************************************************
 // Daclaration de variables
 //***********************************************************************************************
-
 
     if($nav_new_user){
 
@@ -79,16 +76,14 @@
             $uploadDirectory = './img/avatar/';
     
             $_SESSION['uploadAvatar'] = isset($_POST['txt_userEdit_avatar']) ? escapeInput($_POST['txt_userEdit_avatar']) : false;
-            //$_SESSION['uploadAvatar'] = $_POST['txt_userEdit_avatar'];
 
             $_SESSION['uploadAvatar'] = isset($_FILES["fileAvatar"]) ? escapeInput($_FILES["fileAvatar"]["error"]) : false;
     
-            //if (isset($_FILES["fileAvatar"]) && $_FILES["fileAvatar"]["error"] == UPLOAD_ERR_OK){
             if ($_SESSION['uploadAvatar'] == UPLOAD_ERR_OK){
     
-                $_SESSION['uploadAvatar'] = isset($_FILES["fileAvatar"]) ? escapeInput($_FILES["fileAvatar"]["name"]) : false; //$_FILES["fileAvatar"]["name"];
-                $sourceFile = isset($_FILES["fileAvatar"]) ? escapeInput($_FILES["fileAvatar"]["tmp_name"]) : false; //$_FILES["fileAvatar"]["tmp_name"];
-                $destinationFile = $uploadDirectory . basename($_SESSION['uploadAvatar']); //$_FILES["fileAvatar"]["name"]);
+                $_SESSION['uploadAvatar'] = isset($_FILES["fileAvatar"]) ? escapeInput($_FILES["fileAvatar"]["name"]) : false;
+                $sourceFile = isset($_FILES["fileAvatar"]) ? escapeInput($_FILES["fileAvatar"]["tmp_name"]) : false;
+                $destinationFile = $uploadDirectory . basename($_SESSION['uploadAvatar']);
                 unset($_FILES["fileAvatar"]);
     
             }else{
@@ -110,9 +105,9 @@
             $changeAvatar = true;
         }
 
-//***********************************************************************************************
-// traitement du CRUD
-//***********************************************************************************************
+    //***********************************************************************************************
+    // traitement CRUD
+    //***********************************************************************************************
 
     if($bt_userEdit_save && $_SESSION['errorFormUser'] === false){
         
@@ -203,7 +198,7 @@
             "phone" => '',
             "type" => 'Member',
             "avatar" => 'avatar_membre_white.webp',
-            "subscription" => $_SESSION['subscription'], //'Vénusia',
+            "subscription" => $_SESSION['subscription'],
             "password" => ''
         );
         $users[0] = $user;

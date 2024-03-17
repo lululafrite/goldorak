@@ -3,12 +3,12 @@
 	{
 		public function connectionDb(){
 
-			if($_SESSION['local']===true){
-			$DB_HOST = 'localhost';
-			$DB_NAME = 'goldorak';
-			$DB_USER = 'root';
-			$DB_PASS = '';
-			$BD_PORT = '3307';
+			if($_SESSION['local']){
+				$DB_HOST = 'localhost';
+				$DB_NAME = 'goldorak';
+				$DB_USER = 'root';
+				$DB_PASS = '';
+				$BD_PORT = '3307';
 			}
 			else{
 				$DB_HOST = 'db5015520267.hosting-data.io';

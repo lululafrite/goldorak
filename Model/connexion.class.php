@@ -37,6 +37,7 @@
 			include_once('../Model/dbConnect.class.php');
 			$dbConnect_ = new dbConnect();
 			$bdd = $dbConnect_->connectionDb();
+            unset($dbConnect_);
 
             try {
                     $stmt = $bdd->prepare("SELECT `pseudo`,

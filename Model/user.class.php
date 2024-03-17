@@ -1,17 +1,7 @@
 <?php
 
-use Symfony\Component\Intl\Scripts;
-
-use function PHPSTORM_META\type;
-
 	class User
 	{
-
-		function __construct(){
-		}
-
-		//-----------------------------------------------------------------------
-
 		private $id_user;
 		public function getId()
 		{
@@ -120,9 +110,10 @@ use function PHPSTORM_META\type;
 	
 		private function getSubscriptionId() {
 
-			include_once('Model/dbConnect.class.php');
+			include_once('../Model/dbConnect.class.php');
 			$dbConnect_ = new dbConnect();
 			$bdd = $dbConnect_->connectionDb();
+            unset($dbConnect_);
 			
 			$stmt = $bdd->prepare("SELECT `id_subscription` FROM `subscription` WHERE `subscription` = ?");
 			$stmt->execute([$this->subscription]);
@@ -145,9 +136,10 @@ use function PHPSTORM_META\type;
 	
 		private function getUserTypeId() {
 
-			include_once('Model/dbConnect.class.php');
+			include_once('../Model/dbConnect.class.php');
 			$dbConnect_ = new dbConnect();
 			$bdd = $dbConnect_->connectionDb();
+            unset($dbConnect_);
 
 			$stmt = $bdd->prepare("SELECT `id_type` FROM `user_type` WHERE `type` = ?");
 			$stmt->execute([$this->type]);
@@ -173,9 +165,10 @@ use function PHPSTORM_META\type;
 		private $listPseudo;
 		public function getPseudoUser()
 		{
-			include_once('Model/dbConnect.class.php');
+			include_once('../Model/dbConnect.class.php');
 			$dbConnect_ = new dbConnect();
 			$bdd = $dbConnect_->connectionDb();
+            unset($dbConnect_);
 
 			try {
 				// Utilisation d'une requête préparée pour améliorer la sécurité même si aucun paramètre n'est utilisé ici
@@ -202,9 +195,10 @@ use function PHPSTORM_META\type;
 		private $theUser;
 		public function getUser($idUser)
 		{
-			include_once('Model/dbConnect.class.php');
+			include_once('../Model/dbConnect.class.php');
 			$dbConnect_ = new dbConnect();
 			$bdd = $dbConnect_->connectionDb();
+            unset($dbConnect_);
 
 			date_default_timezone_set($_SESSION['timeZone']);
 
@@ -257,6 +251,7 @@ use function PHPSTORM_META\type;
 			include_once('../Model/dbConnect.class.php');
 			$dbConnect_ = new dbConnect();
 			$bdd = $dbConnect_->connectionDb();
+            unset($dbConnect_);
 
 			try
 			{
@@ -313,9 +308,10 @@ use function PHPSTORM_META\type;
 
 		public function addUser() {
 
-			include_once('Model/dbConnect.class.php');
+			include_once('../Model/dbConnect.class.php');
 			$dbConnect_ = new dbConnect();
 			$bdd = $dbConnect_->connectionDb();
+            unset($dbConnect_);
 	
 			try
 			{
@@ -324,25 +320,40 @@ use function PHPSTORM_META\type;
 				$stmt->execute([$this->email]);
 				$result = $stmt->fetch();
 	
-				if (!$result) {
+				if(!$result){
 					// Vérifier si le pseudonyme existe déjà
 					$stmt = $bdd->prepare("SELECT `id_user` FROM `user` WHERE `pseudo` = ?");
 					$stmt->execute([$this->pseudo]);
 					$result = $stmt->fetch();
 	
-					if (!$result) {
+					if(!$result){
 						// Insérer un nouvel utilisateur
-						$stmt = $bdd->prepare("INSERT INTO `user`(`name`,`surname`,`pseudo`,`email`,`phone`,`password`,`avatar`,`id_subscription`,`id_type`)
+						$stmt = $bdd->prepare("INSERT INTO `user`(`name`,
+																`surname`,
+																`pseudo`,
+																`email`,
+																`phone`,
+																`password`,
+																`avatar`,
+																`id_subscription`,
+																`id_type`)
 											  VALUES(?,?,?,?,?,?,?,?,?)");
+
 						$stmt->execute([$this->name, $this->surname, $this->pseudo, $this->email, $this->phone, $this->password,
 										$this->avatar, $this->getSubscriptionId(), $this->getUserTypeId()]);
 	
 						// Récupérer l'ID de l'utilisateur nouvellement inséré
-						$stmt = $bdd->query("SELECT MAX(`id_user`) FROM `user`");
-						$id_user = $stmt->fetch();
-						$this->id_user = intval($id_user[0]);
-	
-						return $this->id_user;
+						try{
+							$stmt = $bdd->prepare("SELECT MAX(`id_user`) AS max_id FROM `user`");
+							$stmt->execute();
+							$id_user_ = $stmt->fetch(PDO::FETCH_ASSOC);
+							
+							$this->id_user = intval($id_user_['max_id']);
+							return $this->id_user;
+
+						}catch (PDOException $e){
+							echo "Erreur lors de l'exécution de la requête : " . $e->getMessage();
+						}
 
 					} else {
 
@@ -351,22 +362,12 @@ use function PHPSTORM_META\type;
 
 					}
 
-				} else {
+				}else{
 
 					echo "<script>alert('Ce courriel est existant! Saisissez un autre courriel');</script>";
 					
-					
-					if($_SESSION['local'] === 'true'){
-
-						echo '<script>window.location.href = "http://goldorak/index.php?page=user_edit&newError=true";</script>';
-
-					}else{
-
-						echo '<script>window.location.href = "https://www.follaco.fr/index.php?page=user_edit&newError=true";</script>';
-
-					}
-					
-					exit;
+					include_once('../common/utilies.php');
+					returnNewError();
 
 				}
 			}
@@ -384,9 +385,10 @@ use function PHPSTORM_META\type;
 
 		public function updateUser($idUser){
 
-			include_once('Model/dbConnect.class.php');
+			include_once('../Model/dbConnect.class.php');
 			$dbConnect_ = new dbConnect();
 			$bdd = $dbConnect_->connectionDb();
+            unset($dbConnect_);
 
 			try
 			{
@@ -430,9 +432,10 @@ use function PHPSTORM_META\type;
 
 		public function deleteUser($id)
 		{
-			include_once('Model/dbConnect.class.php');
+			include_once('../Model/dbConnect.class.php');
 			$dbConnect_ = new dbConnect();
 			$bdd = $dbConnect_->connectionDb();
+            unset($dbConnect_);
 
 			try
 			{
@@ -458,9 +461,10 @@ use function PHPSTORM_META\type;
 		private $userExist;
 		public function verifUser($email)
 		{
-			include_once('Model/dbConnect.class.php');
+			include_once('../Model/dbConnect.class.php');
 			$dbConnect_ = new dbConnect();
 			$bdd = $dbConnect_->connectionDb();
+            unset($dbConnect_);
 
 			try
 			{
@@ -487,22 +491,6 @@ use function PHPSTORM_META\type;
 
 			$bdd = null;
 		}
-
-
-        //__Ajouter user?___________________________________________
-        
-        public function getAddUser()
-        {
-            if(is_null($_SESSION['addUser']))
-            {
-                $_SESSION['addUser']=false;
-            }
-            return $_SESSION['addUser'];
-        }
-        public function setAddUser($new)
-        {
-            $_SESSION['addUser']=$new;
-        }
 
 	}
 	

@@ -1,17 +1,7 @@
 <?php
 
 	class Page
-    {
-        //*******************************************************************
-        // Classe de gestion des pages
-        //*******************************************************************
-
-        // __CONSTRUCTEUR de la CLASS
-
-        public function __construct()
-        {
-        }
-        
+    {        
         // __Nombre de ligne__________________________________________
 
         public function getNbOfLine()
@@ -107,6 +97,7 @@
 			include_once('../Model/dbConnect.class.php');
 			$dbConnect_ = new dbConnect();
 			$bdd = $dbConnect_->connectionDb();
+            unset($dbConnect_);
 
 			try
 			{

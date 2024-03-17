@@ -32,8 +32,7 @@
         $_SESSION['avatar'] = 'avatar_membre_white.webp';
         $_SESSION['subscription'] = 'Vénusia';
         $_SESSION['password'] =  '';
-
-        $_SESSION['addUser'] = false;
+        
         $_SESSION['newUser'] = false;
         $_SESSION['newMember'] = false;
 

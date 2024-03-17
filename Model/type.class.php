@@ -1,18 +1,7 @@
 <?php
 
-use Symfony\Component\Intl\Scripts;
-
-use function PHPSTORM_META\type;
-
 	class Type
 	{
-
-		function __construct()
-		{
-		}
-
-		//-----------------------------------------------------------------------
-
 		private $id_type;
 		public function getId()
 		{
@@ -38,35 +27,37 @@ use function PHPSTORM_META\type;
 		//-----------------------------------------------------------------------
 
 		private $theType;
-		public function getType($îdType)
+		public function getType($idType)
 		{
 			include_once('../Model/dbConnect.class.php');
 			$dbConnect_ = new dbConnect();
 			$bdd = $dbConnect_->connectionDb();
+			unset($dbConnect_);
 
-            date_default_timezone_set($_SESSION['timeZone']);
+			date_default_timezone_set($_SESSION['timeZone']);
 			
 			try
 			{
-			    $sql = $bdd->query("SELECT
+				$stmt = $bdd->prepare("SELECT
 										`user_type`.`id_type`,
 										`user_type`.`type`
-
 									FROM `user_type`
-									
-									WHERE `user_type`.`id_type`=$îdType
-								");
+									WHERE `user_type`.`id_type` = :idType");
+				$stmt->bindParam(':idType', $idType, PDO::PARAM_INT);
+				$stmt->execute();
 
-				$this->theType[] = $sql->fetch();
+				$this->theType = $stmt->fetchAll();
+
 				return $this->theType;
 			}
 			catch (Exception $e)
 			{
-				echo "Erreur de la requete :" . $e->GetMessage();
+				echo "Erreur de la requete :" . $e->getMessage();
 			}
 
-			$bdd=null;
+			$bdd = null;
 		}
+
 
 		//-----------------------------------------------------------------------
 
@@ -76,28 +67,34 @@ use function PHPSTORM_META\type;
 			include_once('../Model/dbConnect.class.php');
 			$dbConnect_ = new dbConnect();
 			$bdd = $dbConnect_->connectionDb();
+			unset($dbConnect_);
 			
 			try
 			{
-			    $sql = $bdd->query("SELECT
+				$sql = $bdd->prepare("SELECT
 										`user_type`.`id_type`,
 										`user_type`.`type`
 									FROM
 										`user_type`
 									WHERE $whereClause
 									ORDER BY $orderBy $ascOrDesc
-									LIMIT $firstLine, $linePerPage
-								");
+									LIMIT :firstLine, :linePerPage");
 
-				while ($this->userTypeList[] = $sql->fetch());
+				$sql->bindParam(':firstLine', $firstLine, PDO::PARAM_INT);
+				$sql->bindParam(':linePerPage', $linePerPage, PDO::PARAM_INT);
+
+				$sql->execute();
+
+				$this->userTypeList = $sql->fetchAll();
+
 				return $this->userTypeList;
 			}
 			catch (Exception $e)
 			{
-				echo "Erreur de la requete :" . $e->GetMessage();
+				echo "Erreur de la requete :" . $e->getMessage();
 			}
 
-			$bdd=null;
+			$bdd = null;
 		}
 
 		//-----------------------------------------------------------------------
@@ -107,24 +104,22 @@ use function PHPSTORM_META\type;
 			include_once('../Model/dbConnect.class.php');
 			$dbConnect_ = new dbConnect();
 			$bdd = $dbConnect_->connectionDb();
+			unset($dbConnect_);
 
-			try{
-				$bdd->exec("INSERT INTO `user_type`(`type`)
-							VALUES('" . $this->type . "')");
+			try {
+				$stmt = $bdd->prepare("INSERT INTO `user_type`(`type`) VALUES(:type)");
+				$stmt->bindParam(':type', $this->type, PDO::PARAM_STR);
+				$stmt->execute();
 
-				$sql = $bdd->query("SELECT MAX(`id_type`) FROM `user_type`");
-				$id_type = $sql->fetch();
-				$this->id_type = intval($id_type['id_type']);
+				$this->id_type = $bdd->lastInsertId();
 
 				echo '<script>alert("L\'enregistrement est effectué!");</script>';
 
 			} catch (Exception $e) {
-				
 				echo "Erreur de la requête : " . $e->getMessage();
-
 			}
 
-			$bdd=null;
+			$bdd = null;
 		}
 
 		//-----------------------------------------------------------------------
@@ -134,21 +129,27 @@ use function PHPSTORM_META\type;
 			include_once('../Model/dbConnect.class.php');
 			$dbConnect_ = new dbConnect();
 			$bdd = $dbConnect_->connectionDb();
+			unset($dbConnect_);
 
 			try
 			{
-				$bdd->exec("UPDATE `user_type` SET `name` = '" . $this->type . "'
-							WHERE `id_type` = " . intval($idType) . "
-							");
-				
-				echo '<script>alert("Les modifications sont enregistrées!");</script>';
+				$stmt = $bdd->prepare("UPDATE `user_type` SET `name` = :name WHERE `id_type` = :idType");
+				$stmt->bindParam(':name', $this->type, PDO::PARAM_STR);
+				$stmt->bindParam(':idType', $idType, PDO::PARAM_INT);
+				$stmt->execute();
+
+				if ($stmt->rowCount() > 0) {
+					echo '<script>alert("Les modifications sont enregistrées!");</script>';
+				} else {
+					echo '<script>alert("Aucune modification effectuée. L\'enregistrement avec l\'ID spécifié n\'existe peut-être pas.");</script>';
+				}
 			}
 			catch (Exception $e)
 			{
-				echo "Erreur de la requete :" . $e->GetMessage();
+				echo "Erreur de la requete :" . $e->getMessage();
 			}
 
-			$bdd=null;
+			$bdd = null;
 		}
 
 		//-----------------------------------------------------------------------
@@ -158,34 +159,27 @@ use function PHPSTORM_META\type;
 			include_once('../Model/dbConnect.class.php');
 			$dbConnect_ = new dbConnect();
 			$bdd = $dbConnect_->connectionDb();
+			unset($dbConnect_);
 
 			try
 			{
-			    $bdd->exec('DELETE FROM user_type WHERE id_type=' . $id);
-				echo '<script>alert("Cet enregistrement est supprimé!");</script>';
+				$stmt = $bdd->prepare('DELETE FROM user_type WHERE id_type = :id');
+				$stmt->bindParam(':id', $id, PDO::PARAM_INT);
+				$stmt->execute();
+
+				if ($stmt->rowCount() > 0) {
+					echo '<script>alert("Cet enregistrement est supprimé!");</script>';
+				} else {
+					echo '<script>alert("L\'enregistrement avec l\'ID spécifié n\'existe pas!");</script>';
+				}
 			}
 			catch (Exception $e)
 			{
-				echo "Erreur de la requete :" . $e->GetMessage();
+				echo "Erreur de la requete :" . $e->getMessage();
 			}
 
-			$bdd=null;
+			$bdd = null;
 		}
-
-        //__Ajouter user?___________________________________________
-        
-        public function getAddUserType()
-        {
-            if(is_null($_SESSION['addUserType']))
-            {
-                $_SESSION['addUserType']=false;
-            }
-            return $_SESSION['addUserType'];
-        }
-        public function setAddUserType($new)
-        {
-            $_SESSION['addUserType']=$new;
-        }
 
 	}
 	
