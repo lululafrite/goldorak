@@ -36,19 +36,19 @@
 
     }else if($btn_venusia){
         
-        $_SESSION['subsription'] = 'Vénusia';
+        $_SESSION['subscription'] = 'Vénusia';
         $_SESSION['newMember'] = true;
         $_SESSION['newUser'] = true;
 
     }else if($btn_actarus){
         
-        $_SESSION['subsription'] = 'Actarus';
+        $_SESSION['subscription'] = 'Actarus';
         $_SESSION['newMember'] = true;
         $_SESSION['newUser'] = true;
 
     }else if($btn_goldorak){
         
-        $_SESSION['subsription'] = 'Goldorak';
+        $_SESSION['subscription'] = 'Goldorak';
         $_SESSION['newMember'] = true;
         $_SESSION['newUser'] = true;
 
