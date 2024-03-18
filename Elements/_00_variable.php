@@ -39,6 +39,7 @@
         $_SESSION['errorFormUser'] = false;
 
         $_SESSION['uploadAvatar'] = '';
+        $_SESSION['btn_monCompte'] = false;
 
 /********************************************************************** */
 /******************* VARIABLES PAGINATION ***************************** */

@@ -7,6 +7,7 @@
 
         $_SESSION['updateMoncompte'] = false;
         $_SESSION['newUser'] = false;
+        $_SESSION['btn_monCompte'] = false;
 
         include_once 'view/home.php';
 
@@ -14,6 +15,7 @@
 
         $_SESSION['updateMoncompte'] = false;
         $_SESSION['newUser'] = false;
+        $_SESSION['btn_monCompte'] = false;
 
         if($_SESSION['typeConnect'] === "Administrator"){
             include_once 'view/user.php';
@@ -24,12 +26,14 @@
     }elseif ($page === 'userEdit'){
 
         $_SESSION['updateMoncompte'] = false;
+        //$_SESSION['btn_monCompte'] = false;
         //$_SESSION['newUser'] = false;
         include_once 'view/userEdit.php';
 
     }elseif($page === 'product'){
 
         $_SESSION['updateMoncompte'] = false;
+        $_SESSION['btn_monCompte'] = false;
         $_SESSION['newUser'] = false;
 
         include_once 'view/product.php';
@@ -37,6 +41,7 @@
     }elseif ($page === 'productEdit'){
 
         $_SESSION['updateMoncompte'] = false;
+        $_SESSION['btn_monCompte'] = false;
         $_SESSION['newUser'] = false;
 
         if($_SESSION['typeConnect'] === "Administrator" || $_SESSION['typeConnect'] === "User" ){
@@ -49,6 +54,7 @@
 
         $_SESSION['updateMoncompte'] = false;
         $_SESSION['newUser'] = false;
+        $_SESSION['btn_monCompte'] = false;
 
         if($_SESSION['typeConnect'] != "Guest"){
             require_once 'view/media.php';
@@ -60,6 +66,7 @@
 
         $_SESSION['updateMoncompte'] = false;
         $_SESSION['newUser'] = false;
+        $_SESSION['btn_monCompte'] = false;
 
         require_once 'view/events.php';
 
@@ -67,6 +74,7 @@
 
         $_SESSION['updateMoncompte'] = false;
         $_SESSION['newUser'] = false;
+        $_SESSION['btn_monCompte'] = false;
 
         if($_SESSION['subscriptionConnect'] === "Goldorak" ){
             include_once 'view/commander.php';
@@ -78,6 +86,7 @@
 
         $_SESSION['updateMoncompte'] = false;
         $_SESSION['newUser'] = false;
+        $_SESSION['btn_monCompte'] = false;
 
         if($_SESSION['subscriptionConnect'] != "Vénusia" ){
             include_once 'view/goldorakgo.php';
@@ -89,6 +98,7 @@
 
         $_SESSION['updateMoncompte'] = false;
         $_SESSION['newUser'] = false;
+        $_SESSION['btn_monCompte'] = false;
 
         include_once 'view/adherer.php';
 
@@ -96,6 +106,7 @@
 
         $_SESSION['updateMoncompte'] = false;
         $_SESSION['newUser'] = false;
+        $_SESSION['btn_monCompte'] = false;
 
         include_once 'view/connexion.php';
 
@@ -103,6 +114,7 @@
 
         $_SESSION['updateMoncompte'] = false;
         $_SESSION['newUser'] = false;
+        $_SESSION['btn_monCompte'] = false;
 
         if($_SESSION['typeConnect'] != "Guest"){
             include_once 'view/disconnect.php';
@@ -114,6 +126,7 @@
 
         $_SESSION['updateMoncompte'] = false;
         $_SESSION['newUser'] = false;
+        $_SESSION['btn_monCompte'] = false;
         
         include_once 'errorPage/accessPage.php';
 
@@ -121,6 +134,7 @@
 
         $_SESSION['updateMoncompte'] = false;
         $_SESSION['newUser'] = false;
+        $_SESSION['btn_monCompte'] = false;
 
         include_once 'errorPage/unknownPage.php';
 
@@ -128,6 +142,7 @@
 
         $_SESSION['updateMoncompte'] = false;
         $_SESSION['newUser'] = false;
+        $_SESSION['btn_monCompte'] = false;
 
         include_once 'errorPage/unknownPage.php';
 
@@ -135,6 +150,7 @@
 
         $_SESSION['updateMoncompte'] = false;
         $_SESSION['newUser'] = false;
+        $_SESSION['btn_monCompte'] = false;
         
         include_once 'errorPage/unknownPage.php';
 
@@ -142,6 +158,7 @@
 
         $_SESSION['updateMoncompte'] = false;
         $_SESSION['newUser'] = false;
+        $_SESSION['btn_monCompte'] = false;
         
         include_once 'errorPage/unknownPage.php';
 
@@ -149,6 +166,7 @@
 
         $_SESSION['updateMoncompte'] = false;
         $_SESSION['newUser'] = false;
+        $_SESSION['btn_monCompte'] = false;
         
         include_once 'errorPage/unknownPage.php';
 

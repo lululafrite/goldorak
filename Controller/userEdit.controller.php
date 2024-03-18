@@ -12,10 +12,13 @@
     $bt_userEdit_delete = isset($_POST['bt_userEdit_delete']) ? true : false;
     $bt_userEdit_cancel = isset($_POST['bt_userEdit_cancel']) ? true : false;
     $bt_userEdit_save = isset($_POST['bt_userEdit_save']) ? true : false;
+
     $btn_monCompte = isset($_POST['btn_monCompte']) ? true : false;
+    if(!$_SESSION['btn_monCompte']){
+        $btn_monCompte ? $_SESSION['btn_monCompte'] = true : $_SESSION['btn_monCompte'] = false;
+    }
 
     $btn_avatar = isset($_POST['btn_avatar']) ? true : false;
-    
     $btn_venusia = isset($_POST['btn_venusia']) ? true : false;
     $btn_actarus = isset($_POST['btn_actarus']) ? true : false;
     $btn_goldorak = isset($_POST['btn_goldorak']) ? true : false;
@@ -84,7 +87,9 @@
                 $_SESSION['uploadAvatar'] = isset($_FILES["fileAvatar"]) ? escapeInput($_FILES["fileAvatar"]["name"]) : false;
                 $sourceFile = isset($_FILES["fileAvatar"]) ? escapeInput($_FILES["fileAvatar"]["tmp_name"]) : false;
                 $destinationFile = $uploadDirectory . basename($_SESSION['uploadAvatar']);
-                $_SESSION['avatarConnect'] = $_SESSION['uploadAvatar'];
+                if($_SESSION['btn_monCompte']){
+                    $_SESSION['avatarConnect'] = $_SESSION['uploadAvatar'];
+                }
                 unset($_FILES["fileAvatar"]);
     
             }else{
