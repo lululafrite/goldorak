@@ -6,7 +6,7 @@
         
         <div class="mx-auto d-flex justify-content-center">
 
-            <form class="bg-dark bg-opacity-75 m-5 p-5 rounded-4" action="/index.php?page=connexion" method="post">
+            <form class="bg-dark bg-opacity-75 m-5 p-5 rounded-4" action="index.php?page=connexion" method="post">
                 
                 <fieldset class="">
                     

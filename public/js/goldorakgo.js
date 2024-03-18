@@ -39,7 +39,10 @@ function startGame() {
         }
 
         // Générer le nombre mystère
-        secretNumber = Math.floor(Math.random() * maxNumber) + 1;
+        secretNumber = 0;
+        while (secretNumber === 0){
+            secretNumber = Math.floor(Math.random() * maxNumber) + 1;
+        }
 
         // Afficher le jeu
         displayGame(0);
@@ -48,7 +51,7 @@ function startGame() {
 
 // Afficher le jeu
 function displayGame(valeur=0) {
-    gameContainer.innerHTML = '<div class=" mb-3 ms-3 me-auto pe-3">\n<h2>Bon courage, ' + playerName + '!<br>Trouve le nombre de Golgoth, il peut être de 1 à ' + maxNumber + '</h2>\n<form id="guess-form">\n<label for="userGuess">Quel est le nombre de Golgoth ?</label>\n<input type="number" id="userGuess" name="userGuess" min="1" max="' + maxNumber + '" required onkeydown="if(event.keyCode==13) makeGuess()" value="' + valeur + '">\n<br>\n<button class="btn btn-lg btn-primary" id="guessButton" type="button" onclick="makeGuess()">Proposer</button>\n</form>\n</div>\n';
+    gameContainer.innerHTML = '<div class=" mb-3 ms-3 me-auto pe-3">\n<h2>Bon courage, ' + playerName + '!<br>Trouve le nombre de Golgoth, il peut aller de 1 à ' + maxNumber + '</h2>\n<form id="guess-form">\n<label for="userGuess">Quel est le nombre de Golgoth ?</label>\n<input type="number" id="userGuess" name="userGuess" min="1" max="' + maxNumber + '" required onkeydown="if(event.keyCode==13) makeGuess()" value="' + valeur + '">\n<br>\n<button class="btn btn-lg btn-primary" id="guessButton" type="button" onclick="makeGuess()">Proposer</button>\n</form>\n</div>\n';
     contenuHtmlActuel = gameContainer.innerHTML;
 
     // Ajoute un gestionnaire d'événements pour la touche "Entrée" sur le bouton "Proposer"

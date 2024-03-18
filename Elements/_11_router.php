@@ -1,5 +1,5 @@
 <?php
-    include_once '../Common/Utilies.php'; // Fonctions communes
+    include_once '../common/utilies.php'; // Fonctions communes
 
     $page = isset($_GET['page']) ? escapeInput($_GET['page']) : 'home';
     

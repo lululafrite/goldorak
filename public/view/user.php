@@ -10,16 +10,16 @@
 
 <div class="container">
 
-    <section class="m-0 d-flex flex-wrap justify-content-between">
+    <section class="d-flex flex-wrap justify-content-center align-items-center m-0 p-0">
 
     <?php for($i=0;$i != count($users);$i++) { ?>
 
-    <article class="border rounded-4 ps-3 my-5">
+    <article class="border rounded-4 px-3 m-4">
 
         <form action="/index.php?page=userEdit" method="post">
 
             <div class="d-flex justify-content-center div__Car--img mt-3">
-                <img src="../img/avatar/<?php echo $users[$i]['avatar']; ?>" alt="Avatar de l'utilisateur" style="width:70px; height: 70px; object-fit: cover;">
+                <img src="img/avatar/<?php echo $users[$i]['avatar']; ?>" alt="Avatar de l'utilisateur" style="width:70px; height: 70px; object-fit: cover;">
             </div>
 
             <div class="div__user--img">

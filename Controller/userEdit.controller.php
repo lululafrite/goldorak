@@ -84,6 +84,7 @@
                 $_SESSION['uploadAvatar'] = isset($_FILES["fileAvatar"]) ? escapeInput($_FILES["fileAvatar"]["name"]) : false;
                 $sourceFile = isset($_FILES["fileAvatar"]) ? escapeInput($_FILES["fileAvatar"]["tmp_name"]) : false;
                 $destinationFile = $uploadDirectory . basename($_SESSION['uploadAvatar']);
+                $_SESSION['avatarConnect'] = $_SESSION['uploadAvatar'];
                 unset($_FILES["fileAvatar"]);
     
             }else{

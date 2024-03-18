@@ -53,9 +53,9 @@
                             <?php if ($_SESSION['typeConnect']==='Administrator'){ ?>
                                 
                                 <p class="p-0" style="text-align: justify;">
-                                    <textarea name="txt_chapter1" cols="1" rows="12">
+<textarea name="txt_chapter1" cols="1" rows="12">
 <?php echo $home[0]['chapter1']; ?>
-                                    </textarea>
+</textarea>
                                 </p>
 
                             <!-- End Chapter 1 -->
@@ -67,7 +67,7 @@
                                         <div class="container m-0 p-0">
                                             <div class="row">
                                                 <div class="col-12 col-lg-5 pb-3 pb-lg-0">
-                                                    <input class="form-control-lg m-0 p-0 border border-black" id="txt_img_chapter1" name="txt_img_chapter1" type="text" placeholder="Saisissez le nom de l'image" style="font-size: 1.6rem;" oninput="validateInput('txt_img_chapter1','','labelMessageimg_chapter1','Saisissez le nom de l\'image (sans useractères spéciaux sauf - et _) aux formats *.png ou *.jpg ou *.webp. Sinon, téléchargez une image depuis votre disque local. ATTENTION!!! Dimmentions image au ratio de 200px sur 450px.')"
+                                                    <input class="form-control-lg bg-transparent text-light m-0 p-0 border border-black" id="txt_img_chapter1" name="txt_img_chapter1" type="text" placeholder="Saisissez le nom de l'image" readonly style="font-size: 1.6rem;" oninput="validateInput('txt_img_chapter1','','labelMessageimg_chapter1','Saisissez le nom de l\'image (sans useractères spéciaux sauf - et _) aux formats *.png ou *.jpg ou *.webp. Sinon, téléchargez une image depuis votre disque local. ATTENTION!!! Dimmentions image au ratio de 200px sur 450px.')"
                                                         value=
                                                         "<?php
                                                             echo $home[0]['img_chapter1'];
@@ -96,7 +96,7 @@
                         <!-- Start image Chapter 1 -->
 
                         <div class="d-none d-sm-block">
-                            <img class="ms-3" src="../img/image/<?php echo $home[0]['img_chapter1']; ?>" alt="Goldorak et Actarus" style="width:200px; height: 350px; object-fit: cover;">
+                            <img class="ms-3" src="img/image/<?php echo $home[0]['img_chapter1']; ?>" alt="Goldorak et Actarus" style="width:200px; height: 350px; object-fit: cover;">
                         </div>
 
                         <!-- End image Chapter 1 -->
@@ -142,7 +142,7 @@
                 <!-- Start image Chapter 2 -->
 
                 <div class="d-none d-sm-block pt-3 pe-3 mb-3">
-                    <img class="ms-3" src="../img/image/<?php echo $home[0]['img_chapter2']; ?>" alt="Goldorak et Actarus" style="width:150px; height: 150px; object-fit: cover;">
+                    <img class="ms-3" src="img/image/<?php echo $home[0]['img_chapter2']; ?>" alt="Goldorak et Actarus" style="width:150px; height: 150px; object-fit: cover;">
                 </div>
 
                 <!-- End image Chapter 2 -->
@@ -169,9 +169,9 @@
                     <?php } ?>
                     <?php if ($_SESSION['typeConnect']==='Administrator'){ ?>
                         <p class="p-0" style="text-align: justify;">
-                            <textarea name="txt_chapter2" cols="1" rows="5">
+<textarea name="txt_chapter2" cols="1" rows="5">
 <?php echo $home[0]['chapter2']; ?>
-                            </textarea>
+</textarea>
                         </p>
 
                 <!-- End Chapter 2 -->
@@ -183,7 +183,7 @@
                                 <div class="container m-0 p-0">
                                     <div class="row">
                                         <div class="col-12 col-lg-5 pb-3 pb-lg-0 d-flex align-items-center">
-                                            <input class="form-control-lg m-0 p-0 border border-black" id="txt_img_chapter2" name="txt_img_chapter2" type="text" placeholder="Saisissez le nom de l'image" style="font-size: 1.6rem;" oninput="validateInput('txt_img_chapter2','','labelMessageimg_chapter2','Saisissez le nom de l\'image (sans useractères spéciaux sauf - et _) aux formats *.png ou *.jpg ou *.webp. Sinon, téléchargez une image depuis votre disque local. ATTENTION!!! Dimmentions image au ratio de 200px sur 450px.')"
+                                            <input class="form-control-lg bg-transparent text-light m-0 p-0 border border-black" id="txt_img_chapter2" name="txt_img_chapter2" type="text" placeholder="Saisissez le nom de l'image" readonly style="font-size: 1.6rem;" oninput="validateInput('txt_img_chapter2','','labelMessageimg_chapter2','Saisissez le nom de l\'image (sans useractères spéciaux sauf - et _) aux formats *.png ou *.jpg ou *.webp. Sinon, téléchargez une image depuis votre disque local. ATTENTION!!! Dimmentions image au ratio de 200px sur 450px.')"
                                                 value=
                                                 "<?php
                                                     echo $home[0]['img_chapter2'];

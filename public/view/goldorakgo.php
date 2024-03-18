@@ -53,4 +53,4 @@
     
 </div>
 
-<script src="../JS/goldorakgo.js"></script>
+<script src="js/goldorakgo.js"></script>

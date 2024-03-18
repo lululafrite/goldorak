@@ -120,7 +120,7 @@
                         <?php if($_SESSION['typeConnect'] === 'Guest'){ ?>
                         <li>
                             <a class="dropdown-item text-light" href="index.php?page=connexion">
-                                <img class="p-0 m-0 pe-2" src="img/icon/box-arrow-in-left.svg" alt="icone du bouton connexion" style="width:10px; height: 10px; object-fit: cover;">    
+                                <img class="p-0 m-0 pe-2" src="img/icon/box-arrow-in-left.svg" alt="icone du bouton connexion">    
                                 Connexion
                             </a>
                         </li>
