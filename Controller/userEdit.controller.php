@@ -1,6 +1,6 @@
 <?php
 
-    include_once('../Model/user.class.php');
+    include_once('../model/user.class.php');
     include_once('../common/utilies.php');
 
 //***********************************************************************************************
@@ -26,7 +26,7 @@
     $newError = isset($_GET['newError']) ? escapeInput($_GET['newError']) : false;
 
 //***********************************************************************************************
-// Daclaration de variables
+// Daclaration et paramètrage des variables
 //***********************************************************************************************
 
     if($nav_new_user){
@@ -71,51 +71,10 @@
     $users[0] = $user;
 
     //***********************************************************************************************
-    // traitement du téléchargement des images 
-    //***********************************************************************************************
-    
-        if($btn_avatar){
-            
-            $uploadDirectory = './img/avatar/';
-    
-            $_SESSION['uploadAvatar'] = isset($_POST['txt_userEdit_avatar']) ? escapeInput($_POST['txt_userEdit_avatar']) : false;
-
-            $_SESSION['uploadAvatar'] = isset($_FILES["fileAvatar"]) ? escapeInput($_FILES["fileAvatar"]["error"]) : false;
-    
-            if ($_SESSION['uploadAvatar'] == UPLOAD_ERR_OK){
-    
-                $_SESSION['uploadAvatar'] = isset($_FILES["fileAvatar"]) ? escapeInput($_FILES["fileAvatar"]["name"]) : false;
-                $sourceFile = isset($_FILES["fileAvatar"]) ? escapeInput($_FILES["fileAvatar"]["tmp_name"]) : false;
-                $destinationFile = $uploadDirectory . basename($_SESSION['uploadAvatar']);
-                if($_SESSION['btn_monCompte']){
-                    $_SESSION['avatarConnect'] = $_SESSION['uploadAvatar'];
-                }
-                unset($_FILES["fileAvatar"]);
-    
-            }else{
-    
-                echo "<script>alert('Aucune image n'a été sélectionnée ou une erreur s'est produite.');</script>";
-                
-            }
-    
-            if(move_uploaded_file($sourceFile, $destinationFile)){
-    
-                echo "<script>alert('L\'image a été uploadée avec succès.');</script>";
-    
-            }else{
-    
-                echo "<script>alert('Désolé, une erreur s'est produite lors de l'upload de l'image.');</script>";
-            
-            }
-    
-            $changeAvatar = true;
-        }
-
-    //***********************************************************************************************
     // traitement CRUD
     //***********************************************************************************************
 
-    if($bt_userEdit_save && $_SESSION['errorFormUser'] === false){
+    if($bt_userEdit_save && !$_SESSION['errorFormUser']){
         
         //Récupération des valeurs des input du formulaire
 
@@ -293,24 +252,38 @@
         }
 
     }
-        
-    if($changeAvatar === true){
 
-        $users[0]['avatar'] = $_SESSION['uploadAvatar'];
-        $_SESSION['avatar'] = $_SESSION['uploadAvatar'];
+    //***********************************************************************************************
+    // traitement du téléchargement des images 
+    //***********************************************************************************************
+    
+    if($btn_avatar){
 
-        $changeAvatar = false;
+        if (uploadImg('uploadAvatar','txt_userEdit_avatar','fileAvatar','./img/avatar/')){
+            
+            if($_SESSION['btn_monCompte']){
+                $_SESSION['avatarConnect'] = $_SESSION['uploadAvatar'];
+            }
+
+            $users[0]['avatar'] = ($_SESSION['uploadAvatar']);
+            $_SESSION['avatar'] = $_SESSION['uploadAvatar'];
+
+        }else{
+
+            echo "<script>alert('Désolé, une erreur s\'est produite lors de l\'upload de l\'image.');</script>";
+
+        }
 
     }
 
     //Traiment de la BD pour récupérer les données destinées à l'input liste type
-    include('../Model/type.class.php');
+    include('../model/type.class.php');
     $Types = new Type();
     $MyType = $Types->get(1,'type', 'ASC', 0, 50);
     unset($Types);
 
     //Traiment de la BD pour récupérer les données destinées à l'input liste subscription
-    include('../Model/subscription.class.php');
+    include('../model/subscription.class.php');
     $Subscriptions = new Subscription();
     $MySubscription = $Subscriptions->get(1,'subscription', 'ASC', 0, 50);
     unset($Subscriptions);

@@ -1,16 +1,26 @@
 <?php
 
+    //Verif validité jeton CSRF
+
+    function verifCsrf() {
+        return isset($_POST['csrf']) && isset($_SESSION['csrf']) && $_POST['csrf'] === $_SESSION['csrf'];
+    }
+
     //escape Input
 
     function escapeInput($input){
         return htmlspecialchars($input, ENT_QUOTES, 'UTF-8');
     }
 
+    function filterInput($input){
+        return filter_input(INPUT_POST, $input, FILTER_DEFAULT);
+    }
+
     //upload image
 
-    function uploadImg($session,$post,$file){
-                
-        $uploadDirectory = './img/image/';
+    function uploadImg($session,$post,$file,$directory = './img/picture/'){
+        
+        $uploadDirectory = $directory;
 
         $_SESSION[$session] = isset($_POST[$post]) ? escapeInput($_POST[$post]) : false;
 

@@ -110,7 +110,7 @@
 	
 		private function getSubscriptionId() {
 
-			include_once('../Model/dbConnect.class.php');
+			include_once('../model/dbConnect.class.php');
 			$dbConnect_ = new dbConnect();
 			$bdd = $dbConnect_->connectionDb();
             unset($dbConnect_);
@@ -136,7 +136,7 @@
 	
 		private function getUserTypeId() {
 
-			include_once('../Model/dbConnect.class.php');
+			include_once('../model/dbConnect.class.php');
 			$dbConnect_ = new dbConnect();
 			$bdd = $dbConnect_->connectionDb();
             unset($dbConnect_);
@@ -165,7 +165,7 @@
 		private $listPseudo;
 		public function getPseudoUser()
 		{
-			include_once('../Model/dbConnect.class.php');
+			include_once('../model/dbConnect.class.php');
 			$dbConnect_ = new dbConnect();
 			$bdd = $dbConnect_->connectionDb();
             unset($dbConnect_);
@@ -195,7 +195,7 @@
 		private $theUser;
 		public function getUser($idUser)
 		{
-			include_once('../Model/dbConnect.class.php');
+			include_once('../model/dbConnect.class.php');
 			$dbConnect_ = new dbConnect();
 			$bdd = $dbConnect_->connectionDb();
             unset($dbConnect_);
@@ -248,7 +248,7 @@
 		private $userList;
 		public function get($whereClause, $orderBy = 'name', $ascOrDesc = 'ASC', $firstLine = 0, $linePerPage = 13)
 		{
-			include_once('../Model/dbConnect.class.php');
+			include_once('../model/dbConnect.class.php');
 			$dbConnect_ = new dbConnect();
 			$bdd = $dbConnect_->connectionDb();
             unset($dbConnect_);
@@ -308,7 +308,7 @@
 
 		public function addUser() {
 
-			include_once('../Model/dbConnect.class.php');
+			include_once('../model/dbConnect.class.php');
 			$dbConnect_ = new dbConnect();
 			$bdd = $dbConnect_->connectionDb();
             unset($dbConnect_);
@@ -385,7 +385,7 @@
 
 		public function updateUser($idUser){
 
-			include_once('../Model/dbConnect.class.php');
+			include_once('../model/dbConnect.class.php');
 			$dbConnect_ = new dbConnect();
 			$bdd = $dbConnect_->connectionDb();
             unset($dbConnect_);
@@ -432,7 +432,7 @@
 
 		public function deleteUser($id)
 		{
-			include_once('../Model/dbConnect.class.php');
+			include_once('../model/dbConnect.class.php');
 			$dbConnect_ = new dbConnect();
 			$bdd = $dbConnect_->connectionDb();
             unset($dbConnect_);
@@ -461,7 +461,7 @@
 		private $userExist;
 		public function verifUser($email)
 		{
-			include_once('../Model/dbConnect.class.php');
+			include_once('../model/dbConnect.class.php');
 			$dbConnect_ = new dbConnect();
 			$bdd = $dbConnect_->connectionDb();
             unset($dbConnect_);

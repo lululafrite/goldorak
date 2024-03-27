@@ -1,11 +1,11 @@
-<?php include('../Controller/user.controller.php'); ?>
+<?php include('../controller/user.controller.php'); ?>
 
 <div class="mt-5">
-    <?php include('../Elements/_07_searchUser.php'); ?>
+    <?php include('../module/_07_searchUser.php'); ?>
 </div>
 
 <div class="mt-5">
-    <?php include('../Elements/_05_select_page.php'); ?>
+    <?php include('../module/_05_select_page.php'); ?>
 </div>
 
 <div class="container">
@@ -19,7 +19,7 @@
         <form action="/index.php?page=userEdit" method="post">
 
             <div class="d-flex justify-content-center div__Car--img mt-3">
-                <img src="img/avatar/<?php echo $users[$i]['avatar']; ?>" alt="Avatar de l'utilisateur" style="width:70px; height: 70px; object-fit: cover;">
+                <img src="img/avatar/<?php echo escapeInput($users[$i]['avatar']); ?>" alt="Avatar de l'utilisateur" style="width:70px; height: 70px; object-fit: cover;">
             </div>
 
             <div class="div__user--img">
@@ -28,17 +28,17 @@
 
                     <tr>
                         <td class="tdLabel text-end text-light border border-0 pe-1">ID:</td>
-                        <td class="tdText border border-0"><input type="text" name='txt_userEdit_id'  class="bg-transparent text-light text-start ps-2" readonly value='<?php echo $users[$i]['id_user'];?>'></td>
+                        <td class="tdText border border-0"><input type="text" name='txt_userEdit_id'  class="bg-transparent text-light text-start ps-2" readonly value='<?php echo escapeInput($users[$i]['id_user']);?>'></td>
                     </tr>
 
                     <tr>
                         <td class="tdLabel text-end border border-0 pe-1">Nom:</td>
-                        <td class="tdText border border-0"><input type="text" name="txt_user_name" class="bg-transparent text-light text-start ps-2" readonly value='<?php echo $users[$i]['name'];?>'></td>
+                        <td class="tdText border border-0"><input type="text" name="txt_user_name" class="bg-transparent text-light text-start ps-2" readonly value='<?php echo escapeInput($users[$i]['name']);?>'></td>
                     </tr>
 
                     <tr>
                         <td class="tdLabel text-end border border-0 pe-1">Prénom:</td>
-                        <td class="tdText border border-0"><input type="text" name="txt_user_surname" class="bg-transparent text-light text-start ps-2" readonly value='<?php echo $users[$i]['surname'];?>'></td>
+                        <td class="tdText border border-0"><input type="text" name="txt_user_surname" class="bg-transparent text-light text-start ps-2" readonly value='<?php echo escapeInput($users[$i]['surname']);?>'></td>
                     </tr>
 
                 </table>
@@ -50,27 +50,27 @@
 
                     <tr>
                         <td class="tdLabel text-end border border-0 pe-1">Pseudo:</td>
-                        <td class="tdText border border-0"><input type="text" name="txt_user_pseudo" class="bg-transparent text-light text-start ps-2" readonly value='<?php echo $users[$i]['pseudo'];?>'></td>
+                        <td class="tdText border border-0"><input type="text" name="txt_user_pseudo" class="bg-transparent text-light text-start ps-2" readonly value='<?php echo escapeInput($users[$i]['pseudo']);?>'></td>
                     </tr>
 
                     <tr>
                         <td class="tdLabel text-end border border-0 pe-1">Email:</td>
-                        <td class="tdText border border-0"><input type="email" name="txt_user_email" class="bg-transparent text-light text-start ps-2" readonly value='<?php echo $users[$i]['email'];?>'></td>
+                        <td class="tdText border border-0"><input type="email" name="txt_user_email" class="bg-transparent text-light text-start ps-2" readonly value='<?php echo escapeInput($users[$i]['email']);?>'></td>
                     </tr>
 
                     <tr>
                         <td class="tdLabel text-end border border-0 pe-1">Phone:</td>
-                        <td class="tdText border border-0"><input type="tel" name="txt_user_phone" class="bg-transparent text-light text-start ps-2" readonly value='<?php echo $users[$i]['phone'];?>'></td>
+                        <td class="tdText border border-0"><input type="tel" name="txt_user_phone" class="bg-transparent text-light text-start ps-2" readonly value='<?php echo escapeInput($users[$i]['phone']);?>'></td>
                     </tr>
 
                     <tr>
                         <td class="tdLabel text-end border border-0 pe-1">Formule:</td>
-                        <td class="tdText border border-0"><input type="tel" name="txt_user_formule" class="bg-transparent text-light text-start ps-2" readonly value='<?php echo $users[$i]['subscription'];?>'></td>
+                        <td class="tdText border border-0"><input type="tel" name="txt_user_formule" class="bg-transparent text-light text-start ps-2" readonly value='<?php echo escapeInput($users[$i]['subscription']);?>'></td>
                     </tr>
 
                     <tr>
                         <td class="tdLabel text-end border border-0 pe-1">Type:</td>
-                        <td class="tdText border border-0"><input type="tel" name="txt_user_type" class="bg-transparent text-light text-start ps-2" readonly value='<?php echo $users[$i]['type'];?>'></td>
+                        <td class="tdText border border-0"><input type="tel" name="txt_user_type" class="bg-transparent text-light text-start ps-2" readonly value='<?php echo escapeInput($users[$i]['type']);?>'></td>
                     </tr>
 
                 </table>
@@ -109,5 +109,5 @@
 </div>
 
 <div class="mb-5">
-    <?php include('../Elements/_05_select_page.php'); ?>
+    <?php include('../module/_05_select_page.php'); ?>
 </div>

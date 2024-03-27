@@ -105,31 +105,31 @@
                 <div class="carousel-inner">
 
                     <div class="carousel-item active">
-                        <img src="img/image/img_goldorak_dark_1200x522_01.webp" class="d-block w-100 h-100" style="object-fit: cover;" alt="...">
+                        <img src="img/picture/img_goldorak_dark_1200x522_01.webp" class="d-block w-100 h-100" style="object-fit: cover;" alt="...">
                     </div>
 
                     <div class="carousel-item">
-                        <img src="img/image/img_goldorak_dark_1200x522_02.webp" class="d-block w-100 h-100" style="object-fit: cover;" alt="...">
+                        <img src="img/picture/img_goldorak_dark_1200x522_02.webp" class="d-block w-100 h-100" style="object-fit: cover;" alt="...">
                     </div>
 
                     <div class="carousel-item">
-                        <img src="img/image/img_goldorak_dark_1200x522_03.webp" class="d-block w-100 h-100" style="object-fit: cover;" alt="...">
+                        <img src="img/picture/img_goldorak_dark_1200x522_03.webp" class="d-block w-100 h-100" style="object-fit: cover;" alt="...">
                     </div>
 
                     <div class="carousel-item">
-                        <img src="img/image/img_goldorak_dark_1200x522_04.webp" class="d-block w-100 h-100" style="object-fit: cover;" alt="...">
+                        <img src="img/picture/img_goldorak_dark_1200x522_04.webp" class="d-block w-100 h-100" style="object-fit: cover;" alt="...">
                     </div>
 
                     <div class="carousel-item">
-                        <img src="img/image/img_goldorak_dark_1200x522_05.webp" class="d-block w-100 h-100" style="object-fit: cover;" alt="...">
+                        <img src="img/picture/img_goldorak_dark_1200x522_05.webp" class="d-block w-100 h-100" style="object-fit: cover;" alt="...">
                     </div>
 
                     <div class="carousel-item">
-                        <img src="img/image/img_goldorak_dark_1200x522_06.webp" class="d-block w-100 h-100" style="object-fit: cover;" alt="...">
+                        <img src="img/picture/img_goldorak_dark_1200x522_06.webp" class="d-block w-100 h-100" style="object-fit: cover;" alt="...">
                     </div>
 
                     <div class="carousel-item">
-                        <img src="img/image/img_goldorak_dark_1200x522_07.webp" class="d-block w-100 h-100" style="object-fit: cover;" alt="...">
+                        <img src="img/picture/img_goldorak_dark_1200x522_07.webp" class="d-block w-100 h-100" style="object-fit: cover;" alt="...">
                     </div>
 
                 </div>

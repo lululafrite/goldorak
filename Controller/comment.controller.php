@@ -1,15 +1,30 @@
 <?php
-    include_once('../Model/comment.class.php');
+    include_once('../common/utilies.php');
+    include_once('../model/comment.class.php');
     
     $comments = new Comment();
-    if(isset($_POST['bt_save_comment'])){
-        
-        $comments->setDate_(date("Y-m-d"));
-        $comments->setPseudo($_POST['txt_comment_pseudo']);
-        $comments->setRating($_POST['selectedRating']);
-        $comments->setComment($_POST['txt_comment_comment']);
 
-        $comments->addComment();
+    if(isset($_POST['bt_save_comment'])){
+
+        $pseudo_ = escapeInput($_POST['txt_comment_pseudo']);
+        $rating_ = escapeInput($_POST['selectedRating']);
+        $comment_ = escapeInput($_POST['txt_comment_comment']);
+        
+        if($comment_ != ""){
+
+            $comments->setDate_(date("Y-m-d"));
+            $comments->setPseudo($pseudo_);
+            $comments->setRating($rating_);
+            $comments->setComment($comment_);
+
+            $comments->addComment();
+
+        }else{
+
+            echo "<script>alert('Le champ commentaire ne peut pas être vide!!! Resaisissez votre commentaire et selectionnez une étoile de 1 à 5.');</script>";
+
+        }
+
         unset($_POST['bt_save_comment']);
 
     }else if(isset($_POST['bt_comment_delete'])){

@@ -2,9 +2,9 @@
 
     if (isset($_POST['envoyer'])) {
         
-        include_once('../Model/connexion.class.php');
+        include_once('../model/connexion.class.php');
 
-        $MyUserConnect = new userConnect();
+        $MyUserConnect = new UserConnect();
 
         $emptyCell = false;
         $emptyEmail = false;

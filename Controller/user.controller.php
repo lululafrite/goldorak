@@ -1,6 +1,6 @@
 <?php
 
-    include('../Model/user.class.php');
+    include('../model/user.class.php');
     include_once('../common/utilies.php');
 
     $MyUser = new User();
@@ -109,7 +109,7 @@
     // Executer la requete SELECT pour rechercher les contacts en fonction de la clause WHERE
     if(!$_SESSION['errorFormUser'] && !$_SESSION['newUser']){
         
-        include_once('../Controller/page.controller.php');
+        include_once('../controller/page.controller.php');
         $users = $MyUser->get($whereClause, 'name', 'ASC', $MyPage->getFirstLine(), $_SESSION['ligneParPage']);
     }
 

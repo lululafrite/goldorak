@@ -1,4 +1,4 @@
-<?php include_once('../Controller/userEdit.controller.php'); ?>
+<?php include_once('../controller/userEdit.controller.php'); ?>
 
 <section class="container">
 
@@ -11,7 +11,7 @@
                 </td>
 
                 <td class="py-5">
-                    <?php include "../Elements/_10_buttonEdit.php"; ?>
+                    <?php include "../module/_10_buttonEdit.php"; ?>
                 </td>
             </tr>
 
@@ -28,7 +28,7 @@
                             if(!empty($MyUser->getId())){
                                 echo $MyUser->getId();
                             }else{
-                                echo $users[0]['id_user'];
+                                echo escapeInput($users[0]['id_user']);
                             }
                         ?>"
                     >
@@ -61,7 +61,7 @@
                     <input list="datalist_userEdit_subscription" name="list_userEdit_subscription" id="list_userEdit_subscription" class="form-control-lg m-0 p-0 ps-3 border border-black fs-4" placeholder="Selectionnez une formule" oninput="validateInput('list_userEdit_subscription','datalist_userEdit_subscription','labelMessageSubscription','Selectionnez votre formule dans la liste de choix.')"
                         value=
                         "<?php
-                            echo $users[0]['subscription'];
+                            echo escapeInput($users[0]['subscription']);
                         ?>"
                     >
                     <datalist id="datalist_userEdit_subscription">
@@ -97,7 +97,7 @@
                     <input class="form-control-lg m-0 p-0 ps-3 border border-black" id="txt_userEdit_name" name="txt_userEdit_name" type="text" placeholder="Saisissez votre NOM" style="font-size: 1.6rem;" oninput="validateInput('txt_userEdit_name','','labelMessageName','Saisissez votre Nom d\'une longueur de 50 caractères maximum.')"
                         value=
                         "<?php
-                            echo $users[0]['name'];
+                            echo escapeInput($users[0]['name']);
                         ?>"
                     >
                 </td>
@@ -127,7 +127,7 @@
                     <input class="form-control-lg m-0 p-0 ps-3 border border-black" id="txt_userEdit_surname" name="txt_userEdit_surname" type="text" placeholder="Saisissez votre Prénom" style="font-size: 1.6rem;" oninput="validateInput('txt_userEdit_surname','','labelMessageSurname','Saisissez votre Prénom d\'une longueur de 50 caractères maximum.')"
                         value=
                         "<?php
-                            echo $users[0]['surname'];
+                            echo escapeInput($users[0]['surname']);
                         ?>"
                     >
                 </td>
@@ -157,7 +157,7 @@
                     <input class="form-control-lg m-0 p-0 ps-3 border border-black <?php echo ($_SESSION['typeConnect'] === 'Member' || $_SESSION['typeConnect'] === 'User') ? 'bg-dark text-light' : ''; ?>" id="txt_userEdit_pseudo" name="txt_userEdit_pseudo" type="text" placeholder="Saisissez votre Pseudo" <?php echo ($_SESSION['typeConnect'] === 'Member' || $_SESSION['typeConnect'] === 'User') ? 'readonly' : ''; ?> style="font-size: 1.6rem;" oninput="validateInput('txt_userEdit_pseudo','','labelMessagePseudo','Saisissez votre pseudonyme d\'une longueur de 20 caractères maximum.')"
                     value=
                         "<?php
-                            echo $users[0]['pseudo'];
+                            echo escapeInput($users[0]['pseudo']);
                         ?>"
                     >
                 </td>
@@ -188,7 +188,7 @@
                     <input class="form-control-lg m-0 p-0 ps-3 border border-black <?php echo ($_SESSION['typeConnect'] === 'Member' || $_SESSION['typeConnect'] === 'User') ? 'bg-dark text-light' : ''; ?>" id="txt_userEdit_email" name="txt_userEdit_email" type="email" placeholder="Saisissez votre courriel" <?php echo ($_SESSION['typeConnect'] === 'Member' || $_SESSION['typeConnect'] === 'User') ? 'readonly' : ''; ?> style="font-size: 1.6rem;" oninput="validateInput('txt_userEdit_email','','labelMessageEmail','Saisissez votre adresse de courriel d\'une longueur maximum de 255 caractères.')"
                         value=
                         "<?php
-                            echo $users[0]['email'];
+                            echo escapeInput($users[0]['email']);
                         ?>"
                     > 
                 </td>
@@ -220,7 +220,7 @@
                     <input class="form-control-lg m-0 p-0 ps-3 border border-black" id="txt_userEdit_phone" name="txt_userEdit_phone" type="tel" placeholder="## ## ## ## ##" style="font-size: 1.6rem;" oninput="validateInput('txt_userEdit_phone','','labelMessagePhone','Saisissez votre N° de téléphone.')"
                         value=
                         "<?php
-                            echo $users[0]['phone'];
+                            echo escapeInput($users[0]['phone']);
                         ?>"
                     >
                 </td>
@@ -251,7 +251,7 @@
                     <input list="datalist_userEdit_type" name="list_userEdit_type" id="list_userEdit_type" class="form-control-lg m-0 p-0 ps-3 border border-black fs-4" placeholder="Selectionnez un type" oninput="validateInput('list_userEdit_type','datalist_userEdit_type','labelMessageType','Selectionnez le type d\'utilisateur dans la liste de choix.')"
                         value=
                         "<?php
-                            echo $users[0]['type'];
+                            echo escapeInput($users[0]['type']);
                         ?>"
                     >
                     <datalist id="datalist_userEdit_type">
@@ -297,7 +297,7 @@
                                         <input class="form-control-lg bg-dark text-light border border-black m-0 p-0 " id="txt_userEdit_avatar" name="txt_userEdit_avatar" type="text" placeholder="Saisissez le nom de l'avatar" readonly style="font-size: 1.6rem;" oninput="validateInput('txt_userEdit_avatar','','labelMessageavatar','Saisissez le nom de l\'avatar (sans useractères spéciaux sauf - et _) aux formats *.png ou *.jpg ou *.webp. Sinon, téléchargez une avatar depuis votre disque local. ATTENTION!!! Dimmentions avatar au ratio de 350px sur 180px.')"
                                             value=
                                             "<?php
-                                                echo $users[0]['avatar'];
+                                                echo escapeInput($users[0]['avatar']);
                                             ?>"
                                         >
                                     </div>
@@ -345,7 +345,7 @@
                     <input class="form-control-lg m-0 p-0 ps-3 border border-black" id="txt_userEdit_password" name="txt_userEdit_password" type="password" placeholder=""style="font-size: 1.6rem;" oninput="validateInput('txt_userEdit_password','','labelMessagePassword','Saisissez un mot de passe de 255 caractères maximum et 8 caractères minimun comprenant au moins : 1 minuscule, 1 majuscule, 1 chiffre et 1 caractère spéciale parmi les suivants \/\*-.!?@')"
                         value=
                         "<?php
-                            echo $users[0]['password'];
+                            echo escapeInput($users[0]['password']);
                         ?>"
                     >
                 </td>
@@ -377,7 +377,7 @@
                     <input class="form-control-lg m-0 p-0 ps-3 border border-black" id="txt_userEdit_confirm" name="txt_userEdit_confirm" type="password" placeholder="" style="font-size: 1.6rem;" oninput="validateInput('txt_userEdit_confirm','','labelMessageConfirm','Le mot de passe de confirmation doit-être équivalent au mot de passe.')"
                         value=
                         "<?php
-                            echo $users[0]['password'];
+                            echo escapeInput($users[0]['password']);
                         ?>"
                     >
                 </td>
@@ -402,7 +402,7 @@
                 </td>
 
                 <td class="pb-5">
-                    <?php include "../Elements/_10_buttonEdit.php"; ?>
+                    <?php include "../module/_10_buttonEdit.php"; ?>
                 </td>
 
             </tr>
@@ -413,5 +413,6 @@
 
 </section>
 
+<script src="js/function.js"></script>
 <script src="js/user_edit.js"></script>
 

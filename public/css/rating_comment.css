@@ -15,3 +15,7 @@
 .rating i.active {
   color: #ffcc00; /* Couleur jaune clair au survol */
 }
+
+#star_{
+  color: #ffcc00;
+}

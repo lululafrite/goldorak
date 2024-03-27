@@ -22,3 +22,29 @@ function handleRating(event){
     }
 
 }
+
+function verifSendComment(input){
+
+    if(!comment(input)){
+        alert ("Le commentaire ne pas être vide!!!");
+    }
+
+}
+
+function comment(input){
+    
+    const myInput = document.getElementById(input);
+
+    if(verifInputEmpty(input)){
+
+        myInput.style.background = '#FFB4B4';
+        return false;
+
+    }else{
+
+        myInput.style.background = '#FFFFFF';
+        return true;
+
+    }
+
+}

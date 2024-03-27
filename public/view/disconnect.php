@@ -1,7 +1,7 @@
 <?php
     
-    include_once '../Model/connexion.class.php';
-    $MyUserConnect = new userConnect();
+    include_once '../model/connexion.class.php';
+    $MyUserConnect = new UserConnect();
 
     $MyUserConnect->SetUserConnect('Guest');
     $MyUserConnect->SetConnexion(false);

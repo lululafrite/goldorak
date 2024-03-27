@@ -1,5 +1,5 @@
 <?php
-	class userConnect
+	class UserConnect
     {        
         private $type;
         public function getUserConnect()
@@ -34,7 +34,7 @@
         private $dataConnect;
         public function queryConnect($email,$pw){
 
-			include_once('../Model/dbConnect.class.php');
+			include_once('../model/dbConnect.class.php');
 			$dbConnect_ = new dbConnect();
 			$bdd = $dbConnect_->connectionDb();
             unset($dbConnect_);

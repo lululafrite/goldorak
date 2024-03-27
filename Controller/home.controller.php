@@ -1,24 +1,26 @@
 <?php
 
-    include('../Model/home.class.php');
+    include('../model/home.class.php');
     include_once('../common/utilies.php');
 
     $homes = new Home();
     
-    //escape input
-    $_SESSION['titre1'] = isset($_POST['txt_titre1']) ? $_POST['txt_titre1'] : '';
-    $_SESSION['titre_chapter1'] = isset($_POST['txt_titre_chapter1']) ? $_POST['txt_titre_chapter1'] : '';
-    $_SESSION['chapter1'] = isset($_POST['txt_chapter1']) ? $_POST['txt_chapter1'] : '';
-    $_SESSION['img_chapter1'] = isset($_POST['txt_img_chapter1']) ? $_POST['txt_img_chapter1'] : '';
-    $_SESSION['titre_chapter2'] = isset($_POST['txt_titre_chapter2']) ? $_POST['txt_titre_chapter2'] : '';
-    $_SESSION['chapter2'] = isset($_POST['txt_chapter2']) ? $_POST['txt_chapter2'] : '';
-    $_SESSION['img_chapter2'] = isset($_POST['txt_img_chapter2']) ? $_POST['txt_img_chapter2'] : '';
-    
     $btn_home_save = isset($_POST['btn_home_save']) ? true : false;
     unset($_POST['btn_home_save']);
 
+    $btn_img_chapter1 = isset($_POST['btn_img_chapter1']) ? true : false;
+    unset($_POST['btn_img_chapter1']);
+
+    $btn_img_chapter2 = isset($_POST['btn_img_chapter2']) ? true : false;
+    unset($_POST['btn_img_chapter2']);
+
     if($btn_home_save){
+        $btn_home_save = false;
         saveHome($homes);
+    }else if(!$btn_img_chapter1 && !$btn_img_chapter2){
+        // Générer jeton CSRF
+        $csrf = bin2hex(random_bytes(32));
+        $_SESSION['csrf'] = $csrf;
     }
 
     $home = $homes->get(1,'id_home','DESC','0','10');
@@ -27,16 +29,14 @@
     // traitement du téléchargement des images 
     //***********************************************************************************************
 
-    $btn_img_chapter1 = isset($_POST['btn_img_chapter1']) ? true : false;
-    unset($_POST['btn_img_chapter1']);
-
     if($btn_img_chapter1){
 
-        if (uploadImg('newImgChapter1','txt_img_chapter1','file_img_chapter1')){
+        $btn_img_chapter1 = false;
+
+        if (uploadImg('newImgChapter1','txt_img_chapter1','file_img_chapter1','./img/picture/')){
 
             $home[0]['img_chapter1'] = $_SESSION['newImgChapter1'];
-            $_SESSION['img_chapter1'] = $_SESSION['newImgChapter1'];
-            saveHome($homes);
+            saveHome($homes, 'btn_img_chapter1');
 
         }else{
 
@@ -45,17 +45,13 @@
         }
 
     }
-
-    $btn_img_chapter2 = isset($_POST['btn_img_chapter2']) ? true : false;
-    unset($_POST['btn_img_chapter2']);
 
     if($btn_img_chapter2){
 
-        if (uploadImg('newImgChapter2','txt_img_chapter2','file_img_chapter2')){
+        if (uploadImg('newImgChapter2','txt_img_chapter2','file_img_chapter2','./img/picture/')){
 
-            $home[0]['img_chapter2'] = ($_SESSION['newImgChapter2']);
-            $_SESSION['img_chapter2'] = $_SESSION['newImgChapter2'];
-            saveHome($homes);
+            $home[0]['img_chapter2'] = $_SESSION['newImgChapter2'];
+            saveHome($homes, 'btn_img_chapter2');
 
         }else{
 
@@ -65,19 +61,53 @@
 
     }
 
-    function saveHome($object){
+    function saveHome($object, $button = ''){
         
-        $object->setTitre1($_SESSION['titre1']);
+        if($_SERVER['REQUEST_METHOD'] === 'POST' && verifCsrf()){
 
-        $object->setTitre_Chapter1($_SESSION['titre_chapter1']);
-        $object->setChapter1($_SESSION['chapter1']);
-        $object->setImg_chapter1($_SESSION['img_chapter1']);
+            //escape input
+            $titre1 = isset($_POST['txt_titre1']) ? filterInput('txt_titre1') : '';
+            
+            $titre_chapter1 = isset($_POST['txt_titre_chapter1']) ? filterInput('txt_titre_chapter1') : '';
+            $chapter1 = isset($_POST['txt_chapter1']) ? filterInput('txt_chapter1') : '';
+            
+            if($button === 'btn_img_chapter1'){
+                $img_chapter1 = $_SESSION['newImgChapter1'];
+            }else{
+                $img_chapter1 = isset($_POST['txt_img_chapter1']) ? filterInput('txt_img_chapter1') : '';
+            }
 
-        $object->setTitre_Chapter2($_SESSION['titre_chapter2']);
-        $object->setChapter2($_SESSION['chapter2']);
-        $object->setImg_chapter2($_SESSION['img_chapter2']);
+            $titre_chapter2 = isset($_POST['txt_titre_chapter2']) ? filterInput('txt_titre_chapter2') : '';
+            $chapter2 = isset($_POST['txt_chapter2']) ? filterInput('txt_chapter2') : '';
+            
+            if($button === 'btn_img_chapter2'){
+                $img_chapter2 = $_SESSION['newImgChapter2'];
+            }else{
+                $img_chapter2 = isset($_POST['txt_img_chapter2']) ? filterInput('txt_img_chapter2') : '';
+            }
 
-        $object->updateHome(1);
+            $object->setTitre1($titre1);
+
+            $object->setTitre_Chapter1($titre_chapter1);
+            $object->setChapter1($chapter1);
+            $object->setImg_chapter1($img_chapter1);
+
+            $object->setTitre_Chapter2($titre_chapter2);
+            $object->setChapter2($chapter2);
+            $object->setImg_chapter2($img_chapter2);
+
+            $object->updateHome(1);
+            
+            if($button === 'btn_img_chapter1' || $button === 'btn_img_chapter1'){
+                routeToHomePage();
+            }
+
+        }else{
+
+            echo "<script>alert('Ce formulaire est sécurisé, vous ne pouvez pas injecter de données malveillantes.');</script>";
+            routeToHomePage();
+
+        }
 
     }
 
