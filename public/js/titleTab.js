@@ -1,4 +1,4 @@
-var pageTitle = document.title;
+let pageTitle = document.title;
 
 if (window.location.href.includes("home")){
 

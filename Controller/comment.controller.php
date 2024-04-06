@@ -1,54 +1,82 @@
 <?php
+
     include_once('../common/utilies.php');
     include_once('../model/comment.class.php');
     
-    $comments = new Comment();
+    $bt_save_comment = isset($_POST['bt_save_comment']) ? true : false;
+    unset($_POST['bt_save_comment']);
 
-    if(isset($_POST['bt_save_comment'])){
+    $bt_comment_delete = isset($_POST['bt_comment_delete']) ? true : false;
+    unset($_POST['bt_comment_delete']);
 
-        $pseudo_ = escapeInput($_POST['txt_comment_pseudo']);
-        $rating_ = escapeInput($_POST['selectedRating']);
-        $comment_ = escapeInput($_POST['txt_comment_comment']);
+    $bt_comment_validate = isset($_POST['bt_comment_validate']) ? true : false;
+    unset($_POST['bt_comment_validate']);
+
+    $bt_comment_refuse = isset($_POST['bt_comment_refuse']) ? true : false;
+    unset($_POST['bt_comment_refuse']);
+
+    if(!isset($comments)){
+        $comments = new Comment();
+    }
+
+    if(verifCsrf('csrfComment') && $_SERVER['REQUEST_METHOD'] === 'POST'){
         
-        if($comment_ != ""){
+        $idComment = filterInput('txt_comment_id');
 
-            $comments->setDate_(date("Y-m-d"));
-            $comments->setPseudo($pseudo_);
-            $comments->setRating($rating_);
-            $comments->setComment($comment_);
+        if($bt_save_comment){
 
-            $comments->addComment();
+            $bt_save_comment = false;
 
-        }else{
+            $pseudo_ = filterInput('txt_comment_pseudo');
+            $rating_ = filterInput('selectedRating');
+            $comment_ = filterInput('txt_comment_comment');
+            
+            if($comment_ != ""){
 
-            echo "<script>alert('Le champ commentaire ne peut pas être vide!!! Resaisissez votre commentaire et selectionnez une étoile de 1 à 5.');</script>";
+                $comments->setDate_(date("Y-m-d"));
+                $comments->setPseudo($pseudo_);
+                $comments->setRating($rating_);
+                $comments->setComment($comment_);
+
+                $comments->addComment();
+
+            }else{
+
+                echo "<script>alert('Le champ commentaire ne peut pas être vide!!! Resaisissez votre commentaire et selectionnez une étoile de 1 à 5.');</script>";
+
+            }
+
+        }else if($bt_comment_delete){
+            
+            $comments->deleteComment($idComment);
+            //routeToHomePage();
+
+        }else if($bt_comment_validate){
+            
+            $comments->modereComment($idComment, 2);
+            //routeToHomePage();
+
+        }else if($bt_comment_refuse){
+            
+            $comments->modereComment($idComment, 1);
+            //routeToHomePage();
 
         }
-
-        unset($_POST['bt_save_comment']);
-
-    }else if(isset($_POST['bt_comment_delete'])){
-        
-        $comments->deleteComment($_POST['txt_comment_id']);
-        unset($_POST['bt_comment_delete']);
-
-    }else if(isset($_POST['bt_comment_validate'])){
-        
-        $comments->modereComment($_POST['txt_comment_id'], 2);
-        unset($_POST['bt_comment_validate']);
-
-    }else if(isset($_POST['bt_comment_refuse'])){
-        
-        $comments->modereComment($_POST['txt_comment_id'], 1);
-        unset($_POST['bt_comment_refuse']);
 
     }
 
     if($_SESSION['typeConnect'] === 'Administrator'){
+
         $Comment = $comments->get(1,'date_','DESC','0','50');
+
     }else if($_SESSION['typeConnect'] === 'User'){
+
         $Comment = $comments->get('`publication` = 0','date_','DESC','0','50');
+
     }else{
+
         $Comment = $comments->get('`publication` = 2','date_','DESC','0','50');
+
     }
+
 ?>

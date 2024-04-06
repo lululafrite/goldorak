@@ -1,8 +1,17 @@
 <?php include_once ("../controller/home.controller.php");?>
 
-<form method="post" enctype="multipart/form-data">
-    <!-- input csrf -->
-    <input type="hidden" name="csrf" value="<?php echo $_SESSION['csrf']; ?>">
+<form method="post" id="formHome"  enctype="multipart/form-data">
+    
+    <!-- input hidden csrf -->
+    <input type="hidden" name="csrfHome" value="<?php echo $_SESSION['csrfHome'];?>">
+
+    <!-- start of data save message -->
+
+    <div class="container d-flex justify-content-center">
+        <div class="text-center text-black bg-warning px-5 rounded-5" name="messageInputEmpty" id="messageInputEmpty1"></div>
+    </div>
+
+    <!-- end of data save message -->
 
     <!-- Start Titre 1 -->
 
@@ -12,7 +21,7 @@
             <h2><?php echo escapeInput($home[0]['titre1']); ?></h2>
         <?php } ?>
         <?php if ($_SESSION['typeConnect']==='Administrator'){ ?>
-            <h2><input class="text-center" type="text" name="txt_titre1" value="<?php echo escapeInput($home[0]['titre1']); ?>"></h2>
+            <h2><input class="text-center" type="text" name="txt_titre1" id="txt_titre1" value="<?php echo escapeInput($home[0]['titre1']); ?>"></h2>
         <?php } ?>
         </br>
     </div>
@@ -37,7 +46,7 @@
                                 <h3><?php echo escapeInput($home[0]['titre_chapter1']); ?></h3>
                             <?php } ?>
                             <?php if ($_SESSION['typeConnect']==='Administrator'){ ?>
-                                <h3><input type="text" name="txt_titre_chapter1" value="<?php echo escapeInput($home[0]['titre_chapter1']); ?>"></h3>
+                                <h3><input type="text" id="txt_titre_chapter1"  name="txt_titre_chapter1" value="<?php echo escapeInput($home[0]['titre_chapter1']); ?>"></h3>
                             <?php } ?>
 
                             <!-- End Titre chapter1 -->
@@ -55,7 +64,7 @@
                             <?php if ($_SESSION['typeConnect']==='Administrator'){ ?>
                                 
                                 <p class="p-0" style="text-align: justify;">
-<textarea name="txt_chapter1" cols="1" rows="12">
+<textarea name="txt_chapter1" id="txt_chapter1" cols="1" rows="12">
 <?php echo escapeInput($home[0]['chapter1']); ?>
 </textarea>
                                 </p>
@@ -98,7 +107,7 @@
                         <!-- Start image Chapter 1 -->
 
                         <div class="d-none d-sm-block">
-                            <img class="ms-3" id="id_img_chapter1" name="id_img_chapter1" src="img/picture/<?php echo escapeInput($home[0]['img_chapter1']); ?>" alt="Goldorak et Actarus" style="width:200px; height: 350px; object-fit: cover;">
+                            <img class="ms-3" id="img_chapter1" name="img_chapter1" src="img/picture/<?php echo escapeInput($home[0]['img_chapter1']); ?>" alt="Goldorak et Actarus" style="width:200px; height: 350px; object-fit: cover;">
                         </div>
 
                         <!-- End image Chapter 1 -->
@@ -106,6 +115,8 @@
                     </div>
 
                 </div>
+
+                <!-- start of comment area -->
 
                 <div class="col-12 col-lg-4 overflow-auto border rounded-3 p-3 m-0 mt-3 mt-lg-0" style="max-height: 400px">
                     
@@ -120,7 +131,7 @@
 
                             <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
                                 <div class="accordion-body text-light" style="text-align: justify;">
-                                    <?php include "../module/_09_commentForm.php"; ?>
+                                    <?php include "../module/commentForm.php"; ?>
                                 </div>
                             </div>
 
@@ -128,14 +139,24 @@
                     </div>
 
                     <div class="mt-3">
-                        <?php include "../module/_09_comment.php"; ?>
+                        <?php include "../module/comment.php"; ?>
                     </div>
 
                 </div>
 
+                <!-- end of comment area -->
+
             </div>
 
         </div>
+        
+        <!-- start of data save message -->
+
+        <div class="container d-flex justify-content-center">
+            <div class="text-center text-black bg-warning px-5 rounded-5" name="messageInputEmpty" id="messageInputEmpty2"></div>
+        </div>
+        
+        <!-- end of data save message -->
 
         <div class="row m-2">
 
@@ -144,7 +165,7 @@
                 <!-- Start image Chapter 2 -->
 
                 <div class="d-none d-sm-block pt-3 pe-3 mb-3">
-                    <img class="ms-3" id="id_img_chapter2" name="id_img_chapter2" src="img/picture/<?php echo escapeInput($home[0]['img_chapter2']); ?>" alt="Goldorak et Actarus" style="width:150px; height: 150px; object-fit: cover;">
+                    <img class="ms-3" id="img_chapter2" name="img_chapter2" src="img/picture/<?php echo escapeInput($home[0]['img_chapter2']); ?>" alt="Goldorak et Actarus" style="width:150px; height: 150px; object-fit: cover;">
                 </div>
 
                 <!-- End image Chapter 2 -->
@@ -157,7 +178,7 @@
                         <h3><?php echo escapeInput($home[0]['titre_chapter2']); ?></h3>
                     <?php } ?>
                     <?php if ($_SESSION['typeConnect']==='Administrator'){ ?>
-                        <h3><input type="text" name="txt_titre_chapter2" value="<?php echo escapeInput($home[0]['titre_chapter2']); ?>"></h3>
+                        <h3><input type="text" name="txt_titre_chapter2" id="txt_titre_chapter2" value="<?php echo escapeInput($home[0]['titre_chapter2']); ?>"></h3>
                     <?php } ?>
 
                 <!-- End Titre Chapter 2 -->
@@ -171,7 +192,7 @@
                     <?php } ?>
                     <?php if ($_SESSION['typeConnect']==='Administrator'){ ?>
                         <p class="p-0" style="text-align: justify;">
-<textarea name="txt_chapter2" cols="1" rows="5">
+<textarea name="txt_chapter2" id="txt_chapter2" cols="1" rows="5">
 <?php echo escapeInput($home[0]['chapter2']); ?>
 </textarea>
                         </p>
@@ -234,10 +255,15 @@
                 <input class="btn btn-lg btn-success w-100" type="button" name="btn_home_save" id="btn_home_save" value="Enregistrer">
             </div>
 
+            <!-- End button Save -->
+
+            <!-- start of data save message -->
+
             <div class="container d-flex justify-content-center mb-5">
                 <div class="text-center text-black bg-warning px-5 rounded-5" id="message"></div>
             </div>
-            <!-- End button Save -->
+            
+            <!-- end of data save message -->
 
         </div>
 
@@ -247,4 +273,6 @@
 
 </form>
 
-<script src="../js/home.js"></script>
+<script src="js/function.js"></script>
+<script src="js/fetch.js"></script>
+<script src="js/home.js"></script>

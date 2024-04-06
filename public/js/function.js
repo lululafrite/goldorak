@@ -7,7 +7,7 @@ function setInputValue(inputId, value) {
 
 function colorBgList(input, color){
     document.addEventListener('DOMContentLoaded', function() {
-        var myInput = document.getElementById(input);
+        let myInput = document.getElementById(input);
         myInput.style.backgroundColor = color;
     });
 }
@@ -30,10 +30,10 @@ function verifInputEmpty(input){
 
 function veriList(input , datalist){
 
-    var myInput = document.getElementById(input);
-    var myDatalist = document.getElementById(datalist);
+    let myInput = document.getElementById(input);
+    let myDatalist = document.getElementById(datalist);
 
-    var isValid = Array.from(myDatalist.options).some(function(option) {
+    let isValid = Array.from(myDatalist.options).some(function(option) {
         return option.value === myInput.value;
     });
 

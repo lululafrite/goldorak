@@ -28,7 +28,7 @@ function validateInput(input , datalist, myLabel, myMessage){
 
     const myInput = document.getElementById(input);
     const errorMessage = document.getElementById(myLabel);
-    //var isValid = false;
+    //let isValid = false;
     let isError = false;
     
     if(datalist != ''){
@@ -157,7 +157,7 @@ document.getElementById('formUserEdit').addEventListener('submit', function (eve
         isError = true;
     }
 
-    var messageAlerte = 'Vous avez un ou plusieurs champs dont la valeur n\'est pas conforme. Veuillez vérifier et corriger le ou les champs concernés';
+    let messageAlerte = 'Vous avez un ou plusieurs champs dont la valeur n\'est pas conforme. Veuillez vérifier et corriger le ou les champs concernés';
     
     if (isError === true){
         event.preventDefault();
@@ -165,77 +165,3 @@ document.getElementById('formUserEdit').addEventListener('submit', function (eve
         isError = false;
     }
 });
-
-/*
-function validateInput(input , datalist, myLabel, myMessage){
-
-    var myInput = document.getElementById(input);
-    var errorMessage = document.getElementById(myLabel);
-    var isValid = false;
-    var isError = false;
-    
-    if(datalist != ''){
-        
-        isValid = veriList(input , datalist);
-
-    }else if(myInput.value.trim() === ''){
-        
-        isError = true;
-
-    }else if(input === 'txt_userEdit_password'){
-
-        var passwordInput = document.getElementById(input).value;
-
-        // Vérifier que la longueur est de 8 caractères
-        if (passwordInput.length < 8) {
-            //alert("Le mot de passe doit contenir au moins 8 caractères dont au moins 1 majuscule, 1 minuscule, 1 chiffre et 1 caractère spécial parmi les suivants (_-/*-@!)");
-            isError=true;
-        }else{
-            isError=false;
-        }
-
-        //Vérifier au moins une majuscule, une minuscule, un chiffre, et un caractère spécial
-        var regex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[_\-/*-@!])[\w\-/*-@!]{8,255}$/;
-        
-        if (!regex.test(passwordInput)) {
-            //alert("Le mot de passe doit contenir au moins 8 caractères dont au moins 1 majuscule, 1 minuscule, 1 chiffre et 1 caractère spécial parmi les suivants (_-/*-@!)");
-            isError=true;
-        }
-        
-    }else if(input === 'txt_userEdit_confirm'){
-
-        var password = document.getElementById('txt_userEdit_password').value;
-        var passwordConfirm = document.getElementById(input).value;
-
-        if(passwordConfirm === password){
-            isError=false;
-            console.log(isError);
-        }
-        else{
-            isError=true;
-            console.log(isError);
-        }
-    }
-
-    if(isError){
-
-        errorMessage.textContent = myMessage;
-        errorMessage.style.color = 'red';
-        myInput.style.background = '#FFB4B4';
-        return false;
-
-    }else{
-
-        errorMessage.textContent = myMessage;
-        errorMessage.style.color = '#000000';
-        
-        if(datalist!=''){
-            myInput.style.background = '#DADADA';
-        }else{
-            myInput.style.background = '#ffffff';
-        }
-
-        return true;
-    }
-}
-*/

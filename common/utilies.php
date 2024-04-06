@@ -1,9 +1,19 @@
 <?php
 
-    //Verif validité jeton CSRF
+    // Create and verification of CSRF token
+    
+    function verifCsrf($varCsrf) {
+            
+        $value_Is = false;
 
-    function verifCsrf() {
-        return isset($_POST['csrf']) && isset($_SESSION['csrf']) && $_POST['csrf'] === $_SESSION['csrf'];
+        if(isset($_POST[$varCsrf]) && isset($_SESSION[$varCsrf]) && $_POST[$varCsrf] === $_SESSION[$varCsrf]){
+            $value_Is = true;
+        }
+
+        $csrf = bin2hex(random_bytes(32));
+        $_SESSION[$varCsrf] = $csrf;
+
+        return $value_Is;
     }
 
     //escape Input

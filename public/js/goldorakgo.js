@@ -1,20 +1,20 @@
-var playerName;
-var attempts = 0;
-var maxNumber;
-var secretNumber;
-var guessedNumbers = [];
+let playerName;
+let attempts = 0;
+let maxNumber;
+let secretNumber;
+let guessedNumbers = [];
 
-var gameContainer = document.getElementById("game-container");
-var contenuHtmlActuel;
-var ajoutBaliseHtml;
-var ajoutBaliseHtml_2;
-var propositionEffectuée;
+let gameContainer = document.getElementById("game-container");
+let contenuHtmlActuel;
+let ajoutBaliseHtml;
+let ajoutBaliseHtml_2;
+let propositionEffectuée;
 
 // Fonction pour commencer le jeu
 function startGame() {
     // Récupérer les valeurs du formulaire
     playerName = document.getElementById("playerName").value;
-    var difficultyElements = parseInt(document.querySelector('input[name=difficulty]:checked').value);
+    let difficultyElements = parseInt(document.querySelector('input[name=difficulty]:checked').value);
 
     // Trouver la difficulté sélectionnée
     //difficultyElements = parseInt(difficultyElements);
@@ -71,7 +71,7 @@ function displayGame(valeur=0) {
 
 // Fonction pour faire une proposition
 function makeGuess() {
-    var userGuess = parseInt(document.getElementById("userGuess").value);
+    let userGuess = parseInt(document.getElementById("userGuess").value);
 
     // Vérifier la validité de la saisie
     if (isNaN(userGuess) || userGuess < 1 || userGuess > maxNumber) {
@@ -92,7 +92,7 @@ function makeGuess() {
             gameContainer.innerHTML = contenuHtmlActuel + "<p class='ms-3'><strong>" + userGuess + " c'est trop haut!</strong></p>" + displayResults();
         } else {
             // Le joueur a deviné correctement
-            var messageGagnant = "<h2 class='m-3'>Bravo, " + playerName + "!</h2><h3 class='m-3'>Tu as trouvé le nombre de Golgoth en " + attempts + " tentatives.</h3><h4 class='m-3'>Goldorak doit abattre " + userGuess + " Golgoth(s) pour sauver la terre.</h4>";
+            let messageGagnant = "<h2 class='m-3'>Bravo, " + playerName + "!</h2><h3 class='m-3'>Tu as trouvé le nombre de Golgoth en " + attempts + " tentatives.</h3><h4 class='m-3'>Goldorak doit abattre " + userGuess + " Golgoth(s) pour sauver la terre.</h4>";
             
             ajoutBaliseHtml = `
                 <p class="m-3" >` + messageGagnant + `</p>
@@ -142,7 +142,7 @@ window.addEventListener("keydown", function(event) {
 // Fonction personnalisée pour intercepter la touche "Entrée" dans le champ de texte de prompt
 function customPromptInput() {
     // Récupère la valeur actuelle du champ de texte
-    var inputText = document.activeElement.value;
+    let inputText = document.activeElement.value;
 
     // Ferme la fenêtre prompt
     customPromptClose();

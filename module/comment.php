@@ -38,7 +38,7 @@
                                 </div>
 
                                 <div class="col-12 col-sm-4 col-lg-12 col-xxl-4 mx-0 px-0">
-                                    <input class="text-start text-sm-center text-lg-start text-xxl-center" type="text" readonly value="Date : <?php echo $Comment[$i]['date_']; ?>">
+                                    <input class="text-start text-sm-center text-lg-start text-xxl-center" type="text" readonly value="<?php echo $Comment[$i]['date_']; ?>">
                                 </div>
 
                                 <div class="col-12 col-sm-3 col-lg-12 col-xxl-3 mx-0 px-0">
@@ -65,19 +65,19 @@
 
                         <div class="card-footer d-flex flex-wrap justify-content-center">
 
-                            <button class="btn btn-lg btn-primary me-2" type="submit" id="bt_comment_validate" name="bt_comment_validate" style="width: 100px;">Valider</button>
-                            <button class="btn btn-lg btn-warning me-2" type="submit" id="bt_comment_refuse" name="bt_comment_refuse" style="width: 100px;">Refuser</button>
-                            <button class="btn btn-lg btn-danger me-2" type="submit" id="bt_comment_delete" name="bt_comment_delete" style="width: 100px;">Supprimer</button>
+                            <input class="btn btn-lg btn-primary me-2 comment-action" type="button" data-comment-id="<?php echo $Comment[$i]['id_comment']; ?>" data-action="bt_comment_validate" style="width: 100px;" value="Valider">
+                            <input class="btn btn-lg btn-warning me-2 comment-action" type="button" data-comment-id="<?php echo $Comment[$i]['id_comment']; ?>" data-action="bt_comment_refuse" style="width: 100px;" value="Refuser">
+                            <input class="btn btn-lg btn-danger me-2 comment-action" type="button" data-comment-id="<?php echo $Comment[$i]['id_comment']; ?>" data-action="bt_comment_delete" style="width: 100px;" value="Supprimer">
                         
                         </div>
 
-                        <div>
+                        <div id="bgStateComment_<?php echo $Comment[$i]['id_comment'];?>">
 
-                            <input class="text-center <?php
+                            <input id="stateComment_<?php echo $Comment[$i]['id_comment'];?>" class="text-center <?php
                                                         if ($Comment[$i]['publication'] == '0'){
                                                             echo "bg-info";
                                                         }else if ($Comment[$i]['publication'] == '1'){
-                                                            echo "bg-danger";
+                                                            echo "bg-warning";
                                                         }else if ($Comment[$i]['publication'] == '2'){
                                                             echo "bg-success";
                                                         }

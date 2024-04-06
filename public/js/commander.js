@@ -1,22 +1,22 @@
-var sommeJoueur = 0;
-var joueurActif;
-var partieEncours;
-var deLance = false;
+let sommeJoueur = 0;
+let joueurActif;
+let partieEncours;
+let deLance = false;
 
 // Joueur name
-var Joueur1 = "Joueur 1";
-var Joueur2 = "Joueur 2";
+let Joueur1 = "Joueur 1";
+let Joueur2 = "Joueur 2";
 
-var inputTotal1 = document.getElementById('total1');
-var inputTotal2 = document.getElementById('total2');
-var inputSomme1 = document.getElementById('somme1');
-var inputSomme2 = document.getElementById('somme2');
+let inputTotal1 = document.getElementById('total1');
+let inputTotal2 = document.getElementById('total2');
+let inputSomme1 = document.getElementById('somme1');
+let inputSomme2 = document.getElementById('somme2');
 
-var btnNewGame = document.getElementById('btnNewGame');
-var btnCancelGame = document.getElementById('btnCancelGame');
-var btnPrendre = document.getElementById('btnPrendre');
-var txtJoueur1 = document.getElementById('txtJoueur1');
-var txtJoueur2 = document.getElementById('txtJoueur2');
+let btnNewGame = document.getElementById('btnNewGame');
+let btnCancelGame = document.getElementById('btnCancelGame');
+let btnPrendre = document.getElementById('btnPrendre');
+let txtJoueur1 = document.getElementById('txtJoueur1');
+let txtJoueur2 = document.getElementById('txtJoueur2');
 
 btnPrendre.style.visibility = 'hidden';
 btnCancelGame.style.visibility = 'hidden';
@@ -50,7 +50,7 @@ function lanceLeDe(){
 
 //Sortir une valeur aléatoire du dé et incrémenter la valeur dans la variable 'somme' OU annuler le tour si la valeur est égale à 1.
 function valeurDuDe() {
-    var randomNumber = Math.floor(Math.random() * 6) + 1;
+    let randomNumber = Math.floor(Math.random() * 6) + 1;
     document.querySelector(".img3").setAttribute("src", "img/game/dice" + randomNumber + ".png");
 
     if (randomNumber === 1){
