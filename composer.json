@@ -1,5 +1,17 @@
 {
-    "require-dev": {
-        "symfony/var-dumper": "^7.0"
+    "name": "lfoll/goldorak",
+    "description": "website of Goldorak Club",
+    "autoload": {
+        "psr-4": {
+            "Lfoll\\Goldorak\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Ludovic FOLLACO"
+        }
+    ],
+    "require": {
+        "firebase/php-jwt": "^6.10"
     }
 }

@@ -65,7 +65,6 @@
 
                 <td class="text-center" colspan="2">
                     <?php if($_SESSION['typeConnect'] != 'Guest'){ ?>
-                        <!-- <input class="btn btn btn-primary fs-4" type="button" id="bt_save_comment" name="bt_save_comment" value="Envoyer"> -->
                         <input class="btn btn btn-primary comment-action" type="button" data-comment-id="<?php echo '0' ?>" data-action="bt_save_comment" name="bt_save_comment" style="width: 100px;" value="Envoyer">
                     <?php }else{echo "Inscrivez-vous pour laisser un commentaire";}?>
                 </td>

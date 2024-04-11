@@ -1,11 +1,11 @@
 <?php include('../controller/user.controller.php'); ?>
 
 <div class="mt-5">
-    <?php include('../module/_07_searchUser.php'); ?>
+    <?php include('../module/searchUser.php'); ?>
 </div>
 
 <div class="mt-5">
-    <?php include('../module/_05_select_page.php'); ?>
+    <?php include('../module/select_page.php'); ?>
 </div>
 
 <div class="container">
@@ -109,5 +109,5 @@
 </div>
 
 <div class="mb-5">
-    <?php include('../module/_05_select_page.php'); ?>
+    <?php include('../module/select_page.php'); ?>
 </div>

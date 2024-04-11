@@ -2,7 +2,9 @@
 
     include_once('../common/utilies.php');
     include_once('../model/home.class.php');
-    
+
+    use \Firebase\JWT\JWT;
+
     $btn_home_save = isset($_POST['btn_home_save']) ? true : false;
     unset($_POST['btn_home_save']);
 
@@ -16,46 +18,63 @@
         $homes = new Home();
     }
 
-    if(verifCsrf('csrfHome') && $_SERVER['REQUEST_METHOD'] === 'POST'){
+    $jwt1 = JWT::jsondecode($_SESSION['jwt']);
+    $jwt2 = JWT::jsondecode(tokenJwt($_SESSION['pseudoConnect'], $_SESSION['SECRET_KEY']));
+
+    if($jwt2->{'delay'} - $jwt1->{'delay'} <= $_SESSION['delay']){
+
+        if(verifCsrf('csrfHome') && $_SERVER['REQUEST_METHOD'] === 'POST'){
+            
+            if($btn_home_save){
+                $btn_home_save = false;
+                saveHome($homes,'');
+            }
+
+            //***********************************************************************************************
+            // traitement du téléchargement des images 
+            //***********************************************************************************************
+
+            if($btn_img_chapter1){
+
+                $btn_img_chapter1 = false;
+
+                if (uploadImg('newImgChapter1','txt_img_chapter1','file_img_chapter1','./img/picture/')){
+
+                    $home[0]['img_chapter1'] = $_SESSION['newImgChapter1'];
+
+                }else{
+
+                    echo "<script>alert('Désolé, une erreur s\'est produite lors de l\'upload de l\'image.');</script>";
+
+                }
+
+            }
+
+            if($btn_img_chapter2){
+
+                if (uploadImg('newImgChapter2','txt_img_chapter2','file_img_chapter2','./img/picture/')){
+
+                    $home[0]['img_chapter2'] = $_SESSION['newImgChapter2'];
+
+                }else{
+
+                    echo "<script>alert('Désolé, une erreur s\'est produite lors de l\'upload de l\'image.');</script>";
+
+                }
+
+            }
+
+        }
+
+    }else if($_SESSION['pseudoConnect'] != 'Guest'){
+
+        $_SESSION['typeConnect'] = 'Guest';
+        $_SESSION['pseudoConnect'] = 'Guest';
+        $_SESSION['avatarConnect'] = 'avatar_membre_white.webp';
+        $_SESSION['subscriptionConnect'] = 'Vénusia';
+        $_SESSION['connexion'] = false;
         
-        if($btn_home_save){
-            $btn_home_save = false;
-            saveHome($homes,'');
-        }
-
-        //***********************************************************************************************
-        // traitement du téléchargement des images 
-        //***********************************************************************************************
-
-        if($btn_img_chapter1){
-
-            $btn_img_chapter1 = false;
-
-            if (uploadImg('newImgChapter1','txt_img_chapter1','file_img_chapter1','./img/picture/')){
-
-                $home[0]['img_chapter1'] = $_SESSION['newImgChapter1'];
-
-            }else{
-
-                echo "<script>alert('Désolé, une erreur s\'est produite lors de l\'upload de l\'image.');</script>";
-
-            }
-
-        }
-
-        if($btn_img_chapter2){
-
-            if (uploadImg('newImgChapter2','txt_img_chapter2','file_img_chapter2','./img/picture/')){
-
-                $home[0]['img_chapter2'] = $_SESSION['newImgChapter2'];
-
-            }else{
-
-                echo "<script>alert('Désolé, une erreur s\'est produite lors de l\'upload de l\'image.');</script>";
-
-            }
-
-        }
+        timeExpired();
 
     }
 

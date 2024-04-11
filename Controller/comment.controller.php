@@ -1,5 +1,7 @@
 <?php
 
+    use \Firebase\JWT\JWT;
+
     include_once('../common/utilies.php');
     include_once('../model/comment.class.php');
     
@@ -19,49 +21,67 @@
         $comments = new Comment();
     }
 
-    if(verifCsrf('csrfComment') && $_SERVER['REQUEST_METHOD'] === 'POST'){
-        
-        $idComment = filterInput('txt_comment_id');
+    $jwt1 = JWT::jsondecode($_SESSION['jwt']);
+    $jwt2 = JWT::jsondecode(tokenJwt($_SESSION['pseudoConnect'], $_SESSION['SECRET_KEY']));
 
-        if($bt_save_comment){
+    if($jwt2->{'delay'} - $jwt1->{'delay'} <= $_SESSION['delay']){
 
-            $bt_save_comment = false;
+        if($jwt1->{'user_pseudo'} === $jwt2->{'user_pseudo'} && $jwt1->{'key'} === $jwt2->{'key'}){
 
-            $pseudo_ = filterInput('txt_comment_pseudo');
-            $rating_ = filterInput('selectedRating');
-            $comment_ = filterInput('txt_comment_comment');
-            
-            if($comment_ != ""){
+            if(verifCsrf('csrfComment') && $_SERVER['REQUEST_METHOD'] === 'POST'){
+                
+                $idComment = filterInput('txt_comment_id');
 
-                $comments->setDate_(date("Y-m-d"));
-                $comments->setPseudo($pseudo_);
-                $comments->setRating($rating_);
-                $comments->setComment($comment_);
+                if($bt_save_comment){
 
-                $comments->addComment();
+                    $bt_save_comment = false;
 
-            }else{
+                    $pseudo_ = filterInput('txt_comment_pseudo');
+                    $rating_ = filterInput('selectedRating');
+                    $comment_ = filterInput('txt_comment_comment');
+                    
+                    if($comment_ != ""){
 
-                echo "<script>alert('Le champ commentaire ne peut pas être vide!!! Resaisissez votre commentaire et selectionnez une étoile de 1 à 5.');</script>";
+                        $comments->setDate_(date("Y-m-d"));
+                        $comments->setPseudo($pseudo_);
+                        $comments->setRating($rating_);
+                        $comments->setComment($comment_);
+
+                        $comments->addComment();
+
+                    }else{
+
+                        echo "<script>alert('Le champ commentaire ne peut pas être vide!!! Resaisissez votre commentaire et selectionnez une étoile de 1 à 5.');</script>";
+
+                    }
+
+                }else if($bt_comment_delete){
+                    
+                    $comments->deleteComment($idComment);
+
+                }else if($bt_comment_validate){
+                    
+                    $comments->modereComment($idComment, 2);
+
+                }else if($bt_comment_refuse){
+                    
+                    $comments->modereComment($idComment, 1);
+
+                }
 
             }
 
-        }else if($bt_comment_delete){
-            
-            $comments->deleteComment($idComment);
-            //routeToHomePage();
-
-        }else if($bt_comment_validate){
-            
-            $comments->modereComment($idComment, 2);
-            //routeToHomePage();
-
-        }else if($bt_comment_refuse){
-            
-            $comments->modereComment($idComment, 1);
-            //routeToHomePage();
-
         }
+
+    }else if($_SESSION['pseudoConnect'] != 'Guest'){
+
+        $_SESSION['typeConnect'] = 'Guest';
+        $_SESSION['pseudoConnect'] = 'Guest';
+        $_SESSION['avatarConnect'] = 'avatar_membre_white.webp';
+        $_SESSION['subscriptionConnect'] = 'Vénusia';
+        $_SESSION['connexion'] = false;
+        
+        timeExpired();
 
     }
 

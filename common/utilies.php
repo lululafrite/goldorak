@@ -1,5 +1,25 @@
 <?php
 
+use Firebase\JWT\JWT;
+
+    // Creating of JWT token
+
+    function tokenJwt ($pseudo, $key){
+        
+        $payload = array(
+
+            "user_pseudo" => $pseudo,
+            "delay" => time() + $_SESSION['delay'],
+            "key" => $key
+
+        );
+
+        $value = JWT::jsonEncode($payload);
+
+        return $value;
+
+    }
+
     // Create and verification of CSRF token
     
     function verifCsrf($varCsrf) {
@@ -90,6 +110,23 @@
         else{
             
             echo '<script>window.location.href = "https://www.follaco.fr/goldorak/public/errorPage/index.php?page=unknownPage";</script>';
+        
+        }
+        exit();
+        
+    }
+
+    // Rerouted if page does not exist 
+    function timeExpired(){
+            
+        if($_SESSION['local']){
+            
+            echo '<script>window.location.href = "http://goldorak/index.php?page=timeExpired";</script>';
+        
+        }
+        else{
+            
+            echo '<script>window.location.href = "https://www.follaco.fr/goldorak/public/errorPage/index.php?page=timeExpired";</script>';
         
         }
         exit();

@@ -12,7 +12,10 @@
     $_SESSION['avatarConnect'] = 'avatar_membre_white.webp';
     $_SESSION['connexion'] = false;
     
-    include_once '../common/utilies.php';
+    include_once('../common/utilies.php');
+
+    $_SESSION['jwt'] = tokenJwt($_SESSION['pseudoConnect'], $_SESSION['SECRET_KEY']);
+    
     routeToHomePage();
     
 ?>
