@@ -6,9 +6,9 @@ Ce site a pour objet de faire connaitre l'association destinée aux passionnés 
 
 Le manuel ci-dessous d'écrit uniquement les étapes principales à respecter pour travailler en local ou en online.
 Pour accéder aux documents du dossier technique :
-php.txt : https://www.follaco.fr/goldorak/public/Dossier_Technique/php.txt
-launch.txt : https://www.follaco.fr/goldorak/public/Dossier_Technique/launch.txt
-bdd_goldorak.sql : https://www.follaco.fr/goldorak/public/Dossier_Technique/bdd_goldorak.sql
+- php.txt : https://www.follaco.fr/goldorak/public/Dossier_Technique/php.txt
+- launch.txt : https://www.follaco.fr/goldorak/public/Dossier_Technique/launch.txt
+- bdd_goldorak.sql : https://www.follaco.fr/goldorak/public/Dossier_Technique/bdd_goldorak.sql
 
 POUR TRAVAILLER EN LOCAL
 
