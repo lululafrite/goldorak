@@ -2,7 +2,7 @@
     
     // La variable $_SESSION['local'] mettre à false si online et à true si serveur local
     // Cette variable agit sur le controleur 'ConfigConnGP.php' pour les paramètres de connexion
-    $_SESSION['local']=true;
+    $_SESSION['local'] = true;
 
     if (!isset($_SESSION['typeConnect'])) {
 

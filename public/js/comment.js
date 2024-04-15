@@ -116,7 +116,20 @@ function sendDataOfComment(button, id = ''){
             let element = document.getElementById('stateComment_' + id);
             element.classList.remove('bg-info','bg-success','bg-danger','bg-warning');
             element.classList.add('bg-danger');
-            window.location.href = "http://goldorak/index.php?page=home";
+
+            let valeurSession = document.getElementById('txt_local').value;
+
+            if (valeurSession === "1"){
+
+                window.location.href = "http://goldorak/index.php?page=home";
+
+            }else{
+
+                window.location.href = "https://www.follaco.fr/goldorak/public/index.php?page=home";
+
+            }
+            return;
+
         })
         .catch(error => {
     

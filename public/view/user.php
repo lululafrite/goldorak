@@ -16,7 +16,7 @@
 
     <article class="border rounded-4 px-3 m-4">
 
-        <form action="/index.php?page=userEdit" method="post">
+        <form action="index.php?page=userEdit" method="post">
 
             <div class="d-flex justify-content-center div__Car--img mt-3">
                 <img src="img/avatar/<?php echo escapeInput($users[$i]['avatar']); ?>" alt="Avatar de l'utilisateur" style="width:70px; height: 70px; object-fit: cover;">

@@ -11,7 +11,7 @@
                 </td>
 
                 <td class="py-5">
-                    <?php include "../module/_10_buttonEdit.php"; ?>
+                    <?php include "../module/buttonEdit.php"; ?>
                 </td>
             </tr>
 
@@ -402,7 +402,7 @@
                 </td>
 
                 <td class="pb-5">
-                    <?php include "../module/_10_buttonEdit.php"; ?>
+                    <?php include "../module/buttonEdit.php"; ?>
                 </td>
 
             </tr>

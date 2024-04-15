@@ -6,7 +6,7 @@
             
             <article class="border-end"></article>
 
-            <article class="d-flex justify-content-center me-0 me-sm-5 articleFooter">
+            <article class="d-flex justify-content-center me-0 me-sm-5">
                 <ul class="m-0 p-0 px-sm-3">
                     <li class="text-danger"><strong>Nous recommandons</strong></li>
                     <li>Jeu vidéo : <a href="https://www.youtube.com/watch?v=huxntHu4rkU&list=PLkqP2Oulr-MS12SAsTzLeoSWjCGdxBhJ6&index=8" target="_blank">Microids</a><li>
@@ -17,7 +17,7 @@
             <hr>
             <article class="border-end"></article>
             
-            <article class="d-flex justify-content-center me-0 me-sm-5 articleFooter">
+            <article class="d-flex justify-content-center me-0 me-sm-5">
                 <ul class="m-0 p-0 px-sm-3">
                     <li class="text-danger"><strong>Nous contacter</strong></li>
                     <li>Email : <a href="mailto:ludovic.follaco@free.fr">ludovic.follaco@free.fr</a><li>

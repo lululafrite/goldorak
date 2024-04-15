@@ -9,7 +9,7 @@ use Firebase\JWT\JWT;
         $payload = array(
 
             "user_pseudo" => $pseudo,
-            "delay" => time() + $_SESSION['delay'],
+            "delay" => time() + 3600,
             "key" => $key
 
         );
