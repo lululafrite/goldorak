@@ -7,17 +7,22 @@ clickEvent('btn_img_chapter2','file_img_chapter2','img_chapter2', 'txt_img_chapt
 
 function clickEvent(button, inputFile = '', inputImage = '', inputTxt = ''){
 
-    document.getElementById(button).addEventListener('click', function(event) {
+    let buttonElement = document.getElementById(button);
 
-        event.preventDefault();
-        //sendDataOfHome(button);
+    if(buttonElement){
 
-        if(inputFile != '' && inputImage != ''){
-            changePicture(inputFile, inputImage);
-            document.getElementById(inputTxt).value = document.getElementById(inputFile).files[0].name;
-        }
+        buttonElement.addEventListener('click', function(event) {
 
-    });
+            event.preventDefault();
+
+            if(inputFile != '' && inputImage != ''){
+                changePicture(inputFile, inputImage);
+                document.getElementById(inputTxt).value = document.getElementById(inputFile).files[0].name;
+            }
+
+        });
+
+    }
 
 }
 
@@ -35,25 +40,6 @@ function changePicture(nameInputFile, idImage) {
 /*********************************************************************************** */
 // Function of sending data to the server with Fetch
 /*********************************************************************************** */
-
-/*function sendDataToServer(url, data) {
-    return fetch(url, {
-        method: 'POST',
-        body: data
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Une erreur s\'est produite lors de la requête.');
-        }
-        return response.text();
-    })
-    .then(data => {
-        console.log('Réponse du serveur :', data);
-    })
-    .catch(error => {
-        console.error('Erreur :', error);
-    });
-}*/
 
 function sendDataOfHome(button){
 
@@ -74,7 +60,7 @@ function sendDataOfHome(button){
     formData.append('txt_img_chapter2', document.querySelector('input[name="txt_img_chapter2"]').value);
 
     // Envoyer les données au serveur
-    sendDataToServer('index.php?page=home', formData)
+    sendDataToServer('index.php?page=home', formData) // Function in file fetch.js
     .then(response => {
         //if (response.ok) {
         const messageAlerte = 'Enregistrement effectué avec succès!';
@@ -114,105 +100,69 @@ initMessageSave('txt_img_chapter2');
 
 function initMessageSave(input){
 
-    document.getElementById(input).addEventListener('input', function() {
+    let inputElement = document.getElementById(input);
+
+    if(inputElement){
+
+        inputElement.addEventListener('input', function() {
     
-        document.getElementById('message').innerText = '';
-        document.getElementById('messageInputEmpty1').innerText = '';
-        document.getElementById('messageInputEmpty2').innerText = '';
+            document.getElementById('message').innerText = '';
+            document.getElementById('messageInputEmpty1').innerText = '';
+            document.getElementById('messageInputEmpty2').innerText = '';
     
-    });
+        });
+    }
 
 }
 
 /**************************************************************************** */
 // Event if button save of form is clicked
 /**************************************************************************** */
+let buttonElement = document.getElementById('btn_home_save');
+if(buttonElement){
 
-document.getElementById('btn_home_save').addEventListener('click', function (event) {
-    
-    console.log('btn_home_save');
-
-    let isError = false;
-
-    if (!validateInput('txt_titre1')) {
-        isError = true;
-    }
-    if (!validateInput('txt_titre_chapter1')) {
-        isError = true;
-    }
-    if (!validateInput('txt_chapter1')) {
-        isError = true;
-    }
-    if (!validateInput('txt_titre_chapter2')) {
-        isError = true;
-    }
-    if (!validateInput('txt_chapter2')) {
-        isError = true;
-    }
-    if (!validateInput('txt_img_chapter2')) {
-        isError = true;
-    }
-
-    const messageAlerte = 'Vous avez un ou plusieurs champs dont la valeur n\'est pas conforme. Veuillez Corriger le ou les champs concernés marqués d\'un fond rose.';
-    
-    if (isError === true){
-
-        event.preventDefault();
+    buttonElement.addEventListener('click', function (event) {
         
-        document.getElementById('message').innerText = messageAlerte;
-        document.getElementById('messageInputEmpty1').innerText = messageAlerte;
-        document.getElementById('messageInputEmpty2').innerText = messageAlerte;
+        console.log('btn_home_save');
 
-        isError = false;
+        let isError = false;
 
-    }else{
+        if (!validateInput('txt_titre1')) {
+            isError = true;
+        }
+        if (!validateInput('txt_titre_chapter1')) {
+            isError = true;
+        }
+        if (!validateInput('txt_chapter1')) {
+            isError = true;
+        }
+        if (!validateInput('txt_titre_chapter2')) {
+            isError = true;
+        }
+        if (!validateInput('txt_chapter2')) {
+            isError = true;
+        }
+        if (!validateInput('txt_img_chapter2')) {
+            isError = true;
+        }
 
-        sendDataOfHome('btn_home_save');
-
-    }
-
-});
-
-/**************************************************************************** */
-// checking input and Changing background if the content is empty
-/**************************************************************************** */
-
-function validateInput(input){
-
-    const myInput = document.getElementById(input);
-
-    let isError = false;
-    
-    if(verifInputEmpty(input)){
-
-        isError = true;
+        const messageAlerte = 'Vous avez un ou plusieurs champs dont la valeur n\'est pas conforme. Veuillez Corriger le ou les champs concernés marqués d\'un fond rose.';
         
-    }
+        if (isError === true){
 
-    if(isError){
-        console.log('validateInput' + input + ' = false');
-        myInput.style.background = '#FFB4B4';
-        return false;
+            event.preventDefault();
+            
+            document.getElementById('message').innerText = messageAlerte;
+            document.getElementById('messageInputEmpty1').innerText = messageAlerte;
+            document.getElementById('messageInputEmpty2').innerText = messageAlerte;
 
-    }else{
-        console.log('validateInput' + input + ' = true');
-        myInput.style.background = '#ffffff';
-        return true;
-    }
-}
+            isError = false;
 
-function verifInputEmpty(input){
-    
-    const myInput = document.getElementById(input);
-    
-    if(myInput.value.trim() === ''){
-        
-        return true;
+        }else{
 
-    }else{
-        
-        return false;
+            sendDataOfHome('btn_home_save');
 
-    }
+        }
 
+    });
 }

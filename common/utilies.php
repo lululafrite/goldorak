@@ -30,8 +30,12 @@ use Firebase\JWT\JWT;
             $value_Is = true;
         }
 
-        $csrf = bin2hex(random_bytes(32));
-        $_SESSION[$varCsrf] = $csrf;
+        if(empty($_SESSION[$varCsrf]) || (!$_SESSION['newUser'] && !$_SESSION['bt_userEdit_save'])){
+
+            $csrf = bin2hex(random_bytes(32));
+            $_SESSION[$varCsrf] = $csrf;
+
+        }
 
         return $value_Is;
     }
@@ -42,8 +46,8 @@ use Firebase\JWT\JWT;
         return htmlspecialchars($input, ENT_QUOTES, 'UTF-8');
     }
 
-    function filterInput($input){
-        return filter_input(INPUT_POST, $input, FILTER_DEFAULT);
+    function filterInput($input, $method = INPUT_POST){
+        return filter_input($method, $input, FILTER_DEFAULT);
     }
 
     //upload image

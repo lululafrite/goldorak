@@ -96,6 +96,7 @@
                         </li>
                         <li>
                             <form action="index.php?page=userEdit" method="post">
+                                <!-- <input class="dropdown-item text-light nav_new_user" type="button" name="nav_new_user" id="nav_new_user" value="Nouveau">  -->
                                 <button class="dropdown-item text-light" id="nav_new_user" name="nav_new_user" type="submit">
                                     <img class="pe-2 mb-1" src="img/icon/person-plus.svg" alt="icone nouveau profil">
                                     Nouveau

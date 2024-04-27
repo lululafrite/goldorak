@@ -50,7 +50,7 @@
                         $Types = new Type();
                         $MyType = $Types->get(1,'type', 'ASC', 0, 50);
                         unset($Types);
-                        for($i=0;$i != count($MyType)-1;$i++) { ?>
+                        for($i=0;$i != count($MyType);$i++) { ?>
                             <option value="<?php echo $MyType[$i]['type']; ?>"><?php echo $MyType[$i]['type']; ?></option>
                     <?php } ?>
                 </select>

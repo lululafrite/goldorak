@@ -1,5 +1,10 @@
 <?php
     include_once '../common/utilies.php'; // Fonctions communes
+    
+    use \Firebase\JWT\JWT;
+    
+    $jwt1 = JWT::jsondecode($_SESSION['jwt']);
+    $jwt2 = JWT::jsondecode(tokenJwt($_SESSION['pseudoConnect'], $_SESSION['SECRET_KEY']));
 
     $page = isset($_GET['page']) ? escapeInput($_GET['page']) : 'home';
     
@@ -11,57 +16,6 @@
 
         include_once 'view/home.php';
 
-    }elseif ($page === 'user'){
-
-        $_SESSION['updateMoncompte'] = false;
-        $_SESSION['newUser'] = false;
-        $_SESSION['btn_monCompte'] = false;
-
-        if($_SESSION['typeConnect'] === "Administrator"){
-            include_once 'view/user.php';
-        }else{
-            pageUnavailable();
-        }
-
-    }elseif ($page === 'userEdit'){
-
-        $_SESSION['updateMoncompte'] = false;
-        //$_SESSION['btn_monCompte'] = false;
-        //$_SESSION['newUser'] = false;
-        include_once 'view/userEdit.php';
-
-    }elseif($page === 'product'){
-
-        $_SESSION['updateMoncompte'] = false;
-        $_SESSION['btn_monCompte'] = false;
-        $_SESSION['newUser'] = false;
-
-        include_once 'view/product.php';
-
-    }elseif ($page === 'productEdit'){
-
-        $_SESSION['updateMoncompte'] = false;
-        $_SESSION['btn_monCompte'] = false;
-        $_SESSION['newUser'] = false;
-
-        if($_SESSION['typeConnect'] === "Administrator" || $_SESSION['typeConnect'] === "User" ){
-            include_once 'view/productEdit.php';
-        }else{
-            pageUnavailable();
-        }
-
-    }elseif($page === 'media'){
-
-        $_SESSION['updateMoncompte'] = false;
-        $_SESSION['newUser'] = false;
-        $_SESSION['btn_monCompte'] = false;
-
-        if($_SESSION['typeConnect'] != "Guest"){
-            require_once 'view/media.php';
-        }else{
-            pageUnavailable();
-        }
-
     }elseif($page === 'events'){
 
         $_SESSION['updateMoncompte'] = false;
@@ -69,30 +23,6 @@
         $_SESSION['btn_monCompte'] = false;
 
         require_once 'view/events.php';
-
-    }elseif ($page === 'commander'){
-
-        $_SESSION['updateMoncompte'] = false;
-        $_SESSION['newUser'] = false;
-        $_SESSION['btn_monCompte'] = false;
-
-        if($_SESSION['subscriptionConnect'] === "Goldorak" ){
-            include_once 'view/commander.php';
-        }else{
-            pageUnavailable();
-        }
-
-    }elseif ($page === 'goldorakgo'){
-
-        $_SESSION['updateMoncompte'] = false;
-        $_SESSION['newUser'] = false;
-        $_SESSION['btn_monCompte'] = false;
-
-        if($_SESSION['subscriptionConnect'] != "Vénusia" ){
-            include_once 'view/goldorakgo.php';
-        }else{
-            pageUnavailable();
-        }
 
     }elseif ($page === 'adherer'){
 
@@ -169,6 +99,75 @@
         $_SESSION['btn_monCompte'] = false;
         
         include_once 'errorPage/unknownPage.php';
+
+    }else if($jwt2->{'delay'} - $jwt1->{'delay'} <= $_SESSION['delay']){
+
+        if ($page === 'user'){
+
+            $_SESSION['updateMoncompte'] = false;
+            $_SESSION['newUser'] = false;
+            $_SESSION['btn_monCompte'] = false;
+
+            if($_SESSION['typeConnect'] === "Administrator"){
+                include_once 'view/user.php';
+            }else{
+                pageUnavailable();
+            }
+
+        }elseif ($page === 'userEdit'){
+
+            $_SESSION['updateMoncompte'] = false;
+            //$_SESSION['btn_monCompte'] = false;
+            //$_SESSION['newUser'] = false;
+            include_once 'view/userEdit.php';
+
+        }elseif($page === 'media'){
+
+            $_SESSION['updateMoncompte'] = false;
+            $_SESSION['newUser'] = false;
+            $_SESSION['btn_monCompte'] = false;
+
+            if($_SESSION['typeConnect'] != "Guest"){
+                require_once 'view/media.php';
+            }else{
+                pageUnavailable();
+            }
+
+        }elseif ($page === 'commander'){
+
+            $_SESSION['updateMoncompte'] = false;
+            $_SESSION['newUser'] = false;
+            $_SESSION['btn_monCompte'] = false;
+
+            if($_SESSION['subscriptionConnect'] === "Goldorak" ){
+                include_once 'view/commander.php';
+            }else{
+                pageUnavailable();
+            }
+
+        }elseif ($page === 'goldorakgo'){
+
+            $_SESSION['updateMoncompte'] = false;
+            $_SESSION['newUser'] = false;
+            $_SESSION['btn_monCompte'] = false;
+
+            if($_SESSION['subscriptionConnect'] != "Vénusia" ){
+                include_once 'view/goldorakgo.php';
+            }else{
+                pageUnavailable();
+            }
+
+        }
+
+    }else if($_SESSION['pseudoConnect'] != 'Guest'){
+
+        $_SESSION['typeConnect'] = 'Guest';
+        $_SESSION['pseudoConnect'] = 'Guest';
+        $_SESSION['avatarConnect'] = 'avatar_membre_white.webp';
+        $_SESSION['subscriptionConnect'] = 'Vénusia';
+        $_SESSION['connexion'] = false;
+        
+        timeExpired();
 
     }else {
 

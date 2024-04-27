@@ -21,7 +21,10 @@
         include_once('../common/utilies.php');
         $_SESSION['jwt'] = tokenJwt($_SESSION['pseudoConnect'], $_SESSION['SECRET_KEY']);
         $_SESSION['delay'] = 3600; //delay for token JWT (1 hour before disconnection and return to the connection page)
-
+        
+        // Token CSRF
+        $_SESSION['csrfHome'] = '';
+        $_SESSION['csrfUSer'] = '';
 
 /********************************************************************** */
 /******************* VARIABLES USER *********************************** */
@@ -45,6 +48,7 @@
 
         $_SESSION['uploadAvatar'] = '';
         $_SESSION['btn_monCompte'] = false;
+        $_SESSION['bt_userEdit_save'] = false;
 
 /********************************************************************** */
 /******************* VARIABLES PAGINATION ***************************** */
@@ -73,5 +77,6 @@
 /********************************************************************** */
 
         $_SESSION['timeZone']="Europe/Paris";
+        $_SESSION['message']="";
     }
 ?>

@@ -1,5 +1,5 @@
 function sendDataToServer(url, data){
-
+    
     return fetch(url, {
 
         method: 'POST',
@@ -19,12 +19,12 @@ function sendDataToServer(url, data){
     })
     .then(data => {
 
-        console.log('Réponse du serveur :', data);
+        //console.log('Réponse du serveur :', data);
 
     })
     .catch(error => {
 
-        console.error('Erreur :', error);
+        //console.error('Erreur :', error);
 
     });
 }

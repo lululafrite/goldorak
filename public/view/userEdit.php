@@ -1,17 +1,64 @@
 <?php include_once('../controller/userEdit.controller.php'); ?>
 
 <section class="container">
+    
+    <div id="sessionValue" data-local="<?php echo isset($_SESSION['local']) ? $_SESSION['local'] : ''; ?>"></div>
 
-    <form action="" method="post" id="formUserEdit" enctype="multipart/form-data">
+    <form method="post" id="formUserEdit" enctype="multipart/form-data">
                 
         <table class="w-100">
+            
+            <!-- input hidden csrf -->
+            <tr style="display: none;">
+                <td colspan="2">
+                    <input type="hidden" name="csrfUSer" value="<?php echo $_SESSION['csrfUSer'];?>">
+                </td>
+            </tr>
 
             <tr class="m-0 p-0">
                 <td class="">
                 </td>
 
                 <td class="py-5">
-                    <?php include "../module/buttonEdit.php"; ?>
+                    <?php //include "../module/buttonEdit.php"; ?>
+                    <div class="d-flex flex-column flex-sm-row">
+
+                        <div class="me-2">
+
+                        <?php if($_SESSION['typeConnect'] === 'Administrator'){ ?>
+                            <button class="btn btn-lg btn-warning fs-4 mb-2 mb-md-0" type="submit" name="bt_userEdit_cancel" style="width: 100px;" onclick="retour();">Retour</button>
+                        <?php } ?>
+                        
+                            <input class="btn btn-lg btn-success fs-4 mb-2 mb-md-0" type="button" name="bt_userEdit_save" id="bt_userEdit_save" style="width: 100px;" value="Enregistrer">
+                        
+                        </div>
+
+                    <?php if($_SESSION['typeConnect'] != 'Administrator' && $_SESSION['typeConnect'] != 'Guest'){ ?>
+                        <div>
+
+                            <!-- <input class="btn btn-lg btn-danger fs-4 mb-2 mb-md-0" type="button" name="bt_userEdit_delete" id="bt_userEdit_delete" style="width: 100px;" value="Supprimer mon compte"> -->
+                            <button class="btn btn-lg btn-danger fs-4 mb-2 mb-md-0" type="submit" name="bt_userEdit_delete">Supprimer mon compte</button>
+                        
+                        </div>
+                    <?php } ?>
+
+                    <?php if($_SESSION['typeConnect'] === 'Administrator'){ ?>
+                        <div>
+
+                            <input class="btn btn-lg btn-info fs-4 mb-2 mb-md-0" type="button" name="bt_userEdit_new" id="bt_userEdit_new" style="width: 100px;" value="Nouveau">
+                            <!-- <input class="btn btn-lg btn-danger fs-4 mb-2 mb-md-0" type="button" name="bt_userEdit_delete" id="bt_userEdit_delete" style="width: 100px;" value="Supprimer"> -->
+                            <button class="btn btn-lg btn-danger fs-4 mb-2 mb-md-0" type="submit" name="bt_userEdit_delete"style="width: 100px;">Supprimer</button>
+                        
+                        </div>
+                    <?php } ?>
+
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="2">
+                    <div class="text-center text-black bg-warning px-5 rounded-5" name="message1" id="message1"><?php if(!empty($users[0]['message'])){echo $users[0]['message'];} ?></div>
                 </td>
             </tr>
 
@@ -43,9 +90,9 @@
 
                 <td class="m-0 p-0">
                     <label class="form-control-lg m-0 mb-2 p-0">
-                    <?php if($_SESSION['typeConnect'] === 'administrator'){ ?>
+                    <?php //if($_SESSION['typeConnect'] === 'administrator'){ ?>
                         Numéro d'identifiant. Ce numèro est incrémenté automatiquement par la robot.
-                    <?php } ?>
+                    <?php //} ?>
                     </label>
                 </td>
 
@@ -111,7 +158,7 @@
 
                 <td class="m-0 p-0">
                     <label class="form-control-lg m-0 mb-2 p-0" id="labelMessageName">
-                        Saisissez le Nom (50 caractères maximum).
+                        Saisissez le Nom (entre 1 et 50 caractères maximum).
                     </label>
                 </td>
 
@@ -141,7 +188,7 @@
 
                 <td class="m-0 p-0">
                     <label class="form-control-lg m-0 mb-2 p-0" id="labelMessageSurname">
-                        Saisissez le Prénom (50 caractères maximum).
+                        Saisissez le Prénom (entre 1 et 50 caractères maximum).
                     </label>
                 </td>
 
@@ -154,7 +201,7 @@
                 </td>
 
                 <td class="m-0 p-0">
-                    <input class="form-control-lg m-0 p-0 ps-3 border border-black <?php echo ($_SESSION['typeConnect'] === 'Member' || $_SESSION['typeConnect'] === 'User') ? 'bg-dark text-light' : ''; ?>" id="txt_userEdit_pseudo" name="txt_userEdit_pseudo" type="text" placeholder="Saisissez votre Pseudo" <?php echo ($_SESSION['typeConnect'] === 'Member' || $_SESSION['typeConnect'] === 'User') ? 'readonly' : ''; ?> style="font-size: 1.6rem;" oninput="validateInput('txt_userEdit_pseudo','','labelMessagePseudo','Saisissez votre pseudonyme d\'une longueur de 20 caractères maximum.')"
+                    <input class="form-control-lg m-0 p-0 ps-3 border border-black <?php echo ($_SESSION['typeConnect'] === 'Member' || $_SESSION['typeConnect'] === 'User') ? 'bg-dark text-light' : ''; ?>" id="txt_userEdit_pseudo" name="txt_userEdit_pseudo" type="text" placeholder="Saisissez votre Pseudo" <?php echo ($_SESSION['typeConnect'] === 'Member' || $_SESSION['typeConnect'] === 'User') ? 'readonly' : ''; ?> style="font-size: 1.6rem;" oninput="validateInput('txt_userEdit_pseudo')"
                     value=
                         "<?php
                             echo escapeInput($users[0]['pseudo']);
@@ -170,9 +217,9 @@
 
                 <td class="m-0 p-0">
                     <label class="form-control-lg m-0 mb-2 p-0" id="labelMessagePseudo" name="labelMessagePseudo">
-                    <?php if($_SESSION['typeConnect'] === 'administrator'){ ?>
-                        Saisissez le pseudonyme (20 caractères maximum).
-                    <?php } ?>
+                    <?php //if($_SESSION['typeConnect'] === 'administrator'){ ?>
+                        Saisissez le pseudonyme (entre 4 et 20 caractères maximum. Aucun caratères spéciaux sauf # et _).
+                    <?php //} ?>
                     </label>
                 </td>
 
@@ -202,9 +249,9 @@
 
                 <td class="m-0 p-0">
                     <label class="form-control-lg m-0 mb-2 p-0" id="labelMessageEmail" name="labelMessageEmail">
-                    <?php if($_SESSION['typeConnect'] === 'administrator'){ ?>
-                        Saisissez l'adresse email (255 caractères maximum).
-                    <?php } ?>
+                    <?php //if($_SESSION['typeConnect'] === 'administrator'){ ?>
+                        Saisissez l'adresse email (entre 6 et 255 caractères maximum).
+                    <?php //} ?>
                     </label>
                 </td>
 
@@ -234,7 +281,7 @@
 
                 <td class="m-0 p-0">
                     <label class="form-control-lg m-0 mb-2 p-0" id="labelMessagePhone" name="labelMessagePhone">
-                        Saisissez le N° de téléphone.
+                        Saisissez le N° de téléphone (entre 6 et 18 caractères maximum).
                     </label>
                 </td>
 
@@ -256,7 +303,7 @@
                     >
                     <datalist id="datalist_userEdit_type">
                         <?php
-                            for($i=0;$i != count($MyType)-1;$i++) { ?>
+                            for($i=0;$i != count($MyType);$i++) { ?>
                             <option value="<?php echo $MyType[$i]['type']; ?>">
                         <?php } ?>
                     </datalist>
@@ -294,7 +341,7 @@
 
                                     <div class="col-12 col-lg-3 pb-3 pb-lg-0">
 
-                                        <input class="form-control-lg bg-dark text-light border border-black m-0 p-0 " id="txt_userEdit_avatar" name="txt_userEdit_avatar" type="text" placeholder="Saisissez le nom de l'avatar" readonly style="font-size: 1.6rem;" oninput="validateInput('txt_userEdit_avatar','','labelMessageavatar','Saisissez le nom de l\'avatar (sans useractères spéciaux sauf - et _) aux formats *.png ou *.jpg ou *.webp. Sinon, téléchargez une avatar depuis votre disque local. ATTENTION!!! Dimmentions avatar au ratio de 350px sur 180px.')"
+                                        <input class="form-control-lg bg-dark text-light border border-black m-0 p-0 " id="txt_userEdit_avatar" name="txt_userEdit_avatar" type="text" placeholder="Saisissez le nom de l'avatar" readonly style="font-size: 1.6rem;" oninput="validateInput('txt_userEdit_avatar','','labelMessageavatar','Saisissez le nom de l\'avatar (sans useractères spéciaux sauf - et _) aux formats *.png ou *.jpg ou *.webp. Sinon, téléchargez une avatar depuis votre disque local. ATTENTION!!! Dimmentions avatar au ratio de 70px sur 70px.')"
                                             value=
                                             "<?php
                                                 echo escapeInput($users[0]['avatar']);
@@ -303,7 +350,7 @@
                                     </div>
 
                                     <div class="col-12 col-lg-5 d-flex align-items-center pb-3 pb-lg-0">
-                                        <input class="fs-4" type="file" name="fileAvatar" id="fileAvatar" accept="avatar/jpeg, avatar/png, avatar/webp" directory="./img/vehicle/">
+                                        <input class="fs-4" type="file" name="fileAvatar" id="fileAvatar" accept="image/jpeg, image/png, image/webp" directory="./img/avatar/">
                                     </div>
 
                                     <div class="col-12 col-lg-4 d-flex align-items-center pb-3 pb-lg-0">
@@ -342,7 +389,7 @@
                 </td>
 
                 <td class="m-0 p-0">
-                    <input class="form-control-lg m-0 p-0 ps-3 border border-black" id="txt_userEdit_password" name="txt_userEdit_password" type="password" placeholder=""style="font-size: 1.6rem;" oninput="validateInput('txt_userEdit_password','','labelMessagePassword','Saisissez un mot de passe de 255 caractères maximum et 8 caractères minimun comprenant au moins : 1 minuscule, 1 majuscule, 1 chiffre et 1 caractère spéciale parmi les suivants \/\*-.!?@')"
+                    <input class="form-control-lg m-0 p-0 ps-3 border border-black" id="txt_userEdit_password" name="txt_userEdit_password" type="password" placeholder="" style="font-size: 1.6rem;" oninput="validateInput('txt_userEdit_password')"
                         value=
                         "<?php
                             echo escapeInput($users[0]['password']);
@@ -374,7 +421,7 @@
                 </td>
 
                 <td class="m-0 p-0 w-90">
-                    <input class="form-control-lg m-0 p-0 ps-3 border border-black" id="txt_userEdit_confirm" name="txt_userEdit_confirm" type="password" placeholder="" style="font-size: 1.6rem;" oninput="validateInput('txt_userEdit_confirm','','labelMessageConfirm','Le mot de passe de confirmation doit-être équivalent au mot de passe.')"
+                    <input class="form-control-lg m-0 p-0 ps-3 border border-black" id="txt_userEdit_confirm" name="txt_userEdit_confirm" type="password" placeholder="" style="font-size: 1.6rem;" oninput="validateInput('txt_userEdit_confirm')"
                         value=
                         "<?php
                             echo escapeInput($users[0]['password']);
@@ -402,9 +449,47 @@
                 </td>
 
                 <td class="pb-5">
-                    <?php include "../module/buttonEdit.php"; ?>
+                    <?php //include "../module/buttonEdit.php"; ?>
+                    <div class="d-flex flex-column flex-sm-row">
+
+                        <div class="me-2">
+
+                        <?php if($_SESSION['typeConnect'] === 'Administrator'){ ?>
+                            <button class="btn btn-lg btn-warning fs-4 mb-2 mb-md-0" type="submit" name="bt_userEdit_cancel" style="width: 100px;" onclick="retour();">Retour</button>
+                        <?php } ?>
+                        
+                            <input class="btn btn-lg btn-success fs-4 mb-2 mb-md-0" type="button" name="bt_userEdit_save" id="bt_userEdit_save_1" style="width: 100px;" value="Enregistrer">
+                        
+                        </div>
+
+                    <?php if($_SESSION['typeConnect'] != 'Administrator' && $_SESSION['typeConnect'] != 'Guest'){ ?>
+                        <div>
+
+                            <!-- <input class="btn btn-lg btn-danger fs-4 mb-2 mb-md-0" type="button" name="bt_userEdit_delete" id="bt_userEdit_delete" style="width: 100px;" value="Supprimer mon compte"> -->
+                            <button class="btn btn-lg btn-danger fs-4 mb-2 mb-md-0" type="submit" name="bt_userEdit_delete">Supprimer mon compte</button>
+                        
+                        </div>
+                    <?php } ?>
+
+                    <?php if($_SESSION['typeConnect'] === 'Administrator'){ ?>
+                        <div>
+
+                            <input class="btn btn-lg btn-info fs-4 mb-2 mb-md-0" type="button" name="bt_userEdit_new" id="bt_userEdit_new_1" style="width: 100px;" value="Nouveau">
+                            <!-- <input class="btn btn-lg btn-danger fs-4 mb-2 mb-md-0" type="button" name="bt_userEdit_delete" id="bt_userEdit_delete" style="width: 100px;" value="Supprimer"> -->
+                            <button class="btn btn-lg btn-danger fs-4 mb-2 mb-md-0" type="submit" name="bt_userEdit_delete"style="width: 100px;">Supprimer</button>
+                        
+                        </div>
+                    <?php } ?>
+
+                    </div>
                 </td>
 
+            </tr>
+
+            <tr>
+                <td colspan="2">
+                    <div class="text-center text-black bg-warning px-5 rounded-5" name="message2" id="message2"><?php if(!empty($users[0]['message'])){echo $users[0]['message'];} ?></div>
+                </td>
             </tr>
 
         </table>
@@ -413,6 +498,9 @@
 
 </section>
 
+<?php $_SESSION['message'] =''; ?>
+
 <script src="js/function.js"></script>
+<script src="js/fetch.js"></script>
 <script src="js/user_edit.js"></script>
 

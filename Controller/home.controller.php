@@ -3,7 +3,7 @@
     include_once('../common/utilies.php');
     include_once('../model/home.class.php');
 
-    use \Firebase\JWT\JWT;
+ //   use \Firebase\JWT\JWT;
 
     $btn_home_save = isset($_POST['btn_home_save']) ? true : false;
     unset($_POST['btn_home_save']);
@@ -18,11 +18,11 @@
         $homes = new Home();
     }
 
-    $jwt1 = JWT::jsondecode($_SESSION['jwt']);
+/*    $jwt1 = JWT::jsondecode($_SESSION['jwt']);
     $jwt2 = JWT::jsondecode(tokenJwt($_SESSION['pseudoConnect'], $_SESSION['SECRET_KEY']));
 
     if($jwt2->{'delay'} - $jwt1->{'delay'} <= $_SESSION['delay']){
-
+*/
         if(verifCsrf('csrfHome') && $_SERVER['REQUEST_METHOD'] === 'POST'){
             
             if($btn_home_save){
@@ -66,7 +66,7 @@
 
         }
 
-    }else if($_SESSION['pseudoConnect'] != 'Guest'){
+    /*}else if($_SESSION['pseudoConnect'] != 'Guest'){
 
         $_SESSION['typeConnect'] = 'Guest';
         $_SESSION['pseudoConnect'] = 'Guest';
@@ -76,7 +76,7 @@
         
         timeExpired();
 
-    }
+    }*/
 
     $home = $homes->get(1,'id_home','DESC','0','10');
 
