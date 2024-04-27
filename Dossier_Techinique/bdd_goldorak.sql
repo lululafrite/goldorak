@@ -33,7 +33,7 @@ CREATE TABLE `comment` (
   PRIMARY KEY (`id_comment`),
   KEY `id_member` (`id_member`),
   CONSTRAINT `comment_ibfk_1` FOREIGN KEY (`id_member`) REFERENCES `user` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -78,7 +78,7 @@ CREATE TABLE `home` (
 LOCK TABLES `home` WRITE;
 /*!40000 ALTER TABLE `home` DISABLE KEYS */;
 INSERT INTO `home` VALUES
-(1,'Accueil : Bienvenue sur le site de l\'association Club Goldorak','Rôle de l\'association : Club Goldorak','Le Club Goldorak est une association destinée aux <em>passionnés de Goldorak</em>, dans laquelle ses <em>adhérents</em> ont accès à beaucoup de <em>privilèges et d\'avantages</em> sur différentes thématiques traitées par notre équipe.</br>\r\nLe Gérant avec son équipe de 12 bénévoles, <em>passionnés et pointus</em> sur le sujet, sont tous permanents dans l\'association. C\'est ainsi qu\'ils scrutent la moindre <em>nouveauté sur Goldorak</em>, ainsi que tous ce qui peut y être lié (média, rassemblements, événements, concerts, produits dérivés, cinéma, séries, bons plans, etc...).</br>\r\n<em>L\'association organise</em> tout pour que vous n\'ayez plus qu\'à profiter de ce qui vous est proposé et de dévorer à pleines dents votre passion en compagnie de personnes qui vous ressemblent.</br>\r\n<em>Chaque année</em>, des adhérents sont <em>tirés au sort</em> pour nous <em>accompagner</em> dans nos nombreux <em>déplacements au Japon</em>, afin de <em>chiner</em> dans les quartiers où nous trouvons des dizaines de <em>boutiques spécialisées en mangas</em>, et pour certaines, exclusivement sur Goldorak.','img_goldorak_aktarus_01.webp','Adhérer au Club Goldorak','Pour rejoindre nos +/-2800 adhérents (au 01/07/2023) au club Goldorak, c\'est très simple! Il suffit de vous munir de votre CB, de cliquer sur lien ci-dessous, de remplir le formulaire et de procéder au paiement de la cotisation annuelle à partir de 35.00€TTC. Nous vous enverrons votre cadeau de bienvenue à l\'encaissement de votre cotisation : Une carte 3D exclusive de Goldorak!!!','img_goldorak_dark_1200x522_02.webp');
+(1,'Accueil : Bienvenue sur le site de l\'association Club Goldorak','Rôle de l\'association : Club Goldorak','Le Club Goldorak est une association destinée aux passionnés de Goldorak, dans laquelle ses adhérents ont accès à beaucoup de privilèges et d\'avantages sur différentes thématiques traitées par notre équipe.\r\nLe Gérant avec son équipe de 12 bénévoles, passionnés et pointus sur le sujet, sont tous permanents dans l\'association. C\'est ainsi qu\'ils scrutent la moindre nouveauté sur Goldorak, ainsi que tous ce qui peut y être lié (média, rassemblements, événements, concerts, produits dérivés, cinéma, séries, bons plans, etc...).\r\nL\'association organise tout pour que vous n\'ayez plus qu\'à profiter de ce qui vous est proposé et de dévorer à pleines dents votre passion en compagnie de personnes qui vous ressemblent.\r\nChaque année, des adhérents sont tirés au sort pour nous accompagner dans nos nombreux déplacements au Japon, afin de chiner dans les quartiers où nous trouvons des dizaines de boutiques spécialisées en mangas, et pour certaines, exclusivement sur Goldorak.','img_goldorak_aktarus_01.webp','Adhérer au Club Goldorak','Pour rejoindre nos +/-2800 adhérents (au 01/07/2023) au club Goldorak, c\'est très simple! Il suffit de vous munir de votre CB, de cliquer sur lien ci-dessous, de remplir le formulaire et de procéder au paiement de la cotisation annuelle à partir de 35.00€TTC. Nous vous enverrons votre cadeau de bienvenue à l\'encaissement de votre cotisation : Une carte 3D exclusive de Goldorak!!!','img_goldorak_dark_1200x522_02.webp');
 /*!40000 ALTER TABLE `home` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -143,15 +143,15 @@ LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
 INSERT INTO `user` VALUES
 (1,'GOLDORAK','Goldorak','goldorak','goldorak@gmail.com','0102030405','Goldorak123/','avatar_goldorak_01.webp',2,2),
-(2,'ADMIN','Admin','Admin','admin@gmail.com','06 06 06 06 06','Admin123/','avatar_admin_white.webp',2,1),
+(2,'ADMIN','Admin','Admin','admin@gmail.com','01 02 03 04 05','Admin123/','avatar_admin_white.webp',2,1),
 (3,'USER','User','User','user@gmail.com','06 08 81 83 90','User123/','avatar_user.webp',2,3),
-(4,'FOLLACO','Ludovic','Professeur','ludovic.follaco@free.fr','0608818390','Lud123/*-','professeur_procyon.webp',2,1),
+(4,'FOLLACO','Ludovic','Professeur','ludovic.follaco@free.fr','0608818390','Admin123/','professeur_procyon.webp',2,1),
 (5,'FOLLACO','Marie','VénusiaXXL','marie.follaco@free.fr','06 59 58 55 15','Marie123/','avatar_venusia_01.webp',3,2),
 (6,'MARTEAU','Antonin','Vega78','antonin.marteau@gmail.com','## ## ## ## ##','Antonin123/','avatar_vega_01.webp',1,2),
 (7,'TAVERNE','Pierre','PrinceEuphor','pierre.taverne@gmail.com','06 06 07 07 08','Pierre123/','avatar_princeEuphor.webp',2,2),
-(8,'ACTARUS','Actarus','actarus','actarus@gmail.com','0102030405','Actarus123/','avatar_actarus.webp',1,2),
+(8,'ACTARUS1','Actarus2','Actarus3','actarus4@gmail.com','010203040500','Actarus123/','avatar_actarus.webp',1,2),
 (9,'VENUSIA','Venusia','venusia','venusia@gmail.com','0102030405','Venusia123/','avatar_venusia_01.webp',3,2),
-(10,'CHIP','Pounette','chipounette','chipounette@gmail.com','0102030405','Chip123/','avatar_venusia_01.webp',1,2),
+(10,'CHIP','Pounette','Chipounette','chipounette@gmail.com','0102030405','Chip123/','avatar_venusia_01.webp',1,2),
 (11,'LEHOMME','Thomas','Thomaslehooo','tho@gmail.com','0613427516','Tho123!!','avatar_soldat_vega.webp',2,2);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -192,4 +192,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-04-07 14:58:35
+-- Dump completed on 2024-04-27 18:34:38
